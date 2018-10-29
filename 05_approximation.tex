@@ -125,12 +125,12 @@ Since $ \graph $ is a complete graph where every edge corresponds to every possi
 From the construction of the graph $ \graph $, $ \scomaset \subset \edges$. By definition, a candidate solution of a monotone dual-arm rearrangement problem must transfer every object exactly once. In terms of the graph, this means that in the subset of edges $ \scomaset $ every vertex appears in only one edge. We arrive at the following crucial observation.
 
 
-
+\vspace{-0.13in}
 {\lemma [Perfect Matching]
 Every candidate solution to a monotone dual-arm rearrangement problem comprises of a set of unordered object-to-arm assignments $ \scomaset $ that is also a perfect matching solution on $ \graph $.
 }
 
-As per the decomposition of the costs in Eq. \ref{eq:cost_function}, it follows that the $ \cost(\scomaset) $ corresponds to the cost of the transfers in the solution. Given the reduction to edge-matching, the solution to the minimum-weight perfect edge matching problem on such a graph would correspond to a $ \scomaset $ that optimizes the cost of \textit{transfers} of all the objects.
+As per the decomposition of the costs in Eq. \ref{eq:cost_function}, it follows that the $ \cost(\scomaset) $ is the cost of the transfers in the solution. The solution to the minimum-weight perfect edge matching problem on such a graph would correspond to a $ \scomaset $ that optimizes the cost of \textit{transfers} of all the objects.
 
 {\lemma [Optimal Matching]
 The set of object-to-arm assignments $ \scomaset^* $ that minimizes the cost of object transfers is a solution to the minimum-weight perfect matching problem on $ \graph $.
@@ -143,7 +143,7 @@ Once such an optimal assignment $ \scomaset^* $ is obtained, the missing part of
 
 
 A complete candidate solution to the problem now requires the sequence of~$ \coma $. By definition of the edges, the complete solution begins at~$ \startq $ and also ends there. This is a complete tour over~$ \tspgraph $, that visits all the vertices i.e., an ordered sequence of vertices $\tour = ( {\startq}, \scoma_\tour, {\startq}  )$.
-
+\vspace{-0.1in}
 {
 \lemma [Tour]
 Any complete tour $ \tour $ over the graph $ \tspgraph $, corresponds to a sequence of object-to-arm assignments $ \scoma_\tour $ and is a candidate solution to the synchronous dual-arm rearrangement problem.
@@ -162,6 +162,9 @@ Let $ \mathbb{P}^{\scomaset} $ represent the set of all possible ordering of the
 
 This differs from the true optimal $ \scoma^* $, since the second step of finding the optimal transit tour only operates over all possible solutions that include the optimally matched transfers obtained in the first step.
 The insight here is that, even though $ \scoma^+ $ reports a solution to a hierarchical optimization objective, the algorithm operates over a much smaller search space, and operates over sub-problems which are more efficient to solve than the baselines.\\
+
+
+\vspace{-0.1in}
 
 \noindent\textbf{Algorithm}: This section describes the algorithm {\tt {Tour\_Over\_Matching}} (\algo) outlined in the previous section. The steps correspond to Algo \ref{algo:tom}. 
 % The algorithm takes as input the set of objects $ \objectset $ and the start(and end) configuration $ \startq $ of the arms.

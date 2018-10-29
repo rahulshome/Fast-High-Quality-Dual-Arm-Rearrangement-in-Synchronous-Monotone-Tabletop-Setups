@@ -8,14 +8,16 @@ This section highlights two optimal strategies to discover $\D(\scoma^*)$: a) ex
 {\permu[n]{2}} + {\permu[n]{2}}\times{\permu[n-2]{2}} + ... + {\permu[n]{2}}\times{\permu[n-2]{2}}\times{\permu[n-4]{2}}...\times{\permu[2]{2}} =\sum_{L=1}^{n/2} {\ \prod_{k=0}^{2L-1}{(n-k)}},
 \vspace{-0.15in}
 \end{equation*}
-where $\permu[n]{k}$ denotes the number of $k$-permutations of $n$.  
+where $\permu[n]{k}$ is the $k$-permutations of $n$.  
 
 \begin{wrapfigure}{r}{2.4in}
-    \vspace{-.1in}
+    \vspace{-.5in}
 	\centering
-	\includegraphics[width=2.3in]{figures/dual_backtracking.PNG}
+	\includegraphics[width=1.8in]{figures/dual_backtracking.PNG}
     \vspace{-.15in}
-	\caption{Search tree for 4 objects. In node $XY$, $m^1$ transfers object $X$, and $m^2$ transfers $Y$. An edge is a transit to the next node. }
+	\caption{Search tree for 4 objects. 
+%	In node $XY$, $m^1$ transfers object $X$, and $m^2$ transfers $Y$. An edge is a transit to the next node. 
+	}
 	\label{fig:backtracking}
     \vspace{-.3in}
 \end{wrapfigure}

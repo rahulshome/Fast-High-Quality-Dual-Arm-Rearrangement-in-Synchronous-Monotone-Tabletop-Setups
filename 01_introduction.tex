@@ -75,8 +75,7 @@ certain relaxations to achieve this objective. In particular,
 monotone tabletop instances are considered, where the start and goal
 object poses do not overlap.  Furthermore, the focus is on
 synchronized execution of pick-and-place actions by the two arms. i.e., where the two arms simultaneously transfer (different) objects, or simultaneously move towards picking the next objects.
-Theoretical arguments and experimental evaluation indicate that the
-synchronization assumption does not significantly degrade solution
+Theoretical arguments and experimental evaluation indicate that this does not significantly degrade solution
 quality.
 
 \begin{figure}[t]\vspace{-0.15in}
@@ -92,29 +91,25 @@ quality.
 The first contribution is the study of the combinatorial structure of
 synchronous, monotone dual-arm rearrangement. Then, a mixed integer linear programming (\milp) model is
 proposed that achieves optimal coordinated solutions in this domain.
-An efficient algorithm {\tt Tour\_Over\_Matching} (\algo) is proposed
-that significantly improves in scalability. \algo\ first optimizes the
+The proposed efficient algorithm {\tt Tour\_Over\_Matching} (\algo) significantly improves in scalability. \algo\ first optimizes the
 cost of object transfers and assigns objects to the two arms by
 solving an optimal matching problem. It minimizes the cost of
 moves from an object's goal to another object's start pose per
 arm as a secondary objective by employing a {\tt TSP} solution. Most
 of the computation time is spent on the many calls to a
 lower-level motion planner that coordinates the two arms. A lazy
-evaluation strategy is proposed, where candidate solution sequences
-are developed first and then motion plans are evaluated for them. The
-strategy results in significant computational improvement and
-minimizes the calls to the coordination motion planner.  An analysis
-is also performed on the expected improvement in solution quality
+evaluation strategy is proposed, where motion plans are evaluated for candidate solution sequences. This results in significant computational improvement and
+reduces the calls to the motion planner.  An analysis
+studies the expected improvement in solution quality
 versus the single arm case, as well as the expected cost overhead from a
 synchronous solution.
 
-Finally, experiments for i) a simple planar picker setting, and ii) a
-model of two 7-DOF Kuka arms, demonstrate a nearly two-fold
-improvement against the single arm case for the proposed approach in practice. The
-solutions are close to optimal for the dual-arm case and the algorithm
-exhibits good scalability. The computational costs of both the optimal
-and the proposed method are significantly improved from the lazy
-evaluation strategy. 
+Finally, experiments for i) a simple planar picker setting, and ii) two 7-DOF Kuka arms, demonstrate a nearly two-fold
+improvement against the single arm case for the proposed approach in practice. The algorithm exhibits close to optimal solutions and good scalability. 
+The lazy evaluation strategy significantly improves computation costs for both the optimal and proposed methods.
+%The computational costs of both the optimal
+%and the proposed method are significantly improved from the lazy
+%evaluation strategy. 
 % When the synchronous solutions are smoothed to
 % asynchronous ones, there is not significance difference in overall
 % path quality. \kiril{This statement is unclear. What is the benefit from performing this step?}
