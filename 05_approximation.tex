@@ -102,7 +102,8 @@ This ends up scaling better by effectively reducing the size of the search space
 % \scoma^+ : \tour \ \mathtt{on}\ \tspgraph
 % \end{align*}
 
-\begin{wrapfigure}{r}{2.5in}\vspace{-0.5in}
+\begin{wrapfigure}{r}{2.5in}
+\vspace{-0.15in}
 % \begin{figure}[H]
 	\begin{center}
 % 		\includegraphics[width=2.5in]{figures/mapp}
@@ -114,15 +115,16 @@ This ends up scaling better by effectively reducing the size of the search space
 \vspace{-0.1in}
 \end{wrapfigure}
 
-\noindent\textbf{Foundations:} Consider a complete weighted directed graph $\graph(\nodes,\edges)$ (Eq.~\ref{eq:transfergraph}), where $\node \in \nodes$ corresponds to a single object $ \object $. Each directed edge, $\edge=(\object_i,\object_j) \in \edges$ is an ordered pair of objects $ \object_i $ and $\object_j $, where the order determines the assignment of an object to an arm $ \arm^1 $ or $ \arm^2 $. The cost of an edge $ \cost(\edge) $ is the coordinated motion planning cost of performing the transfer corresponding to $ \coma = (\object_i,\object_j) $. For instance, as shown in Fig \ref{fig:edge_matching}(middle), $\edge(A,B)$ corresponds to $ \arm^1 $ transferring `A', while $ \arm^2 $ transfers `B', and the $\cost( \edge(A,B) ) = \cost(T(\coma=(A,B))$ is the cost of such a concurrent motion. Note that these costs refer to only the transfer costs i.e., starting from the arms picking up the objects $ A $ and $ B $ at the initial poses(as shown in Fig \ref{fig:edge_matching}(left)), and moving them to their target poses. It should also be noted that since the arms are different, in general, $\cost( \edge(A,B) )$ is not necessarily equal to $\cost( \edge(B,A) )$.
+\noindent\textbf{Foundations:} Consider a complete weighted directed graph $\graph(\nodes,\edges)$ (Eq.~\ref{eq:transfergraph}), where $\node \in \nodes$ corresponds to a single object $ \object $. Each directed edge, $\edge=(\object_i,\object_j) \in \edges$ is an ordered pair of objects $ \object_i $ and $\object_j $, where the order determines the assignment of an object to an arm $ \arm^1 $ or $ \arm^2 $. The cost of an edge $ \cost(\edge) $ is the coordinated motion planning cost of performing the transfer corresponding to $ \coma = (\object_i,\object_j) $. For instance, as shown in Fig \ref{fig:edge_matching}(middle), $\edge(A,B)$ corresponds to $ \arm^1 $ transferring `A', while $ \arm^2 $ transfers `B', and the $\cost( \edge(A,B) ) = \cost(T(\coma=(A,B))$ is the cost of such a concurrent motion. 
+%Note that these costs refer to only the transfer costs i.e., starting from the arms picking up the objects $ A $ and $ B $ at the initial poses(as shown in Fig \ref{fig:edge_matching}(left)), and moving them to their target poses. 
+It should also be noted that since the arms are different, in general, $\cost( \edge(A,B) ) \neq \cost( \edge(B,A) )$.
 
 
 
 Following the observation made in Eq.~\ref{eq:cost_function}, the cost of the transfers can be reasoned about independent of their order. 
 Define $\scomaset$ as the unordered set of $\coma\in\scoma$, then unordered transfer cost component corresponds to $\sum_{\coma\in\scomaset}\cost(T(\coma))$.
 % We defined $ \scoma $ to be an ordered sequence of object-to-arm assignments. Let $ \scoma $ be a candidate solution to the synchronized dual-arm rearrangement problem. $ \scoma $ is an ordered sequence of $ \coma $, and $ \scomaset $ denote the unordered set of all $ \coma $ that comprise $ \scoma $. 
-Since $ \graph $ is a complete graph where every edge corresponds to every possible valid $ \coma $, $ \scomaset $ must also be a part of $ \graph $. 
-From the construction of the graph $ \graph $, $ \scomaset \subset \edges$. By definition, a candidate solution of a monotone dual-arm rearrangement problem must transfer every object exactly once. In terms of the graph, this means that in the subset of edges $ \scomaset $ every vertex appears in only one edge. We arrive at the following crucial observation.
+Since $ \graph $ is a complete graph where every edge corresponds to every possible valid $ \coma $, by construction $ \scomaset \subset \edges$. A candidate solution of a monotone dual-arm rearrangement problem must transfer every object exactly once. In terms of the graph, this means that in the subset of edges $ \scomaset $ every vertex appears in only one edge. We arrive at the following crucial observation.
 
 
 \vspace{-0.13in}
@@ -132,6 +134,7 @@ Every candidate solution to a monotone dual-arm rearrangement problem comprises 
 
 As per the decomposition of the costs in Eq. \ref{eq:cost_function}, it follows that the $ \cost(\scomaset) $ is the cost of the transfers in the solution. The solution to the minimum-weight perfect edge matching problem on such a graph would correspond to a $ \scomaset $ that optimizes the cost of \textit{transfers} of all the objects.
 
+\vspace{-0.13in}
 {\lemma [Optimal Matching]
 The set of object-to-arm assignments $ \scomaset^* $ that minimizes the cost of object transfers is a solution to the minimum-weight perfect matching problem on $ \graph $.
 }
@@ -139,10 +142,10 @@ The set of object-to-arm assignments $ \scomaset^* $ that minimizes the cost of 
 % \scomaset^* = \underset{ \scomaset \in \mathtt{EM(\graph)}  }{ \mathtt{argmin} } \ \cost(\scomaset)
 % $$
 
-Once such an optimal assignment $ \scomaset^* $ is obtained, the missing part of the complete solution is the set of transits between the object transfers and their ordering. Construct another directed graph $ \tspgraph $ (Eqs. \ref{eq:transitgraph}), where the vertices comprise of the $ \coma \in \scomaset^*$. An edge $ e(\coma_{u\rightarrow v}) $ between any two vertices corresponds to the coordinated \textit{transit} motion between them. For instance, as in Fig \ref{fig:edge_matching}(right) for an edge between $ \coma(A,B) $ and $ \coma(C,D) $, $ \arm^1 $ moves from the target pose of object `A' to the starting pose of object `C', and similarly $ \arm^2 $ moves from the target of `B' to the start of `D'. An additional vertex corresponding to the starting(and ending) configuration of the two arms ($ \startq $) is added to the graph. The graph is fully connected again to represent all possible transits or moves.  
-
-
-A complete candidate solution to the problem now requires the sequence of~$ \coma $. By definition of the edges, the complete solution begins at~$ \startq $ and also ends there. This is a complete tour over~$ \tspgraph $, that visits all the vertices i.e., an ordered sequence of vertices $\tour = ( {\startq}, \scoma_\tour, {\startq}  )$.
+Once such an optimal assignment $ \scomaset^* $ is obtained, the missing part of the complete solution is the set of transits between the object transfers and their ordering. Construct another directed graph $ \tspgraph $ (Eqs. \ref{eq:transitgraph}), where the vertices comprise of the $ \coma \in \scomaset^*$. An edge $ e(\coma_{u\rightarrow v}) $ corresponds to the coordinated \textit{transit} motion between them. For instance, as in Fig \ref{fig:edge_matching}(right) for an edge between $ \coma(A,B) $ and $ \coma(C,D) $, $ \arm^1 $ moves from the target pose of object `A' to the starting pose of object `C', and similarly $ \arm^2 $ moves from the target of `B' to the start of `D'. An additional vertex corresponding to the starting(and ending) configuration of the two arms ($ \startq $) is added to the graph. The graph is fully connected again to represent all possible transits or moves.  
+A complete candidate solution to the problem now requires the sequence of~$ \coma $, 
+%By definition of the edges, the complete solution begins at~$ \startq $ and also ends there. 
+which is a complete tour over~$ \tspgraph $, that visits all the vertices i.e., an ordered sequence of vertices $\tour = ( {\startq}, \scoma_\tour, {\startq}  )$.
 \vspace{-0.1in}
 {
 \lemma [Tour]
@@ -161,8 +164,9 @@ Let $ \mathbb{P}^{\scomaset} $ represent the set of all possible ordering of the
 \end{equation}
 
 This differs from the true optimal $ \scoma^* $, since the second step of finding the optimal transit tour only operates over all possible solutions that include the optimally matched transfers obtained in the first step.
-The insight here is that, even though $ \scoma^+ $ reports a solution to a hierarchical optimization objective, the algorithm operates over a much smaller search space, and operates over sub-problems which are more efficient to solve than the baselines.\\
-
+The insight here is that, even though $ \scoma^+ $ reports a solution to a hierarchical optimization objective, 
+%the algorithm operates over a much smaller search space, and operates over sub-problems which are more efficient to solve than the baselines.\\
+the search space is much smaller, and the sub-problems more efficient to solve.\\
 
 \vspace{-0.1in}
 
