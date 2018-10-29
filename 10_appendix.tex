@@ -1,0 +1,176 @@
+% \usepackage{amsmath,amsfonts,amssymb,mathrsfs}
+% \usepackage{graphicx}
+% \usepackage{psfrag,graphicx,epsfig,epsf}
+% \usepackage[ruled,linesnumbered, noend]{algorithm2e}
+% \usepackage{fancyhdr}
+% \usepackage{wrapfig}
+% \usepackage{subfigure}
+% \usepackage{mathtools}
+% \usepackage{url}
+% \usepackage{color}
+% \usepackage{verbatim}
+% \usepackage{xspace}
+
+% \DeclareMathOperator*{\argmin}{arg\,min}
+
+% \newcommand\permu[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+% \newcommand\combi[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+
+% \begin{document}
+
+% \title{Fast High-Quality Dual-Arm Rearrangement in Synchronous, Monotone Tabletop Setups: Appendix}
+% %\titlerunning{Fast Methods for Synchronized Tabletop Dual-Arm Rearragement}
+% \author{Rahul Shome$^1$ \and Kiril Solovey$^2$ \and Jingjin Yu$^1$ \and Kostas Bekris$^1$ \and Dan Halperin$^2$}
+% %\authorrunning{Shome et al.}
+% \institute{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel}
+
+
+% \maketitle
+% \input{notation}
+% \documentclass{llncs}
+
+%####################################################################################
+%####################################################################################
+%####################################################################################
+%####################################################################################
+%####################################################################################
+
+
+\subsection{Expected k-arm cost bounds in a planar disk manipulator model}
+\commentadd{
+The arguments made in Theorem \ref{thm:karm} can be extended to $k$ disc arms.
+In the planar unit-square setting, with $k$ arms, there are $\frac{n}{k}$ objects 
+for each arm to work with. Consider the transfers and transits of a set of $k$ 
+objects, one for each arm. By \cite{ChiHanYu2018WAFR}, the arbitrary rearrangement of $k$ discs 
+can be achieved in a bounded region with a perimeter of $O(kr)$. 
+Clearly, the per robot additional (makespan or distance) cost is bounded by some 
+function $f(k, r)c_t$, which goes to zero as $r$ goes to zero. Adding up all the potential 
+extra cost,  a $k$-arm solution has a cumulative cost
+
+{\centerline
+{
+$C_{\rm k{\text-}arm} = C_{\rm single} + nf(k,r)c_t \approx (c_{pd} + 0.52c_t + f(k,r)c_t)n\;.$
+}
+}
+
+\noindent For fixed $k$ and small $r$, $C_{\rm k{\text-}arm}$ is almost the same as $C_{\rm single}$.
+%, $c_t$ is a distance (e.g., energy) cost. 
+Upon considering the maximum of the two arc lengths or makespan,
+the $k$-arm cost becomes $C_{\rm k{\text-}arm}^t \approx (c_{pd} + 0.52c_t)\frac{n}{k} + nf(k,r)c_t$.
+
+The cost ratio is
+\vspace{-0.1in}
+\begin{equation}\label{eq:kmakespan-ratio}
+\frac{C_{\rm k{\text-}arm}^t}{C_{\rm single}} \approx 
+\frac{(c_{pd} + 0.52c_t)\frac{n}{k} + nf(k,r)c_t}{(c_{pd} + 0.52c_t)n}
+= \frac{1}{k} + \frac{f(k,r)c_t}{c_{pd} + 0.52c_t}\;.
+% \vspace{-0.1in}
+\end{equation}
+
+When $r$ is small or when $\frac{c_t}{c_{pd}}$ is small, the $k$-arm 
+solution is roughly $\frac{1}{k}$ as costly as the single arm solution. On 
+the other hand, in this model a $k$-arm solution does not do better than $\frac{1}{k}$ of 
+the single arm.
+
+\begin{theorem}
+For rearranging objects with non-overlapping starts and goals that are
+uniformly distributed in a unit square,  a $k$-arm solution can have an 
+asymptotic improvement of $\frac{1}{k}$ over the single arm solution. 
+\end{theorem}
+}
+% \rahul{Need to verify this line of reasoning}
+
+
+\subsection{Expected measure of the maximum of lengths of two random lines on an unit square}
+Prior work \cite{ghosh1951random} defines the \textit{pdf} of lengths($l$) of randomly sampled lines in a rectangle of sides $a,b, \ \ a\geq b$ as 
+\begin{align*}
+p(l) &= (\frac{4l}{a^2b^2})\phi(l)\\
+\phi(l)&= \frac{1}{2}\pi a b - a l - b l + \frac{1}{2} l^2, \ \ l\in[0,b]\\
+\phi(l)&= ab \sininv(\frac{b}{l}) + a. \sqrt[]{(l^2-b^2)} - al - \frac{1}{2}b^2, \ \ l\in[b,a]\\
+\phi(l)&= ab\{\sininv(\frac{b}{l})-\cosinv(\frac{a}{l})\} + a\sqrt[]{(l^2-b^2)} + b\sqrt[]{(l^2-a^2)} \\
+&- \frac{1}{2}(l^2+a^2+b^2),\ \ l\in[a,\sqrt[]{(a^2+b^2)}]
+\end{align*}
+
+In the unit square model, $a=b=1$. Substituting the values, the \textit{pdf} becomes
+\begin{align}
+p(l)&= 2\pi l - 8\pi l^2 + 2l^3, \ \ l\in[0,1]\\
+p(l)&= 4l\sininv(\frac{1}{l}) - 4l\cosinv(\frac{1}{l}) + 8l\sqrt[]{(l^2-1)} -2l^3 -4l, \ \ l\in[1,\sqrt[]{2}]
+\end{align}
+
+Assuming two random sets of lines, representing transfers in a random split of objects between two arms, we need the expected value of the maximum of these pairwise lengths ie., $\mathtt{E}(max(l_1,l_2)), \ \ l_1,l_2\ i.i.d, \ \ l_1 \sim p, l_2 \sim p$.
+This is estimated using the \textit{pdf} obtained. 
+\begin{equation}
+\mathtt{E}(max(l_1,l_2)) = \int_0^{\sqrt[]{2}} \int_0^{\sqrt[]{2}} max(l_1,l_2)p(l_1)p(l_2) dl_2 dl_1 \approx 0.663
+\end{equation}
+The result is calculated by taking into account the combination of different ranges of $p(l)$ and $max(l_1,l_2)$.
+\commentadd{
+\begin{wrapfigure}{r}{1.4in}
+	\centering
+	\vspace{-0.3in}
+    \includegraphics[width=1.4in]{figures/monte_carlo}
+	\caption{Empirical cost ratio versus the estimate}
+  	\label{fig:bounds}
+\end{wrapfigure}
+
+Prior work~\cite{santalo2004integral} offered an estimate for the expected length of a transit path $C_{sg}$ in terms of the expected length of a line segment, $0.52$, in a randomized setting in an unit square. With the current estimate of $0.663$ for the maximum of two such randomly sampled line segments, it follows that, the expected makespan or maximum of distances cost will use this estimate.
+
+Using this result, the synchronized cost ratio is stated in Equation~\ref{eq:synchronized-ratio} as
+$$
+\frac{C_{\rm dual}^{\rm sync}}{C_{\rm single}} \approx 
+\frac{(c_{pd} + 0.66c_t)\frac{n}{2} + 4n\pi rc_t}{(c_{pd} + 0.52c_t)n}
+$$
+As a way to validate our asymptotic estimate, randomized trials were run with different number randomly sampled object transfer coordinates on an unit square.
+% Fig \ref{fig:bounds} verifies empirically that the ratio of $\frac{C_{dual}^{sync}}{C_{single}}$ when $c_{pd}=0,r=0$, asymptotically converges to the calculated expected value of $0.636$. 
+When $c_{pd}=0$ and $r=0$, the ratio of $\frac{C_{dual}^{sync}}{C_{single}}$ evaluates to $0.636$. Fig \ref{fig:bounds} verifies empirically that the ratio converges to the expected value as the number of transfers increases.
+This indicates the asymptotic speedup of a synchronized dual arm solution for a makespan or maximum of distances cost metric.
+}
+
+\subsection{Smoothing}
+The result of the velocity tuning over the solution trajectories for the individual arms as a post-processing step is shown in Fig \ref{fig:smoothing}. The objective is to minimize any waits that might be a by-product of the synchronization. 
+% The small improvements indicate that synchronization does not adversely affect the solution executions. 
+The small \% improvements indicate that the asynchronous variants of the solutions discovered from the methods do not yield a big enough saving in execution time. 
+Most of the improvement as a percentage of the original solution duration is not too high. On top of that, the time taken to smooth the solutions for \algo (overlaid on Fig \ref{fig:smoothing}) shows that it is often not beneficial.
+In their largest problem instances the \kuka spent $ 0.44s $ of smoothing time to save $ 3.23s $ off the solution duration, while the picker spent $  9.84s $ to save $ 0.54s $.
+This indicates that among the class of synchronized solutions discovered by the proposed algorithms, the analogous asynchronous variants do not seem to be drastically better. Moreover, smoothing does not improve the maximum of distances cost measure, but only reduces the solution duration. The theoretical bounds in the simple planar setups agree with the results in that the synchronization does not degrade the benefits of using 2 arms too much. It should be pointed out though that it needs to be studied further, whether these trends would hold for a class of algorithms that can solve the asynchronous dual-arm rearrangement problem in general setups. This is out of the scope of the current work.
+ 
+% \kiril{What is the bottom line here? Is smoothing worthwhile? The y-axis in the plots is labeled as \% whereas the bars are labeled with seconds.}
+
+
+% \vspace{-0.2in}
+\begin{figure}
+	\centering
+	\includegraphics[width=2.3in]{figures/results/sp_smoothing}
+	\includegraphics[width=2.3in]{figures/results/kuka_smoothing}
+	\caption{Smoothed solution improvement as a percentage of the original synchronized solution duration, and the time taken to smooth solutions obtained from \algo in seconds.}
+	\label{fig:smoothing}
+%     \vspace{-.3in}
+\end{figure}
+
+
+
+
+
+%####################################################################################
+%####################################################################################
+%####################################################################################
+%####################################################################################
+%####################################################################################
+% {\small
+% \bibliographystyle{spmpsci}
+% \bibliography{bib/manip}}
+
+% \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+

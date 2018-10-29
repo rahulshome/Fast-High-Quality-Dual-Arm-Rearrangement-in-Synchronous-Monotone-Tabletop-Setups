@@ -1,0 +1,81 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem{AjtKomTus84}
+Ajtai, M., Koml{\'o}s, J., Tusn{\'a}dy, G.: On optimal matchings.
+\newblock Combinatorica \textbf{4}(4), 259--264 (1984).
+\newblock \doi{10.1007/BF02579135}
+
+\bibitem{caricato2003parallel}
+Caricato, P., Ghiani, G., Grieco, A., Guerriero, E.: Parallel tabu search for a
+  pickup and delivery problem under track contention.
+\newblock Parallel Computing \textbf{29}(5), 631--639 (2003)
+
+\bibitem{coltin2014multi}
+Coltin, B.: Multi-agent pickup and delivery planning with transfers  (2014)
+
+\bibitem{Dobson:2017aa}
+Dobson, A., Solovey, K., Shome, R., Halperin, D., Bekris, K.E.: {Scalable
+  Asymptotically-Optimal Multi-Robot Motion Planning}.
+\newblock In: The 1st IEEE International Symposium on Multi-Robot and
+  Multi-Agent Systems (MRS). Los Angeles, USA (2017)
+
+\bibitem{frederickson1976approximation}
+Frederickson, G.N., Hecht, M.S., Kim, C.E.: Approximation algorithms for some
+  routing problems.
+\newblock In: Foundations of Computer Science, 1976., 17th Annual Symposium on,
+  pp. 216--227. IEEE (1976)
+
+\bibitem{friggstad2013multiple}
+Friggstad, Z.: Multiple traveling salesmen in asymmetric metrics.
+\newblock In: Approximation, Randomization, and Combinatorial Optimization.
+  Algorithms and Techniques, pp. 173--188. Springer (2013)
+
+\bibitem{garg2000polylogarithmic}
+Garg, N., Konjevod, G., Ravi, R.: A polylogarithmic approximation algorithm for
+  the group steiner tree problem.
+\newblock Journal of Algorithms \textbf{37}(1), 66--84 (2000)
+
+\bibitem{lenstra1981complexity}
+Lenstra, J.K., Kan, A.: Complexity of vehicle routing and scheduling problems.
+\newblock Networks \textbf{11}(2), 221--227 (1981)
+
+\bibitem{parragh2008survey}
+Parragh, S.N., Doerner, K.F., Hartl, R.F.: A survey on pickup and delivery
+  models part ii: Transportation between pickup and delivery locations.
+\newblock Journal f{\"u}r Betriebswirtschaft \textbf{58}(2), 81--117 (2008)
+
+\bibitem{rathinam2006matroid}
+Rathinam, S., Sengupta, R.: Matroid intersection and its application to a
+  multiple depot, multiple {TSP}  (2006)
+
+\bibitem{santalo2004integral}
+Santal{\'o}, L.A.: Integral geometry and geometric probability.
+\newblock Cambridge university press (2004)
+
+\bibitem{savelsbergh1995general}
+Savelsbergh, M.W., Sol, M.: The general pickup and delivery problem.
+\newblock Transportation science \textbf{29}(1), 17--29 (1995)
+
+\bibitem{slavik1997errand}
+Slavik, P.: Errand scheduling problem  (1997)
+
+\bibitem{TrePavFra13}
+Treleaven, K., Pavone, M., Frazzoli, E.: Asymptotically optimal algorithms for
+  one-to-one pickup and delivery problems with applications to transportation
+  systems.
+\newblock IEEE Transactions on Automatic Control \textbf{59}(9), 2261--2276
+  (2013)
+
+\bibitem{yu2015target}
+Yu, J., Chung, S.J., Voulgaris, P.G.: Target assignment in robotic networks:
+  Distance optimality guarantees and hierarchical strategies.
+\newblock IEEE Transactions on Automatic Control \textbf{60}(2), 327--341
+  (2015)
+
+\end{thebibliography}

@@ -1,0 +1,120 @@
+\documentclass{llncs}
+%\usepackage{makeidx}  % allows for indexgeneration
+
+\usepackage{amsmath,amsfonts,amssymb,mathrsfs}
+\usepackage{graphicx}
+\usepackage{psfrag,graphicx,epsfig,epsf}
+\usepackage[ruled,linesnumbered, noend]{algorithm2e}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{xspace}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newcommand\permu[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\combi[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Theorems        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{amsthm}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{axiom}[theorem]{Axiom}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{problem}{Problem}
+%\newtheorem{prob}[theorem]{Problem}
+%\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{obj}[theorem]{Objective}
+%\newtheorem{prop}[theorem]{Property}
+%\newtheorem{schedule}[theorem]{Schedule}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Figure resizing          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The macros are useful when we need to change the document textwidth. 
+
+%%This would resize everything within it to \textwidth
+%\def\resizeall{\resizebox{\textwidth}{!}}
+%
+%%This would make a box around the item and center it 
+%\def\resizetotextwidth{\makebox[\textwidth]}
+
+\begin{document}
+
+\title{Fast, High-Quality Dual-Arm Rearrangement in Synchronous, Monotone Tabletop Setups}
+%\titlerunning{Fast Methods for Synchronized Tabletop Dual-Arm Rearragement}
+\author{Rahul Shome$^1$ \and Kiril Solovey$^2$ \and Jingjin Yu$^1$ \and Kostas Bekris$^1$ \and Dan Halperin$^2$}
+%\authorrunning{Shome et al.}
+\institute{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel}
+
+\maketitle
+\input{notation}
+
+\begin{abstract}
+\input{00_abstract}
+\end{abstract}
+
+%\kiril{I've temporarily changed the format to make the display in overleaf slightly more convenient.}
+
+\blfootnote{Work by Rahul Shome, Jingjin Yu and Kostas Bekris has been supported in part by NSF CNS-1330789, IIS-1617744 and IIS-1734419. Work by Dan Halperin has been supported in part by the Israel Science Foundation grant~825/15, the Blavatnik Computer Science Research Fund, the Blavatnik Interdisciplinary Cyber Research Center at Tel Aviv University, Yandex and Facebook.}
+
+\vspace{-.5in}
+
+\section{Introduction}
+\label{sec:intro}
+\input{01_introduction}
+
+\section{Related Work}
+\label{sec:background}
+\input{02_background}
+
+\section{Problem Setup and Notation}
+\label{sec:problem}
+\input{03_problem}
+
+\section{Baseline Approaches and Size of Search Space}
+\label{sec:baseline}
+\input{04_baseline}
+
+\section{Efficient Solution via Tour over Matching}
+\label{sec:approximation}
+\input{05_approximation}
+
+\section{Integration with Motion Planning}
+\label{sec:integration}
+\input{06_integration}
+
+\section{Bounding Costs under Planar Disc Manipulator Model}
+\label{sec:cost_bounds}
+\input{07_cost_bounds}
+
+\section{Evaluation}
+\label{sec:evaluation}
+\input{08_evaluation}
+
+\section{Discussion}
+\label{sec:discussion}
+\input{09_discussion}
+
+%
+% The file named.bst is a bibliography style file for BibTeX 0.99c
+{\small
+\bibliographystyle{spmpsci}
+\bibliography{bib/manip}}
+
+\newpage
+
+\section{Appendix}
+\label{sec:appendix}
+\input{10_appendix}
+
+\end{document}
