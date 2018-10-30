@@ -74,7 +74,7 @@ When $r$ is small or when $\frac{c_t}{c_{pd}}$ is small, the $2$-arm
 solution is roughly half as costly as the single arm solution. On 
 the other hand, in this model a $2$-arm solution does not do better than $\frac{1}{2}$ of 
 the single arm 
-solution. This argument can be extended to $k$-arms as well.
+solution. This argument can be extended to $k$-arms as well \cite{Shome2018WAFR}.
 \vspace{-0.08in}
 \commentadd{
 \begin{theorem}
@@ -84,7 +84,7 @@ asymptotic improvement of $\frac{1}{2}$ over the single arm solution.
 \label{thm:karm}
 \end{theorem}
 }
-The synchronization assumption changes the expected cost of the solution. The random partitioning of the $n$ objects into two sets of $\frac{n}{2}$ object with a random ordering of the objects yields $\frac{n}{2}$ pairs of objects transfers, which dominate the total cost for large $n$. The cost~(Eq.~\ref{eq:cost_function}) of $\frac{n}{2}$ synchronized transfers ($\coma_i$) includes $\frac{n}{2}c_{pd}$ and $C^{\rm sync}_{sg} \approx (\mathtt{E}(max(l_1,l_2))c_t)\frac{n}{2}$, where $\mathtt{E}(max(l_1,l_2))$ is the expected measure of the max of lengths $l_1$,$l_2$ of two randomly paired transfers. Using the \textit{pdf}\cite{ghosh1951random} of lengths of random lines in an unit square and integrating over the setup, results in the value of $\mathtt{E}(max(l_1,l_2))$ to be $0.66$. 
+The synchronization assumption changes the expected cost of the solution. The random partitioning of the $n$ objects into two sets of $\frac{n}{2}$ object with a random ordering of the objects yields $\frac{n}{2}$ pairs of objects transfers, which dominate the total cost for large $n$. The cost~(Eq.~\ref{eq:cost_function}) of $\frac{n}{2}$ synchronized transfers ($\coma_i$) includes $\frac{n}{2}c_{pd}$ and $C^{\rm sync}_{sg} \approx (\mathtt{E}(max(l_1,l_2))c_t)\frac{n}{2}$, where $\mathtt{E}(max(l_1,l_2))$ is the expected measure of the max of lengths $l_1$,$l_2$ of two randomly paired transfers. Using the \textit{pdf}\cite{ghosh1951random} of lengths of random lines in an unit square and integrating over the setup\cite{Shome2018WAFR}, results in the value of $\mathtt{E}(max(l_1,l_2))$ to be $0.66$ . 
 % (Section \ref{sec:appendix}). 
 This means $C_{\rm dual}^{\rm sync} \approx (c_{pd} + 0.66c_t)\frac{n}{2} + 4n\pi rc_t$.
 % \vspace{-0.1in}

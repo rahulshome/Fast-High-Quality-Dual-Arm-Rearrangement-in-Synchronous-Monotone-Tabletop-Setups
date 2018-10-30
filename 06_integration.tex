@@ -63,7 +63,7 @@ The lazy variants give up on optimality for the sake of efficiency but given eno
 % The solutions obtained out of the methods adhere to the defined synchronization assumptions of the problem. 
 Applying velocity tuning over the solution trajectories for the individual arms relaxes the synchronization assumption
 by minimizing any waits that might be a by-product of the synchronization. 
-Smoothing does not change the maximum of distances, only improves execution time. Indications that the smoothed variants of the synchronous solutions do not provide significant savings in execution time are included in the Appendix for the interested reader.
+Smoothing does not change the maximum of distances, only improves execution time. Indications that the smoothed variants of the synchronous solutions do not provide significant savings in execution time are included in the Appendix \cite{Shome2018WAFR} for the interested reader.
 
 It should be noted that in an iterative version of \algo, in order to explore variations in $ \scomaset^* $ if failures occur in finding $\tour$, some edges need to be temporarily blocked on $ \scomaset^* $. The search structures can also be augmented with {\tt NO\_ACT} tasks, for possible $\coma$ where one of the arms do not move. 
 % This effectively includes single arm solutions in the search as well.
