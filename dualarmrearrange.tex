@@ -1,4 +1,6 @@
-\documentclass{llncs}
+% \documentclass{llncs}
+
+\documentclass[journal]{IEEEtran}
 %\usepackage{makeidx}  % allows for indexgeneration
 
 \usepackage{amsmath,amsfonts,amssymb,mathrsfs}
@@ -54,7 +56,7 @@
 %\titlerunning{Fast Methods for Synchronized Tabletop Dual-Arm Rearragement}
 \author{Rahul Shome$^1$ \and Kiril Solovey$^2$ \and Jingjin Yu$^1$ \and Kostas Bekris$^1$ \and Dan Halperin$^2$}
 %\authorrunning{Shome et al.}
-\institute{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel}
+% \institute{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel}
 
 \maketitle
 \input{notation}
@@ -65,25 +67,27 @@
 
 %\kiril{I've temporarily changed the format to make the display in overleaf slightly more convenient.}
 
-\blfootnote{Work by \textit{RS}, \textit{JU} and \textit{KB} was supported by NSF CNS-1330789, IIS-1617744 and IIS-1734419, and \textit{DH} by the ISF grant~825/15, Blavatnik Computer Science Research Fund, Blavatnik Interdisciplinary Cyber Research Center, Yandex and Facebook.}
+\blfootnote{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel.
 
-\vspace{-.5in}
+Work by \textit{RS}, \textit{JU} and \textit{KB} was supported by NSF CNS-1330789, IIS-1617744 and IIS-1734419, and \textit{DH} by the ISF grant~825/15, Blavatnik Computer Science Research Fund, Blavatnik Interdisciplinary Cyber Research Center, Yandex and Facebook.}
+
+% \vspace{-.5in}
 \section{Introduction}
 \label{sec:intro}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{01_introduction}
 
 
-\vspace{-.15in}
+% \vspace{-.15in}
 \section{Related Work}
 \label{sec:background}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{02_background}
 
-\vspace{-.15in}
+% \vspace{-.15in}
 \section{Problem Setup and Notation}
 \label{sec:problem}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{03_problem}
 
 \vspace{-.15in}
@@ -92,46 +96,48 @@
 \vspace{-.1in}
 \input{04_baseline}
 
-\vspace{-.15in}
+% \vspace{-.15in}
 \section{Efficient Solution via Tour over Matching}
 \label{sec:approximation}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{05_approximation}
 
-\vspace{-.15in}
+% \vspace{-.15in}
 \section{Integration with Motion Planning}
 \label{sec:integration}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{06_integration}
 
-\vspace{-.15in}
+% \vspace{-.15in}
 \section{Bounding Costs under Planar Disc Manipulator Model}
 \label{sec:cost_bounds}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{07_cost_bounds}
 
-\vspace{-.15in}
+% \vspace{-.15in}
 \section{Evaluation}
 \label{sec:evaluation}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{08_evaluation}
 
-\vspace{-.15in}
+% \vspace{-.15in}
 \section{Discussion}
 \label{sec:discussion}
-\vspace{-.1in}
+% \vspace{-.1in}
 \input{09_discussion}
 
 %
 % The file named.bst is a bibliography style file for BibTeX 0.99c
-{\small
-\bibliographystyle{spmpsci}
-\bibliography{bib/manip}}
+% {\small
+% \bibliographystyle{spmpsci}
+% \bibliography{bib/manip}}
+
+\bibliographystyle{IEEEtran} \bibliography{IEEEabrv,bib/manip}
 
 %\newpage
 
-%\section{Appendix}
-%\label{sec:appendix}
-%\input{10_appendix}
+\section{Appendix}
+\label{sec:appendix}
+\input{10_appendix}
 
 \end{document}

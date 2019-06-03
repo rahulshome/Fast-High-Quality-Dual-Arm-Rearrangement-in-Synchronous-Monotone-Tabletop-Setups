@@ -32,12 +32,12 @@ setups \cite{193}. The proliferation of robot arms, however, including dual-arm 
 A motivating point is that the coordinated use of multiple arms can
 result in significant improvements in efficiency. This arises from the following argument.
 
-\vspace{-.1in}
+% \vspace{-.1in}
 \begin{lemma}\label{l:k-arm-lower-bound}
 There are classes of tabletop rearrangement problems, where a $k$-arm
 ($k \ge 2$) solution can be arbitrarily better than the optimal
 single-arm one.
-\vspace{-.3in}
+% \vspace{-.3in}
 \end{lemma}
 
 For instance, assume two arms that have full (overhand) access to a 
@@ -62,11 +62,11 @@ is coordination overhead, the best $2$-arm solution cannot do worse; simply
 let one of the arms carry out the best single arm solution while the 
 other remains outside the workspace. More generally:
 
-\vspace{-.1in}
+% \vspace{-.1in}
 \begin{lemma}\label{l:2-arm-no-worse}
 For any rearrangement problem, the best $k$-arm ($k \ge 2$) solution
 cannot be worse than an optimal single arm solution.
-\vspace{-.1in}
+% \vspace{-.1in}
 \end{lemma}
 
 The above points motivate the development of scalable algorithmic
@@ -78,12 +78,15 @@ synchronized execution of pick-and-place actions by the two arms. i.e., where th
 Theoretical arguments and experimental evaluation indicate that this does not significantly degrade solution
 quality.
 
-\begin{figure}[t]\vspace{-0.15in}
+\begin{figure}[t]
+% \vspace{-0.15in}
 	\centering
-	\includegraphics[width=3in]{figures/two_arms}\vspace{-0.1in}
+	\includegraphics[width=3in]{figures/two_arms}
+% 	\vspace{-0.1in}
 	\caption{Example of dual-arm setups that can utilize
 	algorithms proposed in this work.}
-	\label{fig:two_arms}\vspace{-0.25in}
+	\label{fig:two_arms}
+% 	\vspace{-0.25in}
 \end{figure}
 
 
