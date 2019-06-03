@@ -175,10 +175,10 @@ the search space is much smaller, and the sub-problems more efficient to solve.\
 
 \noindent $ \mathtt{transfer\_graph} $: This function constructs a directed graph $ \graph $ defined by Eqs.~\ref{eq:transfergraph}. This step creates a graph with $ n $ vertices and $ \permu[n]{2} $ edges.
 
-\begin{wrapfigure}{r}{0.6\textwidth}\vspace{-0.3in}
-  \begin{minipage}{0.6\textwidth}
-  \vspace{0pt} 
-    \begin{algorithm}[H]
+%\begin{wrapfigure}{r}{0.6\textwidth}\vspace{-0.3in}
+%  \begin{minipage}{0.6\textwidth}
+%  \vspace{0pt} 
+    \begin{algorithm}[t]
     \caption{{\tt \algo}$ (\objectset, \startq, \ainit, \atarget) $}
     \label{algo:tom}
     $ \graph \leftarrow \mathtt{transfer\_graph}(\objectset, \ainit, \atarget) $\;
@@ -187,9 +187,9 @@ the search space is much smaller, and the sub-problems more efficient to solve.\
     $ \scoma^+\leftarrow\mathtt{optimal\_tour}(\tspgraph) $\;
     $ \mathbf{\mathtt{return}}\ \trajset(\scoma^+)$\;
     \end{algorithm}
-  \end{minipage}
-  \vspace{-0.3in}
-\end{wrapfigure}
+%  \end{minipage}
+%  \vspace{-0.3in}
+%\end{wrapfigure}
 
 \noindent $ \mathtt{optimal\_matching} $: This function takes the graph $ \graph $ constructed as an argument and returns the unordered set of edges, corresponding to the set of optimal transfers over $ \graph $. 
 \commentdel{The first step is to convert the directed graph $ \graph $ into an equivalent undirected graph $ \graph_U $. Since $ \graph $ is complete, every pair of vertices has two directed edges between them. $\graph_U$ only preserves the minimally weighted connection for every vertex pair. Optimal matching is solved using an Edmond's Blossom Algorithm~\cite{edmonds1965maximum,galil1986ev} implementation~\cite{dezsHo2011lemon}. 
