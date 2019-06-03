@@ -1,6 +1,6 @@
 This section highlights two optimal strategies to discover $\D(\scoma^*)$: a) exhaustive search, which reveals the search space of all possible sequences of object pairs $ \scoma $ and b) an MILP model. Both alternatives, however, suffer from scalability issues as for each possible assignment, it is necessary to solve a coordinated motion planning problem for the arms. This motivates minimizing the number of assignments $\coma$ considered, and the number of motion planning queries it requires for discovering $\D(\scoma^*)$, while still aiming for high quality solutions.
 
-\noindent\textbf{Exhaustive Search}: The exhaustive search approach shown in Fig. \ref{fig:backtracking} is a brute force expansion of all possible sequences of object pairs $ \scoma $. Nodes correspond to transfers $T(\coma_i)$ and edges are moves $M(\coma_{i\rightarrow i{^\prime}})$. The approach evaluates the cost for all possible branches to return the best sequence $\scoma$. The total number of nodes is in the order of $O(n!)$, expressed over the levels $L$ of the search tree as: 
+\subsection{Exhaustive Search} The exhaustive search approach shown in Fig. \ref{fig:backtracking} is a brute force expansion of all possible sequences of object pairs $ \scoma $. Nodes correspond to transfers $T(\coma_i)$ and edges are moves $M(\coma_{i\rightarrow i{^\prime}})$. The approach evaluates the cost for all possible branches to return the best sequence $\scoma$. The total number of nodes is in the order of $O(n!)$, expressed over the levels $L$ of the search tree as: 
 % \kiril{It may be beneficial to explain the formula below, or perhaps move it to the appendix to save space and avoid explaining it here.}:
 
 % \vspace{-0.25in}
@@ -37,7 +37,8 @@ Additional motion plans are needed for the initial move from $q_{\rm safe}^k$ an
 
 This returns optimal synchronized solution but performs an exhaustive search and requires exponentially many calls to a motion planner.
 
-\noindent\textbf{MILP Formulation}:
+\subsection{MILP Formulation}
+
 Mixed Integer Linear Programming (\milp) formulations can utilize highly optimized solvers \cite{gurobi}. Prior work has applied these techniques for solving m-TSP \cite{rathinam2006matroid,friggstad2013multiple} and pickup-and-delivery problems \cite{coltin2014multi,savelsbergh1995general}, but viewed these problems in a decoupled manner. This work outlines an \milp formulation for the synchronized dual-arm rearrangement problem that reasons about coordination costs arising from arm interactions in a shared workspace.
 
 \textit{Graph Representation:}
@@ -65,11 +66,11 @@ Eq. [B] below defines indicator variables. Eqs. [C-E] ensure edge-flow conserved
 x_e \in \{ 0,1 \}& \ \ \forall e \in \hat{E} \tag*{[B]}\\
 \sum_{e\in\delta_{\rm in}(v)} x_e \leq 1& \ \ \forall v\in \hat{V} \tag*{[C]}\\
 \sum_{e\in\delta_{\rm out}(v)} x_e \leq 1& \ \ \forall v\in \hat{V} \tag*{[D]}\\
-\sum_{e\in\delta_{\rm in}(v)}x_e = \sum_{e\in\delta_{\rm out}(v)}x_e& \ \ \forall v\in \hat{V} \tag*{[E]}\\
 \end{align*}
 \end{minipage}
 \noindent\begin{minipage}{.48\textwidth}
 \begin{align*}
+\sum_{e\in\delta_{\rm in}(v)}x_e = \sum_{e\in\delta_{\rm out}(v)}x_e& \ \ \forall v\in \hat{V} \tag*{[E]}\\
 \sum_{e\in\delta_{\rm in}(\startq)} x_e = 1& \tag*{[F]}\\
 \sum_{e\in\delta_{\rm out}(\startq)} x_e = 1& \tag*{[G]}\\
 \sum_{e\in\gamma(\object)} x_e = 1& \ \  \forall \object\in\objectset \tag*{[H]}\\

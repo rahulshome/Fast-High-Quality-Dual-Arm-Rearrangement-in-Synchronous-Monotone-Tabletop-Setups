@@ -5,7 +5,7 @@ The optimal baseline methods described above highlight the problem's complexity.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\noindent\textbf{Importance of Transfers}: In order to draw some insight, consider again the tabletop setup with a general cost measure of $c_t$ per unit distance.
+\subsection{Importance of Transfers} In order to draw some insight, consider again the tabletop setup with a general cost measure of $c_t$ per unit distance.
 Lemma~\ref{l:k-arm-lower-bound} suggests that under certain conditions, there 
 may not be a meaningful bound on the performance ratio between a $k$-arm 
 solution and a single-arm solution. This motivates the examination of another
@@ -127,7 +127,7 @@ This ends up scaling better by effectively reducing the size of the search space
 %\vspace{-0.1in}
 \end{figure*}
 
-\noindent\textbf{Foundations:} Consider a complete weighted directed graph $\graph(\nodes,\edges)$ (Eq.~\ref{eq:transfergraph}), where $\node \in \nodes$ corresponds to a single object $ \object $. Each directed edge, $\edge=(\object_i,\object_j) \in \edges$ is an ordered pair of objects $ \object_i $ and $\object_j $, where the order determines the assignment of an object to an arm $ \arm^1 $ or $ \arm^2 $. The cost of an edge $ \cost(\edge) $ is the coordinated motion planning cost of performing the transfer corresponding to $ \coma = (\object_i,\object_j) $. For instance, as shown in Fig \ref{fig:edge_matching}(middle), $\edge(A,B)$ corresponds to $ \arm^1 $ transferring `A', while $ \arm^2 $ transfers `B', and the $\cost( \edge(A,B) ) = \cost(T(\coma=(A,B))$ is the cost of such a concurrent motion. 
+\subsection{Foundations} Consider a complete weighted directed graph $\graph(\nodes,\edges)$ (Eq.~\ref{eq:transfergraph}), where $\node \in \nodes$ corresponds to a single object $ \object $. Each directed edge, $\edge=(\object_i,\object_j) \in \edges$ is an ordered pair of objects $ \object_i $ and $\object_j $, where the order determines the assignment of an object to an arm $ \arm^1 $ or $ \arm^2 $. The cost of an edge $ \cost(\edge) $ is the coordinated motion planning cost of performing the transfer corresponding to $ \coma = (\object_i,\object_j) $. For instance, as shown in Fig \ref{fig:edge_matching}(middle), $\edge(A,B)$ corresponds to $ \arm^1 $ transferring `A', while $ \arm^2 $ transfers `B', and the $\cost( \edge(A,B) ) = \cost(T(\coma=(A,B))$ is the cost of such a concurrent motion. 
 %Note that these costs refer to only the transfer costs i.e., starting from the arms picking up the objects $ A $ and $ B $ at the initial poses(as shown in Fig \ref{fig:edge_matching}(left)), and moving them to their target poses. 
 It should also be noted that since the arms are different, in general, $\cost( \edge(A,B) ) \neq \cost( \edge(B,A) )$.
 
@@ -182,7 +182,8 @@ the search space is much smaller, and the sub-problems more efficient to solve.\
 
 %\vspace{-0.1in}
 
-\noindent\textbf{Algorithm}: This section describes the algorithm {\tt {Tour\_Over\_Matching}} (\algo) outlined in the previous section. The steps correspond to Algo \ref{algo:tom}. 
+\subsection{Algorithm : Tour-Over-Matching} 
+This section describes the algorithm  (\algo) outlined in the previous section. The steps correspond to Algo \ref{algo:tom}. 
 % The algorithm takes as input the set of objects $ \objectset $ and the start(and end) configuration $ \startq $ of the arms.
 
 \noindent $ \mathtt{transfer\_graph} $: This function constructs a directed graph $ \graph $ defined by Eqs.~\ref{eq:transfergraph}. This step creates a graph with $ n $ vertices and $ \permu[n]{2} $ edges.

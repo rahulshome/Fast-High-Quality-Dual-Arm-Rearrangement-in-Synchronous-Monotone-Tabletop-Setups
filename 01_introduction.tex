@@ -110,6 +110,16 @@ synchronous solution.
 Finally, experiments for i) a simple planar picker setting, and ii) two 7-DOF Kuka arms, demonstrate a nearly two-fold
 improvement against the single arm case for the proposed approach in practice. The algorithm exhibits close to optimal solutions and good scalability. 
 The lazy evaluation strategy significantly improves computation costs for both the optimal and proposed methods.
+
+\tase{
+The current archival version is an extension of previous work and several additions have been made to the draft to provide a more holistic inspection of the problem, chiefly:
+\begin{enumerate}
+	\item An additional benchmark has been added to demonstrate the efficacy of the proposed approach in problem domains where all the object positions do not lie in the shared workspace.
+	\item It has been argued that smoothing can be used to alleviate the sychronization assumption. Data from the effects of smoothing the solutions in the experiments have been reported and show that the minor improvements highlight that in practice the synchronization assumption is not tragic.
+	\item A k-arm extension of the asymptotic cost bound in the asynchronous case has been included.
+	\item The proof for the asymptotic cost bound estimate for 2-arms under the synchronization assumption has been expanded, and Monte-Carlo trials have been reported in a simplified setup to validate the analysis model.
+\end{enumerate}
+}
 %The computational costs of both the optimal
 %and the proposed method are significantly improved from the lazy
 %evaluation strategy. 

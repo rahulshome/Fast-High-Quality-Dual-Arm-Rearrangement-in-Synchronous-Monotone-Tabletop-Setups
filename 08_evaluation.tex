@@ -9,16 +9,16 @@
 %\textit{What do we measure: a) solution quality in terms of the cost metrics
 %identified and b) computation time.}
 
-\begin{figure*}[b]
+\begin{figure}[h]
 %    \vspace{-.6in}
 	\centering
-		\includegraphics[width=0.49\textwidth,trim={1cm 9cm 1cm 5cm},clip]{figures/simple_picker_benchmark}
-		\includegraphics[width=0.47\textwidth]{figures/kuka_benchmark2}
+		\includegraphics[width=0.245\textwidth,trim={1cm 9cm 1cm 5cm},clip]{figures/simple_picker_benchmark}
+		\includegraphics[width=0.235\textwidth]{figures/kuka_benchmark2}
 %		\vspace{-.3in}
 		\caption{\textit{Picker} and \textit{Manipulator} trials.}
 		\label{fig:benchmarks}
 %    \vspace{-.3in}
-\end{figure*}
+\end{figure}
 This section describes the experiments performed to evaluate the algorithms in two  domains shown in Fig \ref{fig:benchmarks}: a) simple picker and b) general manipulators.
 %\begin{figure}[ht]
 %	\centering
@@ -31,15 +31,15 @@ In order to ensure monotonicity, the object starts and goals do not overlap. Uni
 A comparison point includes a random split method, which splits $ \objectset $ at random into two subsets and chooses an arbitrary ordering. Maximum of distances cost is compared to the single arm solution~\cite{193}. Computation times and success rates are reported. The trends in both experiments show that in the single-shot versions, exhaustive and \milp tend to time-out for larger $n$. Lazy variants scale much better for all the algorithms, and in some cases increase the success ratio due to retries. \algo has much better running time than exhaustive and \milp, and producing better and more solutions than random split. Overall, the results show a) our \milp succeeds more within the time limit than exhaustive, b) \algo scales the best among all the methods, and c) the cost of solutions from \algo is close to the optimal baseline, which is around half of the single arm cost.
 % to demonstrate the gains from using multiple arms.  Overall, MILP scales better than exhaustive search, while finding optimal solutions. \algo scales better than the other methods, and finds high quality solutions. The lazy variants improve all the dual-arm methods.
 
-%\subsection{Simple Picker}
+\subsection{Simple Picker}
 %The results are shown in Figure~\ref{fig:disk}.
-\textbf{Simple Picker}: This benchmark evaluates two disk robots hovering over a planar surface scattered with objects. The robots are only free to move around in a plane parallel to the resting plane of the objects, and the robots can pick up objects when they are directly above them. Fig~\ref{fig:disk}(\textit{top}) all runs up to $ 24 $ objects succeeded for \algo. \milp scales better than exhaustive. Lazy random split succeeds in all cases~(\textit{bottom}). In terms of solution costs~(\textit{middle}) exhaustive finds the true optimal. \milp matches exhaustive and \algo is competitive. In all experiments, \algo enjoys a success rate of 100\%.
+This benchmark evaluates two disk robots hovering over a planar surface scattered with objects. The robots are only free to move around in a plane parallel to the resting plane of the objects, and the robots can pick up objects when they are directly above them. Fig~\ref{fig:disk}(\textit{top}) all runs up to $ 24 $ objects succeeded for \algo. \milp scales better than exhaustive. Lazy random split succeeds in all cases~(\textit{bottom}). In terms of solution costs~(\textit{middle}) exhaustive finds the true optimal. \milp matches exhaustive and \algo is competitive. In all experiments, \algo enjoys a success rate of 100\%.
 % \kiril{What is the reason for low success rate of exhaustive and milp? Is it due to exceeding the time budget?} \kiril{This paragraph misses a statement that demonstrates the benefits of our approach: "In all experiments, \algo enjoys a success rate of \%100, while having much better running time than exhaustive and milp, and producing a higher cost solution than random split. Furthermore, \algo produces a plan whose cost is around half of the single arm plan cost." Similar statements should be added to the other experiments.}
 
 %\subsection{General Manipulator}
 %The results are shown in Figure~\ref{fig:kuka}.
 
-\textbf{General Dexterous Manipulator}: The second benchmark sets up two \kuka arms across a table with objects on it. The objects are placed in the common reachable part of both arms' workspace, and only one top-down grasping configuration is allowed for each object pose. Here (Fig~\ref{fig:kuka}) a larger number of motion plans tend to fail, so the single shot variants show artifacts of the randomness of \drrtstar in their success rates. 
+\subsection{General Dexterous Manipulator} The second benchmark sets up two \kuka arms across a table with objects on it. The objects are placed in the common reachable part of both arms' workspace, and only one top-down grasping configuration is allowed for each object pose. Here (Fig~\ref{fig:kuka}) a larger number of motion plans tend to fail, so the single shot variants show artifacts of the randomness of \drrtstar in their success rates. 
 % The lazy iterative variants show the robust scalability. 
 Random split performs the worst since it is unlikely to chance upon valid motion plans. Single shot exhaustive and \milp scale poorly because of expensive motion planning.
 Interestingly, motion planning infeasibility reduces the size of the exhaustive search tree.
@@ -48,8 +48,7 @@ The solution costs \textit{(middle)} substantiate benefits of the use of two arm
 
 
 
-
-\begin{figure*}[h!]
+\begin{figure*}[t]
 %\vspace{-0.2in}
 	\centering
 %	\includegraphics[width=2.1in]{figures/disk_solution}
@@ -87,4 +86,44 @@ The solution costs \textit{(middle)} substantiate benefits of the use of two arm
 %    \vspace{-0.3in}
 	\label{fig:kuka}
 \end{figure*}
+
+\tase{
+\subsection{Smoothing}
+The result of the velocity tuning over the solution trajectories for the individual arms as a post-processing step is shown in Fig \ref{fig:smoothing}. The objective is to minimize any waits that might be a by-product of the synchronization. 
+% The small improvements indicate that synchronization does not adversely affect the solution executions. 
+The small \% improvements indicate that the asynchronous variants of the solutions discovered from the methods do not yield a big enough saving in execution time. 
+Most of the improvement as a percentage of the original solution duration is not too high. On top of that, the time taken to smooth the solutions for \algo (overlaid on Fig \ref{fig:smoothing}) shows that it is often not beneficial.
+In their largest problem instances the \kuka spent $ 0.44s $ of smoothing time to save $ 3.23s $ off the solution duration, while the picker spent $  9.84s $ to save $ 0.54s $.
+This indicates that among the class of synchronized solutions discovered by the proposed algorithms, the analogous asynchronous variants do not seem to be drastically better. Moreover, smoothing does not improve the maximum of distances cost measure, but only reduces the solution duration. The theoretical bounds in the simple planar setups agree with the results in that the synchronization does not degrade the benefits of using 2 arms too much. It should be pointed out though that it needs to be studied further, whether these trends would hold for a class of algorithms that can solve the asynchronous dual-arm rearrangement problem in general setups. This is out of the scope of the current work.
+
+% \kiril{What is the bottom line here? Is smoothing worthwhile? The y-axis in the plots is labeled as \% whereas the bars are labeled with seconds.}
+
+%\clearpage
+
+% \vspace{-0.2in}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=0.48\textwidth]{figures/results/labels}
+	\includegraphics[width=0.48\textwidth]{figures/results/sp_smoothing}
+	\includegraphics[width=0.48\textwidth]{figures/results/kuka_smoothing}
+	\caption{Smoothed solution improvement as a percentage of the original synchronized solution duration, and the time taken to smooth solutions obtained from \algo in seconds.}
+	\label{fig:smoothing}
+	%     \vspace{-.3in}
+\end{figure}
+
+\subsection{Discrete Reachability Benchmark}
+In this benchmark, two Kuka arms are placed opposite a target arrangement table. The initial poses of the objects are set to be on opposite ends of the arms, as demonstrated in the image. The purpose of this study is to see the effects of general divided workspaces where both the initial and target poses are not in the region of common reachability of the arms. This is indeed a simpler problem for the coordinated methods, but proves challenging to the naive random split strategy. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.48\textwidth]{figures/reachability}
+	\includegraphics[width=0.48\textwidth]{figures/results/labels}
+	\includegraphics[width=0.48\textwidth]{figures/results/5_kuka_lazy_ms_success.png}
+	\includegraphics[width=0.48\textwidth]{figures/results/5_kuka_lazy_ms_cost.png}
+	\includegraphics[width=0.48\textwidth]{figures/results/5_kuka_lazy_ms_time.png}
+	\caption{The reachability benchmark}
+	\label{fig:reachability_benchmark}
+	%     \vspace{-.3in}
+\end{figure}
+}
 
