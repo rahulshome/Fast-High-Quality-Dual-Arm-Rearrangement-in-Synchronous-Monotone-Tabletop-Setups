@@ -57,7 +57,11 @@ cost_{e(u,v)} =& \cost(u) + \cost(u,v)\\ =&\cost(T(\coma_u)) + \cost(M(\coma_{u\
 % \vspace{-.15in}
 Let $\cost(\startq) = 0$. The total number of motion planning queries needed to be answered to define the edge costs is expressed in Eq.~\ref{eq:mpcount}. The formulation proposed in this section tries to ensure the discovery of $ \scoma^* $ on $ \hat{G} $ as a tour that starts and ends at $ \startq $, while traversing each vertex corresponding to $ \scoma^* $. To provide the {\tt MILP} formulation, define $ \delta_{\rm in}(v) $ as the in-edge set $v$, and  $ \delta_{\rm out}(v) $ as the out-edge set. Then, $ \gamma(\object) $ is the object coverage set $ \gamma(\object) = \{ e(u,v) \ |\ e\in\hat{E}, \object\in  \coma_u  \} $, i.e., all the edges that transfer $ \object $.
 
-\textit{Model:} Set the optimization objective as: $\ \ \min \sum_{e \in \hat{E}} cost_e x_e\  $\hspace{.81in} [A]\\ 
+\textit{Model:} Set the optimization objective as:
+%$\ \ \min \sum_{e \in \hat{E}} cost_e x_e\  $\hspace{.81in} [A]\\ 
+\begin{align*}
+	\min \sum_{e \in \hat{E}} cost_e x_e \tag*{[A]}
+\end{align*}
 Eq. [B] below defines indicator variables. Eqs. [C-E] ensure edge-flow conserved tours. Eqs. [F-G] force $\startq$ to be part of the tour. Eq. [H] transfers every object only once. Eq. [I] lazily enforces the tour to be of length $ \frac{n}{2} + 1 $. While the number of motion-planning queries to be solved is the same as in exhaustive search, efficient {\milp} solvers \cite{gurobi} provide a more scalable search process.
 
 % \vspace{-.2in}
@@ -66,10 +70,10 @@ Eq. [B] below defines indicator variables. Eqs. [C-E] ensure edge-flow conserved
 x_e \in \{ 0,1 \}& \ \ \forall e \in \hat{E} \tag*{[B]}\\
 \sum_{e\in\delta_{\rm in}(v)} x_e \leq 1& \ \ \forall v\in \hat{V} \tag*{[C]}\\
 \sum_{e\in\delta_{\rm out}(v)} x_e \leq 1& \ \ \forall v\in \hat{V} \tag*{[D]}\\
-\end{align*}
-\end{minipage}
-\noindent\begin{minipage}{.48\textwidth}
-\begin{align*}
+%\end{align*}
+%\end{minipage}
+%\noindent\begin{minipage}{.48\textwidth}
+%\begin{align*}
 \sum_{e\in\delta_{\rm in}(v)}x_e = \sum_{e\in\delta_{\rm out}(v)}x_e& \ \ \forall v\in \hat{V} \tag*{[E]}\\
 \sum_{e\in\delta_{\rm in}(\startq)} x_e = 1& \tag*{[F]}\\
 \sum_{e\in\delta_{\rm out}(\startq)} x_e = 1& \tag*{[G]}\\
