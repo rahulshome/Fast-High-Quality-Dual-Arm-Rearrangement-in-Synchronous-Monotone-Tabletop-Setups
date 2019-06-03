@@ -61,12 +61,12 @@ the $k$-arm cost becomes $C_{\rm k{\text-}arm}^t \approx (c_{pd} + 0.52c_t)\frac
 
 The cost ratio is
 \vspace{-0.1in}
-\begin{equation}\label{eq:kmakespan-ratio}
-\frac{C_{\rm k{\text-}arm}^t}{C_{\rm single}} \approx 
+\begin{align*}\label{eq:kmakespan-ratio}
+\frac{C_{\rm k{\text-}arm}^t}{C_{\rm single}} &\approx 
 \frac{(c_{pd} + 0.52c_t)\frac{n}{k} + nf(k,r)c_t}{(c_{pd} + 0.52c_t)n}
-= \frac{1}{k} + \frac{f(k,r)c_t}{c_{pd} + 0.52c_t}\;.
+\\&= \frac{1}{k} + \frac{f(k,r)c_t}{c_{pd} + 0.52c_t}\;.\numberthis
 % \vspace{-0.1in}
-\end{equation}
+\end{align*}
 
 When $r$ is small or when $\frac{c_t}{c_{pd}}$ is small, the $k$-arm 
 solution is roughly $\frac{1}{k}$ as costly as the single arm solution. On 
@@ -93,25 +93,25 @@ p(l) &= (\frac{4l}{a^2b^2})\phi(l)\\
 \end{align*}
 
 In the unit square model, $a=b=1$. Substituting the values, the \textit{pdf} becomes
-\begin{align}
+\begin{align*}
 p(l)&= 2\pi l - 8\pi l^2 + 2l^3, \ \ l\in[0,1]\\
-p(l)&= 4l\sininv(\frac{1}{l}) - 4l\cosinv(\frac{1}{l}) + 8l\sqrt[]{(l^2-1)} -2l^3 -4l, \ \ l\in[1,\sqrt[]{2}]
-\end{align}
+p(l)&= 4l\sininv(\frac{1}{l}) - 4l\cosinv(\frac{1}{l}) + 8l\sqrt[]{(l^2-1)} -2l^3 -4l,\\ &\ l\in[1,\sqrt[]{2}]
+\end{align*}
 
 Assuming two random sets of lines, representing transfers in a random split of objects between two arms, we need the expected value of the maximum of these pairwise lengths ie., $\mathtt{E}(max(l_1,l_2)), \ \ l_1,l_2\ i.i.d, \ \ l_1 \sim p, l_2 \sim p$.
 This is estimated using the \textit{pdf} obtained. 
-\begin{equation}
-\mathtt{E}(max(l_1,l_2)) = \int_0^{\sqrt[]{2}} \int_0^{\sqrt[]{2}} max(l_1,l_2)p(l_1)p(l_2) dl_2 dl_1 \approx 0.663
-\end{equation}
+\begin{align*}
+\mathtt{E}(max(l_1,l_2)) &= \int_0^{\sqrt[]{2}} \int_0^{\sqrt[]{2}} max(l_1,l_2)p(l_1)p(l_2) dl_2 dl_1\\&\approx 0.663
+\end{align*}
 The result is calculated by taking into account the combination of different ranges of $p(l)$ and $max(l_1,l_2)$.
 \commentadd{
-\begin{wrapfigure}{r}{1.4in}
+\begin{figure}[h]
 	\centering
-	\vspace{-0.3in}
-    \includegraphics[width=1.4in]{figures/monte_carlo}
+%	\vspace{-0.3in}
+    \includegraphics[width=0.35\textwidth]{figures/monte_carlo}
 	\caption{Empirical cost ratio versus the estimate}
-  	\label{fig:bounds}
-\end{wrapfigure}
+  	\label{fig:mcbounds}
+\end{figure}
 
 Prior work~\cite{santalo2004integral} offered an estimate for the expected length of a transit path $C_{sg}$ in terms of the expected length of a line segment, $0.52$, in a randomized setting in an unit square. With the current estimate of $0.663$ for the maximum of two such randomly sampled line segments, it follows that, the expected makespan or maximum of distances cost will use this estimate.
 
@@ -122,7 +122,7 @@ $$
 $$
 As a way to validate our asymptotic estimate, randomized trials were run with different number randomly sampled object transfer coordinates on an unit square.
 % Fig \ref{fig:bounds} verifies empirically that the ratio of $\frac{C_{dual}^{sync}}{C_{single}}$ when $c_{pd}=0,r=0$, asymptotically converges to the calculated expected value of $0.636$. 
-When $c_{pd}=0$ and $r=0$, the ratio of $\frac{C_{dual}^{sync}}{C_{single}}$ evaluates to $0.636$. Fig \ref{fig:bounds} verifies empirically that the ratio converges to the expected value as the number of transfers increases.
+When $c_{pd}=0$ and $r=0$, the ratio of $\frac{C_{dual}^{sync}}{C_{single}}$ evaluates to $0.636$. Fig \ref{fig:mcbounds} verifies empirically that the ratio converges to the expected value as the number of transfers increases.
 This indicates the asymptotic speedup of a synchronized dual arm solution for a makespan or maximum of distances cost metric.
 }
 
@@ -138,10 +138,11 @@ This indicates that among the class of synchronized solutions discovered by the 
 
 
 % \vspace{-0.2in}
-\begin{figure}
-	\centering
-	\includegraphics[width=2.3in]{figures/results/sp_smoothing}
-	\includegraphics[width=2.3in]{figures/results/kuka_smoothing}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=0.48\textwidth]{figures/results/labels}
+	\includegraphics[width=0.48\textwidth]{figures/results/sp_smoothing}
+	\includegraphics[width=0.48\textwidth]{figures/results/kuka_smoothing}
 	\caption{Smoothed solution improvement as a percentage of the original synchronized solution duration, and the time taken to smooth solutions obtained from \algo in seconds.}
 	\label{fig:smoothing}
 %     \vspace{-.3in}
@@ -150,12 +151,13 @@ This indicates that among the class of synchronized solutions discovered by the 
 \subsection{Discrete Reachability Benchmark}
 In this benchmark, two Kuka arms are placed opposite a target arrangement table. The initial poses of the objects are set to be on opposite ends of the arms, as demonstrated in the image. The purpose of this study is to see the effects of general divided workspaces where both the initial and target poses are not in the region of common reachability of the arms. This is indeed a simpler problem for the coordinated methods, but proves challenging to the naive random split strategy. 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=5.3in]{figures/reachability}
-	\includegraphics[width=5.3in]{figures/results/5_kuka_lazy_ms_success.png}
-	\includegraphics[width=5.3in]{figures/results/5_kuka_lazy_ms_cost.png}
-	\includegraphics[width=5.3in]{figures/results/5_kuka_lazy_ms_time.png}
+	\includegraphics[width=0.48\textwidth]{figures/reachability}
+	\includegraphics[width=0.48\textwidth]{figures/results/labels}
+	\includegraphics[width=0.48\textwidth]{figures/results/5_kuka_lazy_ms_success.png}
+	\includegraphics[width=0.48\textwidth]{figures/results/5_kuka_lazy_ms_cost.png}
+	\includegraphics[width=0.48\textwidth]{figures/results/5_kuka_lazy_ms_time.png}
 	\caption{The reachability benchmark}
 	\label{fig:reachability_benchmark}
 %     \vspace{-.3in}

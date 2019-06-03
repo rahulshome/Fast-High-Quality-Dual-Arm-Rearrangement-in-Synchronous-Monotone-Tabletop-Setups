@@ -50,23 +50,23 @@ the $2$-arm cost becomes $C_{\rm dual}^t \approx (c_{pd} + 0.52c_t)\frac{n}{2} +
 % }
 % }
 The cost ratio is
-\vspace{-0.1in}
-\begin{equation}\label{eq:makespan-ratio}
-\frac{C_{\rm dual}^t}{C_{\rm single}} \approx 
+%\vspace{-0.1in}
+\begin{align*}\label{eq:makespan-ratio}
+\frac{C_{\rm dual}^t}{C_{\rm single}} &\approx 
 \frac{(c_{pd} + 0.52c_t)\frac{n}{2} + 4n\pi rc_t}{(c_{pd} + 0.52c_t)n}
-= \frac{1}{2} + \frac{4\pi rc_t}{c_{pd} + 0.52c_t}\;.
+\\&= \frac{1}{2} + \frac{4\pi rc_t}{c_{pd} + 0.52c_t}\;.\numberthis
 % \vspace{-0.1in}
-\end{equation}
+\end{align*}
 
 \commentdel{
  \begin{wrapfigure}{r}{1.4in}
-  \vspace{-.45in}
+%  \vspace{-.45in}
 	\centering
     \includegraphics[width=1.4in]{figures/monte_carlo}
-    \vspace{-.4in}
+%    \vspace{-.4in}
 	\caption{Empirical cost ratio versus the estimate}
   	\label{fig:bounds}
-    \vspace{-.4in}
+%    \vspace{-.4in}
 \end{wrapfigure}
 }
 
@@ -98,17 +98,17 @@ This means $C_{\rm dual}^{\rm sync} \approx (c_{pd} + 0.66c_t)\frac{n}{2} + 4n\p
 % }
 % }
 The synchronized cost ratio is
-\vspace{-0.1in}
-\begin{equation}\label{eq:synchronized-ratio}
-\frac{C_{\rm dual}^{\rm sync}}{C_{\rm single}} \approx 
+%\vspace{-0.1in}
+\begin{align*}\label{eq:synchronized-ratio}
+\frac{C_{\rm dual}^{\rm sync}}{C_{\rm single}} &\approx 
 \frac{(c_{pd} + 0.66c_t)\frac{n}{2} + 4n\pi rc_t}{(c_{pd} + 0.52c_t)n}
-= \frac{1}{2} + \frac{ (0.07 + 4\pi r)c_t}{c_{pd} + 0.52c_t}\;.
-\vspace{-0.1in}
-\end{equation}
+\\&= \frac{1}{2} + \frac{ (0.07 + 4\pi r)c_t}{c_{pd} + 0.52c_t}\;.\numberthis
+%\vspace{-0.1in}
+\end{align*}
 
 When $\frac{c_t}{c_{pd}}$ is small, even the synchronized $2$-arm solution provides an improvement of $\frac{1}{2}$. For the case when both $r$ and $c_{pd}$ are small, we observe that the ratio approaches $0.636$. 
 \commentdel{Fig \ref{fig:bounds} confirms empirically that in randomized trials on an unit square, the ratio of $\frac{C_{dual}^{sync}}{C_{single}}$ when $c_{pd}=0,r=0$, converges to the calculated estimate (red line).}
-\vspace{-0.08in}
+%\vspace{-0.08in}
 \begin{theorem}
 For rearranging objects with non-overlapping starts and goals that are 
 uniformly distributed in a unit square,  a randomized $2$-arm synchronized solution can have an 

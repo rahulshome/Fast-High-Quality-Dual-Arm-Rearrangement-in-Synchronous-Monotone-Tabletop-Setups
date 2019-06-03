@@ -1,15 +1,15 @@
 Consider a planar surface and a set of $n$ rigid objects $ \objectset=\{ \object_1, \object_2 \cdots \object_n\}$  that can rest on the surface in stable poses $p_i \in \Pspace_i \subset SE(3)$. The arrangement space $ \Aspace = \Pspace_1 \times \Pspace_2 \ldots \times \Pspace_n $ is the Cartesian product of all $\Pspace_i$, where $ \arrangement = (\pose_1, \ldots, \pose_n) \in \Aspace $. In valid arrangements $ \Afree \subset \Aspace$, the objects are pairwise disjoint.
 
-\begin{wrapfigure}{r}{2.4in}
+\begin{figure}[h]
     % \vspace{-.3in}
 	\centering
-	\includegraphics[width=1.115in,trim={10cm 3cm 8cm 12cm},clip]{figures/rearrangement_start}
-	\includegraphics[width=1.115in,trim={10cm 3cm 8cm 12cm},clip]{figures/rearrangement_end}
+	\includegraphics[width=0.24\textwidth,trim={10cm 3cm 8cm 12cm},clip]{figures/rearrangement_start}
+	\includegraphics[width=0.24\textwidth,trim={10cm 3cm 8cm 12cm},clip]{figures/rearrangement_end}
     % \vspace{-.15in}
 	\caption{An example of object rearrangement involving two robotic arms. Initial (left) and final (right) object configuration.}
 	\label{fig:rearrangement}
     % \vspace{-.35in}
-\end{wrapfigure}
+\end{figure}
 Two robot arms $\arm^1$ and $\arm^2$ can 
 % pick, raise above the surface and place the objects. 
 pick and place the objects from and to the surface.
@@ -23,10 +23,10 @@ A path for $\arm^k$ is denoted as $ \pi^k : [0,1] \rightarrow \cfree^k$ and incl
 
 % \vspace{-.15in} 
 \begin{equation}
-% D^* =  (\pi^{*1}, \pi^{*2}) \ |\ \arrangement(\ainit, D^*) = \atarget \textrm{ and } \pi^{*i} \in \cfree^i(\pi^{*j}) \vspace{-.05in}
+ D^* =  (\pi^{*1}, \pi^{*2}) \ |\ \arrangement(\ainit, D^*) = \atarget \textrm{ and } \pi^{*i} \in \cfree^i(\pi^{*j}) \vspace{-.05in}
 \label{eq:dualarm_constraint}
 \end{equation}
-\noindent and optimizes a cost function: $D^* = \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} } \ \cost(D).$}
+ and optimizes a cost function: $D^* = \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} } \ \cost(D).$}
 
 A set of assumptions are introduced to deal with the problem's combinatorics. The reachable task-space $\taskspace^k \subset SE(3)$ of arm $\arm^k$ is the set of $SE(3)$ poses that objects attached to the arm's end effector can acquire.
 
@@ -60,15 +60,19 @@ The focus will be on simultaneous execution of transfer and move paths.
 % \vspace{-.1in}
 {\assumption [Synchronicity] Consider dual-arm paths, which can be decomposed into a sequence of simultaneous transfers and moves for both arms:
 % \vspace{-.1in}
-\begin{equation}
-D=\left(T(\pi^1_1,\pi^2_1),M(\pi^1_{1\rightarrow 2},\pi^2_{1\rightarrow 2}), \ldots , M(\pi^1_{\ell-1\rightarrow \ell},\pi^2_{\ell-1\rightarrow \ell}), T(\pi^1_\ell,\pi^2_\ell)\right).
+\begin{align*}
+D=& (T(\pi^1_1,\pi^2_1),M(\pi^1_{1\rightarrow 2},\pi^2_{1\rightarrow 2}), \ldots , M(\pi^1_{\ell-1\rightarrow \ell},\pi^2_{\ell-1\rightarrow \ell}),\\
+& T(\pi^1_\ell,\pi^2_\ell)).\numberthis
 % \vspace{-.05in}
 \label{eq:synchronicity}
-\end{equation}}
+\end{align*}}
 \noindent For simplicity, Eq.~\ref{eq:synchronicity} does not include an initial move from $q^k_{\rm safe} \in \cfree^k$ and a final move back to $q^k_{\rm safe}$. An odd number of objects can also be easily handled. Then, the sequence of object pairs moved during a dual-arm path as in Eq. \ref{eq:synchronicity} is: 
 % \vspace{-.1in} 
 % $$ \scoma(D) = \left(  \coma_i = (\object_i^1,\object_i^2) \ |\ i,j\in [1,\cdots,\ell], \bigcup_i (\object_i^1 \cup \object_i^2) = \objectset, \object_i^1 \cap \object_j^1 = \object_i^2 \cap \object_j^2 = \emptyset \right). \vspace{-.15in}$$
-$$ \scoma(D) = \left(  \coma_i = (\object_i^1,\object_i^2) \ |\ i,j\in [1\cdots \ell], \bigcup_i (\object_i^1 \cup \object_i^2) = \objectset, \forall k,k'\in[1,2], \object_i^k \neq \object_j^{k'} \right). $$
+\begin{align*}
+	\scoma(D) = &\Bigg(  \coma_i = (\object_i^1,\object_i^2) \ |\ i,j\in [1\cdots \ell],\\& \bigcup_i (\object_i^1 \cup \object_i^2) = \objectset, \forall k,k'\in[1,2], \object_i^k \neq \object_j^{k'} \Bigg).&\numberthis
+	\label{eq:scomaD}
+\end{align*}
 
 \noindent Given the pairs of objects $\coma_i$, it is possible to express a transfer as $T(\coma_i)$ and a move as $M(\coma_{i\rightarrow j})$.  Then, $D(\scoma)$ is the synchronous, monotone dual-arm path due to $\scoma = (\coma_1, \ldots, \coma_{\ell})$, i.e., $D(\scoma) = (T(\coma_1),M(\coma_{1\rightarrow 2}),\ldots,M(\coma_{\ell-1\rightarrow \ell}),T(\coma_\ell)).$
 

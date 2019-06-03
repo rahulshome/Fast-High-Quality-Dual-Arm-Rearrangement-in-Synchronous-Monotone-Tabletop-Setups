@@ -4,23 +4,23 @@ This section highlights two optimal strategies to discover $\D(\scoma^*)$: a) ex
 % \kiril{It may be beneficial to explain the formula below, or perhaps move it to the appendix to save space and avoid explaining it here.}:
 
 % \vspace{-0.25in}
-\begin{equation*}
-{\permu[n]{2}} + {\permu[n]{2}}\times{\permu[n-2]{2}} + ... + {\permu[n]{2}}\times{\permu[n-2]{2}}\times{\permu[n-4]{2}}...\times{\permu[2]{2}} =\sum_{L=1}^{n/2} {\ \prod_{k=0}^{2L-1}{(n-k)}},
+\begin{align*}
+{\permu[n]{2}} + {\permu[n]{2}}\times{\permu[n-2]{2}} + ... + {\permu[n]{2}}\times{\permu[n-2]{2}}\times{\permu[n-4]{2}}...&\times{\permu[2]{2}} =\\\sum_{L=1}^{n/2} {\ \prod_{k=0}^{2L-1}{(n-k)}}&\numberthis
 % \vspace{-0.15in}
-\end{equation*}
+\end{align*}
 where $\permu[n]{k}$ is the $k$-permutations of $n$.  
 
-\begin{wrapfigure}{r}{2.4in}
+\begin{figure}[h]
     % \vspace{-.5in}
 	\centering
-	\includegraphics[width=1.8in]{figures/dual_backtracking.PNG}
+	\includegraphics[width=0.48\textwidth]{figures/dual_backtracking.PNG}
     % \vspace{-.15in}
 	\caption{Search tree for 4 objects. 
 %	In node $XY$, $m^1$ transfers object $X$, and $m^2$ transfers $Y$. An edge is a transit to the next node. 
 	}
 	\label{fig:backtracking}
     % \vspace{-.3in}
-\end{wrapfigure}
+\end{figure}
 Motion plans can be reused, however, and repeated occurrences of $T(\coma_i)$ and $M(\coma_{i\rightarrow i^{\prime}})$ should be counted only once for a total of: 
 \begin{myitem}
 \item[$-$] $  {\permu[n]{2}} $ \textit{transfers} of objects, and 
@@ -29,11 +29,11 @@ Motion plans can be reused, however, and repeated occurrences of $T(\coma_i)$ an
 Additional motion plans are needed for the initial move from $q_{\rm safe}^k$ and the return to it at the end of the process, introducing $ 2\times\permu[n]{2} $ transits:
 
 % \vspace{-0.25in}
-\begin{equation}
-\textrm{\# of Transfers} + \textrm{\# of Moves} =  {\permu[n]{2}} +   \Big{(}({{\permu[n]{2}}\times\permu[n-2]{2}}) + (2\times{\permu[n]{2}})\Big{)}
+\begin{align*}
+\textrm{\# of Transfers} + \textrm{\# of Moves} =&\\  {\permu[n]{2}} +   \Big{(}({{\permu[n]{2}}\times\permu[n-2]{2}}) + (2\times{\permu[n]{2}})&\Big{)}\numberthis
 \label{eq:mpcount}
 % \vspace{-0.15in}
-\end{equation}
+\end{align*}
 
 This returns optimal synchronized solution but performs an exhaustive search and requires exponentially many calls to a motion planner.
 
@@ -45,10 +45,12 @@ The problem can be represented as a directed graph where each vertex $v = \coma_
 
 % \vspace{-.25in}
 \begin{align*}
-\hspace{0.5in} \hat{V} = \{ v = \coma_v = (\object_v^1,\object_v^2)\ | \  \forall\ \object_v^1,\object_v^2 \in \objectset, \object_v^1 \neq \object_v^2 \} \cup \{S\}\\
-\hat{E} = \{  e(u,v)\ | \ \forall\ u,v\in \hat{V} \textrm{ so that } u\neq v,\ \object_v^k \neq \object_u^{\ell}\ \forall\ k, \ell \in [1,2] \}\\
-\cup\ \{e(\startq,v)\ \forall\ v\in\hat{V}\setminus \startq\} \cup \{e(v,\startq)\ \forall\ v\in\hat{V}\setminus \startq\}\\
-cost_{e(u,v)} = \cost(u) + \cost(u,v) =\cost(T(\coma_u)) + \cost(M(\coma_{u\rightarrow v}))
+\hspace{0.5in} \hat{V} =& \{ v = \coma_v = (\object_v^1,\object_v^2)\ |\\& \  \forall\ \object_v^1,\object_v^2 \in \objectset, \object_v^1 \neq \object_v^2 \} \cup \{S\}\\
+\hat{E} =& \{  e(u,v)\ | \ \forall\ u,v\in \hat{V} \textrm{ so that } u\neq v,\ \\& 
+\object_v^k \neq \object_u^{\ell}\ \forall\ k, \ell \in [1,2] \}
+\cup\ \\&
+ \{e(\startq,v)\ \forall\ v\in\hat{V}\setminus \startq\} \cup \\& \{e(v,\startq)\ \forall\ v\in\hat{V}\setminus \startq\}\\
+cost_{e(u,v)} =& \cost(u) + \cost(u,v)\\ =&\cost(T(\coma_u)) + \cost(M(\coma_{u\rightarrow v}))
 \end{align*}
 
 % \vspace{-.15in}
@@ -58,7 +60,7 @@ Let $\cost(\startq) = 0$. The total number of motion planning queries needed to 
 Eq. [B] below defines indicator variables. Eqs. [C-E] ensure edge-flow conserved tours. Eqs. [F-G] force $\startq$ to be part of the tour. Eq. [H] transfers every object only once. Eq. [I] lazily enforces the tour to be of length $ \frac{n}{2} + 1 $. While the number of motion-planning queries to be solved is the same as in exhaustive search, efficient {\milp} solvers \cite{gurobi} provide a more scalable search process.
 
 % \vspace{-.2in}
-\noindent\begin{minipage}{.5\textwidth}
+\noindent\begin{minipage}{.48\textwidth}
 \begin{align*}
 x_e \in \{ 0,1 \}& \ \ \forall e \in \hat{E} \tag*{[B]}\\
 \sum_{e\in\delta_{\rm in}(v)} x_e \leq 1& \ \ \forall v\in \hat{V} \tag*{[C]}\\
@@ -66,7 +68,7 @@ x_e \in \{ 0,1 \}& \ \ \forall e \in \hat{E} \tag*{[B]}\\
 \sum_{e\in\delta_{\rm in}(v)}x_e = \sum_{e\in\delta_{\rm out}(v)}x_e& \ \ \forall v\in \hat{V} \tag*{[E]}\\
 \end{align*}
 \end{minipage}
-\noindent\begin{minipage}{.5\textwidth}
+\noindent\begin{minipage}{.48\textwidth}
 \begin{align*}
 \sum_{e\in\delta_{\rm in}(\startq)} x_e = 1& \tag*{[F]}\\
 \sum_{e\in\delta_{\rm out}(\startq)} x_e = 1& \tag*{[G]}\\

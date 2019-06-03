@@ -9,16 +9,16 @@
 %\textit{What do we measure: a) solution quality in terms of the cost metrics
 %identified and b) computation time.}
 
-\begin{wrapfigure}{r}{2.2in}
-    \vspace{-.6in}
+\begin{figure*}[b]
+%    \vspace{-.6in}
 	\centering
-		\includegraphics[width=1.1in,trim={1cm 9cm 1cm 5cm},clip]{figures/simple_picker_benchmark}
-		\includegraphics[width=1.05in]{figures/kuka_benchmark2}
-		\vspace{-.3in}
+		\includegraphics[width=0.49\textwidth,trim={1cm 9cm 1cm 5cm},clip]{figures/simple_picker_benchmark}
+		\includegraphics[width=0.47\textwidth]{figures/kuka_benchmark2}
+%		\vspace{-.3in}
 		\caption{\textit{Picker} and \textit{Manipulator} trials.}
 		\label{fig:benchmarks}
-    \vspace{-.3in}
-\end{wrapfigure}
+%    \vspace{-.3in}
+\end{figure*}
 This section describes the experiments performed to evaluate the algorithms in two  domains shown in Fig \ref{fig:benchmarks}: a) simple picker and b) general manipulators.
 %\begin{figure}[ht]
 %	\centering
@@ -49,39 +49,42 @@ The solution costs \textit{(middle)} substantiate benefits of the use of two arm
 
 
 
-\begin{figure}[h]
-\vspace{-0.2in}
+\begin{figure*}[h!]
+%\vspace{-0.2in}
 	\centering
 %	\includegraphics[width=2.1in]{figures/disk_solution}
 %	\includegraphics[width=2.1in]{figures/disk_timing}
 %	\includegraphics[width=2.1in]{figures/disk_more_solution}
 %	\includegraphics[width=2.1in]{figures/disk_more_timing}
-	\includegraphics[width=3.5in]{figures/results/labels}
-	\includegraphics[width=2in]{figures/results/4_sp_ms_success}
-	\includegraphics[width=2in]{figures/results/3_sp_lazy_ms_success}
-	\includegraphics[width=2in]{figures/results/4_sp_ms_cost}
-	\includegraphics[width=2in]{figures/results/3_sp_lazy_ms_cost}
-	\includegraphics[width=2in]{figures/results/4_sp_ms_time}
-	\includegraphics[width=2in]{figures/results/3_sp_lazy_ms_time}
-	\vspace{-0.15in}
-	\caption{\textit{Simple Picker} results with success\textit{(top)}, solution costs\textit{(middle)}, and computation\textit{(bottom)} reported for single-shot\textit{(left)} and lazy\textit{(right)} versions of the methods}
-    \vspace{-0.3in}
-	\label{fig:disk}
-\end{figure}
 
-\begin{figure}[h]
-\vspace{-0.2in}
+%\includegraphics[width=0.48\textwidth,trim={1cm 9cm 1cm 5cm},clip]{figures/simple_picker_benchmark}\\
+	\includegraphics[width=0.6\textwidth]{figures/results/labels}
+	\includegraphics[width=0.48\textwidth]{figures/results/4_sp_ms_success}
+	\includegraphics[width=0.48\textwidth]{figures/results/3_sp_lazy_ms_success}
+	\includegraphics[width=0.48\textwidth]{figures/results/4_sp_ms_cost}
+	\includegraphics[width=0.48\textwidth]{figures/results/3_sp_lazy_ms_cost}
+	\includegraphics[width=0.48\textwidth]{figures/results/4_sp_ms_time}
+	\includegraphics[width=0.48\textwidth]{figures/results/3_sp_lazy_ms_time}
+%	\vspace{-0.15in}
+	\caption{\textit{Simple Picker} results with success\textit{(top)}, solution costs\textit{(middle)}, and computation\textit{(bottom)} reported for single-shot\textit{(left)} and lazy\textit{(right)} versions of the methods}
+%    \vspace{-0.3in}
+	\label{fig:disk}
+\end{figure*}
+
+\begin{figure*}[h!]
+%\vspace{-0.2in}
 	\centering
-	\includegraphics[width=3.5in]{figures/results/labels}
-	\includegraphics[width=2in]{figures/results/2_kuka_ms_success}
-	\includegraphics[width=2in]{figures/results/1_kuka_lazy_ms_success}
-	\includegraphics[width=2in]{figures/results/2_kuka_ms_cost}
-	\includegraphics[width=2in]{figures/results/1_kuka_lazy_ms_cost}
-	\includegraphics[width=2in]{figures/results/2_kuka_ms_time}
-	\includegraphics[width=2in]{figures/results/1_kuka_lazy_ms_time}
-	\vspace{-0.15in}
+%	\includegraphics[width=0.48\textwidth]{figures/kuka_benchmark2}
+	\includegraphics[width=0.6\textwidth]{figures/results/labels}
+	\includegraphics[width=0.48\textwidth]{figures/results/2_kuka_ms_success}
+	\includegraphics[width=0.48\textwidth]{figures/results/1_kuka_lazy_ms_success}
+	\includegraphics[width=0.48\textwidth]{figures/results/2_kuka_ms_cost}
+	\includegraphics[width=0.48\textwidth]{figures/results/1_kuka_lazy_ms_cost}
+	\includegraphics[width=0.48\textwidth]{figures/results/2_kuka_ms_time}
+	\includegraphics[width=0.48\textwidth]{figures/results/1_kuka_lazy_ms_time}
+%	\vspace{-0.15in}
     \caption{\textit{\kuka}results with success\textit{(top)}, solution costs\textit{(middle)}, and computation\textit{(bottom)} reported for single-shot\textit{(left)} and lazy\textit{(right)} versions of the methods}
-    \vspace{-0.3in}
+%    \vspace{-0.3in}
 	\label{fig:kuka}
-\end{figure}
+\end{figure*}
 
