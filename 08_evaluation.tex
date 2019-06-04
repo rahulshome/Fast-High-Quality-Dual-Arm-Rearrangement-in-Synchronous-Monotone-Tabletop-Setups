@@ -89,18 +89,13 @@ The solution costs \textit{(middle)} substantiate benefits of the use of two arm
 
 \tase{
 \subsection{Smoothing}
+
 The result of the velocity tuning over the solution trajectories for the individual arms as a post-processing step is shown in Fig \ref{fig:smoothing}. The objective is to minimize any waits that might be a by-product of the synchronization. 
 % The small improvements indicate that synchronization does not adversely affect the solution executions. 
 The small \% improvements indicate that the asynchronous variants of the solutions discovered from the methods do not yield a big enough saving in execution time. 
 Most of the improvement as a percentage of the original solution duration is not too high. On top of that, the time taken to smooth the solutions for \algo (overlaid on Fig \ref{fig:smoothing}) shows that it is often not beneficial.
 In their largest problem instances the \kuka spent $ 0.44s $ of smoothing time to save $ 3.23s $ off the solution duration, while the picker spent $  9.84s $ to save $ 0.54s $.
-This indicates that among the class of synchronized solutions discovered by the proposed algorithms, the analogous asynchronous variants do not seem to be drastically better. Moreover, smoothing does not improve the maximum of distances cost measure, but only reduces the solution duration. The theoretical bounds in the simple planar setups agree with the results in that the synchronization does not degrade the benefits of using 2 arms too much. It should be pointed out though that it needs to be studied further, whether these trends would hold for a class of algorithms that can solve the asynchronous dual-arm rearrangement problem in general setups. This is out of the scope of the current work.
 
-% \kiril{What is the bottom line here? Is smoothing worthwhile? The y-axis in the plots is labeled as \% whereas the bars are labeled with seconds.}
-
-%\clearpage
-
-% \vspace{-0.2in}
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=0.48\textwidth]{figures/results/labels}
@@ -111,8 +106,18 @@ This indicates that among the class of synchronized solutions discovered by the 
 	%     \vspace{-.3in}
 \end{figure}
 
+This indicates that among the class of synchronized solutions discovered by the proposed algorithms, the analogous asynchronous variants do not seem to be drastically better. Moreover, smoothing does not improve the maximum of distances cost measure, but only reduces the solution duration. The theoretical bounds in the simple planar setups agree with the results in that the synchronization does not degrade the benefits of using 2 arms too much. It should be pointed out though that it needs to be studied further, whether these trends would hold for a class of algorithms that can solve the asynchronous dual-arm rearrangement problem in general setups. This is out of the scope of the current work.
+
+% \kiril{What is the bottom line here? Is smoothing worthwhile? The y-axis in the plots is labeled as \% whereas the bars are labeled with seconds.}
+
+%\clearpage
+
+% \vspace{-0.2in}
+
+
 \subsection{Discrete Reachability Benchmark}
-In this benchmark, two Kuka arms are placed opposite a target arrangement table, as shown in Fig \ref{fig:reachability_benchmark}. The initial poses of the objects are set to be on opposite ends of the arms, as demonstrated in the image. The purpose of this study is to see the effects of general divided workspaces where both the initial and target poses are not in the region of common reachability of the arms. This is indeed a simpler problem for the coordinated methods, but proves challenging to the naive random split strategy. 
+
+In this benchmark, two Kuka arms are placed opposite a target arrangement table, as shown in Fig \ref{fig:reachability_benchmark}. The initial poses of the objects on either side of the arms in a way that the initial poses are reachable by only one of the arms. The purpose of this study is to see the effects of general divided workspaces where both the initial and target poses are not in the region of common reachability of the arms. This somewhat simplifies the problem of coordinating the two arms because interactions are limited to the target poses of the objects. 
 
 \begin{figure}[h]
 	\centering
@@ -125,5 +130,9 @@ In this benchmark, two Kuka arms are placed opposite a target arrangement table,
 	\label{fig:reachability_benchmark}
 	%     \vspace{-.3in}
 \end{figure}
+
+The problem of optimizing the assignment of arms to objects will be affected by the reachability. Expectedly, the naive random split tends to erroneously assign unreachable objects to arms. It should be noted that a single arm solution does not exist for this benchmark. The data reported for the lazy variants, shows that our proposed method manages to maintain scalability and robustness even in such scenarios and moreover, shows the benefits of dual-arm rearrangement.
+
+
 }
 
