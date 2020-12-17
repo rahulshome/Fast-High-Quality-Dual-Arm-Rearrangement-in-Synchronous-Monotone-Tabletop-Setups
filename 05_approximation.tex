@@ -52,7 +52,7 @@ $C_{gs}^M = \Theta(\sqrt{n\ln n})$. Putting these together, we have,
 C_{\rm single} &\approx nc_{pd} + (0.52n + 0.44\sqrt{n\ln n})c_t \\&\approx (c_{pd} + 0.52c_t)n \numberthis
 % \vspace{-0.1in}
 \end{align*}
-noting that the $0.44\sqrt{n\ln n}c_t$ term may also be ignored for large $n$. The cost of dual arm solutions will be analyzed in Section \ref{sec:cost_bounds}.
+noting that the $0.44\sqrt{n\ln n}c_t$ term may also be ignored for large $n$. The cost of dual arm solutions will be analyzed in Section \ref{sec:cost_bounds}. We summarize the discussion above in the following lemma.
 {
 \lemma For large $n$, the transfers dominate the cost of the solution.
 \label{lem:transferdomination}
@@ -94,16 +94,17 @@ This ends up scaling better by effectively reducing the size of the search space
 %\end{minipage}
 
 
-\begin{align*}
-	\graph(\nodes, \edges)\\
-	\nodes = \{ \node=\object, \forall \object \in \objectset \}\\
-	\edges = \{ \edge(u, v): \coma = (u,v), \forall u,v\in\nodes \}\\
-	\cost(\edge(u,v)) = \cost(T(\coma=(u,v))) \numberthis\label{eq:transfergraph}\\ \\
-	\tspgraph(\tspnodes, \tspedges)\\
-	\tspnodes = \{ \node=\coma, \forall \coma \in \scomaset^* \} \cup \{\coma_S\} \\
-	\tspedges = \{ \edge(u, v): \coma_{u\rightarrow v}, \forall u,v\in\tspnodes \}\\
-	\cost(\edge(u,v)) = \cost(M(\coma_{u\rightarrow v})) \numberthis\label{eq:transitgraph}
-\end{align*}
+% \begin{align*}
+% 	\graph(\nodes, \edges)\\
+% 	\nodes = \{ \node=\object, \forall \object \in \objectset \}\\
+% 	\edges = \{ \edge(u, v): \coma = (u,v), \forall u,v\in\nodes \}\\
+% 	\cost(\edge(u,v)) = \cost(T(\coma=(u,v))) \numberthis\label{eq:transfergraph}\\ \\
+% 	\tspgraph(\tspnodes, \tspedges)\\
+% 	\tspnodes = \{ \node=\coma, \forall \coma \in \scomaset^* \} \cup \{\coma_S\} \\
+% 	\tspedges = \{ \edge(u, v): \coma_{u\rightarrow v}, \forall u,v\in\tspnodes \}\\
+% 	\cost(\edge(u,v)) = \cost(M(\coma_{u\rightarrow v})) \numberthis\label{eq:transitgraph}
+% \end{align*}
+
 %\vspace{0.05in}
 
 % \begin{align*}
@@ -111,6 +112,7 @@ This ends up scaling better by effectively reducing the size of the search space
 % \scomaset^*\ \mathtt{on}\ \graph \\
 % \scoma^+ : \tour \ \mathtt{on}\ \tspgraph
 % \end{align*}
+
 
 \begin{figure*}
 %\vspace{-0.15in}
@@ -122,28 +124,38 @@ This ends up scaling better by effectively reducing the size of the search space
 		\includegraphics[width=0.8\textwidth]{figures/algo_2}
 	\end{center}
 %\vspace{-0.2in}
-	\caption{\textit{(Top-left)} A dual-arm rearrangement problem. \textit{(Top)} The problem of optimizing object transfers reduces to a minimum weight edge matching on a fully connected directed graph of \textit{transfers}. \textit{(Bottom)} Each transit moves the arms from the target poses of the current objects, to the initial poses of the next objects in the object-arm assignments. The ordering of the object-arm assignments form an optimal tour over a \textit{transit} graph.}
+	\caption{ \tase{ \textit{(Top-left)} A dual-arm rearrangement problem. \textit{(Top-middle)} Directed edges between objects represents the assignment of arms to object \textit{transfers}. \textit{(Top-right)} The problem of optimizing object transfers reduces to a minimum weight edge matching on a fully connected directed graph of \textit{transfers}. \textit{(Bottom-left)} The legends for the different symbols used in the diagrams. \textit{(Bottom-middle)} A directed edge between object pairs represents the \textit{transit} between the target poses of the previous objects to the initial poses of the next. \textit{(Bottom-right)} Each transit moves the arms from the target poses of the current objects, to the initial poses of the next objects in the object-arm assignments. A sequence of object-arm assignments form an optimal tour over a \textit{transit} graph.} }
 %	\vspace{-0.2in}
 	\label{fig:edge_matching}
 % \end{figure}
-%\vspace{-0.1in}
+\vspace{-0.1in}
 \end{figure*}
 
-\subsection{Foundations} Consider a complete weighted directed graph $\graph(\nodes,\edges)$ (Eq.~\ref{eq:transfergraph}), where $\node \in \nodes$ corresponds to a single object $ \object $. Each directed edge, $\edge=(\object_i,\object_j) \in \edges$ is an ordered pair of objects $ \object_i $ and $\object_j $, where the order determines the assignment of an object to an arm $ \arm^1 $ or $ \arm^2 $. The cost of an edge $ \cost(\edge) $ is the coordinated motion planning cost of performing the transfer corresponding to $ \coma = (\object_i,\object_j) $. For instance, as shown in Fig \ref{fig:edge_matching}(middle), $\edge(A,B)$ corresponds to $ \arm^1 $ transferring `A', while $ \arm^2 $ transfers `B', and the $\cost( \edge(A,B) ) = \cost(T(\coma=(A,B))$ is the cost of such a concurrent motion. 
+
+\subsection{Foundations} Consider a complete weighted directed graph $\graph(\nodes,\edges)$ (Eqs.~\ref{eq:transfergraph}), where $\node \in \nodes$ corresponds to a single object $ \object $.
+ Each directed edge, $\edge=(\object_i,\object_j) \in \edges$ is an ordered pair of objects $ \object_i $ and $\object_j $, where the order determines the assignment of an object to an arm $ \arm^1 $ or $ \arm^2 $. 
+The cost of an edge $ \cost(\edge) $ is the coordinated motion planning cost of performing the transfer corresponding to $ \coma = (\object_i,\object_j) $. For instance, as shown in Fig~\ref{fig:edge_matching}(top-middle), $\edge(A,B)$ corresponds to $ \arm^1 $ transferring `A', while $ \arm^2 $ transfers `B', and the $\cost( \edge(A,B) ) = \cost(T(\coma=(A,B))$ is the cost of such a concurrent motion. 
 %Note that these costs refer to only the transfer costs i.e., starting from the arms picking up the objects $ A $ and $ B $ at the initial poses(as shown in Fig \ref{fig:edge_matching}(left)), and moving them to their target poses. 
 It should also be noted that since the arms are different, in general, $\cost( \edge(A,B) ) \neq \cost( \edge(B,A) )$.
+\vspace{-0.1in}
+\begin{align*}
+	\graph(\nodes, \edges)\\
+	\nodes = \{ \node=\object, \forall \object \in \objectset \}\\
+	\edges = \{ \edge(u, v): \coma = (u,v), \forall u,v\in\nodes \}\\
+	\cost(\edge(u,v)) = \cost(T(\coma=(u,v))) \numberthis\label{eq:transfergraph}
+\end{align*}
 
 
-
-Following the observation made in Eq.~\ref{eq:cost_function}, the cost of the transfers can be reasoned about independent of their order. 
+By Eq.~\ref{eq:cost_function}, the cost of the transfers can be reasoned about independent of their order. 
 Define $\scomaset$ as the unordered set of $\coma\in\scoma$, then unordered transfer cost component corresponds to $\sum_{\coma\in\scomaset}\cost(T(\coma))$.
 % We defined $ \scoma $ to be an ordered sequence of object-to-arm assignments. Let $ \scoma $ be a candidate solution to the synchronized dual-arm rearrangement problem. $ \scoma $ is an ordered sequence of $ \coma $, and $ \scomaset $ denote the unordered set of all $ \coma $ that comprise $ \scoma $. 
-Since $ \graph $ is a complete graph where every edge corresponds to every possible valid $ \coma $, by construction $ \scomaset \subset \edges$. A candidate solution of a monotone dual-arm rearrangement problem must transfer every object exactly once. In terms of the graph, this means that in the subset of edges $ \scomaset $ every vertex appears in only one edge. We arrive at the following crucial observation.
+Since $ \graph $ is a complete graph (shown in Fig~\ref{fig:edge_matching}(top-right)) where every edge corresponds to every possible valid $ \coma $, by construction $ \scomaset \subset \edges$. A candidate solution of a monotone dual-arm rearrangement problem must transfer every object exactly once. In terms of the graph, this means that in the subset of edges $ \scomaset $ every vertex appears in only one edge. We arrive at the following crucial observation.
+
 
 
 %\vspace{-0.13in}
 {\lemma [Perfect Matching]
-Every candidate solution to a monotone dual-arm rearrangement problem comprises of a set of unordered object-to-arm assignments $ \scomaset $ that is also a perfect matching solution on $ \graph $.
+Every candidate solution to a monotone dual-arm rearrangement problem comprises a set of unordered object-to-arm assignments $ \scomaset $ that is also a perfect matching solution on $ \graph $.
 }
 
 As per the decomposition of the costs in Eq. \ref{eq:cost_function}, it follows that the $ \cost(\scomaset) $ is the cost of the transfers in the solution. The solution to the minimum-weight perfect edge matching problem on such a graph would correspond to a $ \scomaset $ that optimizes the cost of \textit{transfers} of all the objects.
@@ -156,7 +168,15 @@ The set of object-to-arm assignments $ \scomaset^* $ that minimizes the cost of 
 % \scomaset^* = \underset{ \scomaset \in \mathtt{EM(\graph)}  }{ \mathtt{argmin} } \ \cost(\scomaset)
 % $$
 
-Once such an optimal assignment $ \scomaset^* $ is obtained, the missing part of the complete solution is the set of transits between the object transfers and their ordering. Construct another directed graph $ \tspgraph $ (Eqs. \ref{eq:transitgraph}), where the vertices comprise of the $ \coma \in \scomaset^*$. An edge $ e(\coma_{u\rightarrow v}) $ corresponds to the coordinated \textit{transit} motion between them. For instance, as in Fig \ref{fig:edge_matching}(right) for an edge between $ \coma(A,B) $ and $ \coma(C,D) $, $ \arm^1 $ moves from the target pose of object `A' to the starting pose of object `C', and similarly $ \arm^2 $ moves from the target of `B' to the start of `D'. An additional vertex corresponding to the starting(and ending) configuration of the two arms ($ \startq $) is added to the graph. The graph is fully connected again to represent all possible transits or moves.  
+Once such an optimal assignment $ \scomaset^* $ is obtained, the missing part of the complete solution is the set of transits between the object transfers and their ordering. Construct another directed graph $ \tspgraph $ (Eqs. \ref{eq:transitgraph}), where the vertices comprise of the $ \coma \in \scomaset^*$, i.e., the optimal object-to-arm assignments. An edge $ e(\coma_{u\rightarrow v}) $ corresponds to the coordinated \textit{transit} motion between them. For instance, as in Fig~\ref{fig:edge_matching}(bottom-middle) for an edge between $ \coma(A,B) $ and $ \coma(C,D) $, $ \arm^1 $ moves from the target pose of object `A' to the starting pose of object `C', and similarly $ \arm^2 $ moves from the target of `B' to the start of `D'. An additional vertex corresponding to the starting (and ending) configuration of the two arms ($ \startq $) is added to the graph. The graph (shown in Fig~\ref{fig:edge_matching}(bottom-right)) is fully connected again to represent all possible transits or moves.  
+\vspace{-0.1in}
+\begin{align*}
+	\tspgraph(\tspnodes, \tspedges)\\
+	\tspnodes = \{ \node=\coma, \forall \coma \in \scomaset^* \} \cup \{\coma_S\} \\
+	\tspedges = \{ \edge(u, v): \coma_{u\rightarrow v}, \forall u,v\in\tspnodes \}\\
+	\cost(\edge(u,v)) = \cost(M(\coma_{u\rightarrow v})) \numberthis\label{eq:transitgraph}
+\end{align*}
+
 A complete candidate solution to the problem now requires the sequence of~$ \coma $, 
 %By definition of the edges, the complete solution begins at~$ \startq $ and also ends there. 
 which is a complete tour over~$ \tspgraph $, that visits all the vertices i.e., an ordered sequence of vertices $\tour = ( {\startq}, \scoma_\tour, {\startq}  )$.
@@ -170,10 +190,10 @@ Any complete tour $ \tour $ over the graph $ \tspgraph $, corresponds to a seque
 % The cost of the tour $ \tour $ can be written as $\cost(\tour) = \sum_{e(u,v)\in\tour}\cost({M}( \coma_{u\rightarrow v} ))$.
 
 
-Let $ \mathbb{P}^{\scomaset} $ represent the set of all possible ordering of the elements in $ \scomaset $. This means, any candidate tour corresponds to a $ \scoma_\tour\in\mathbb{P}^{\scomaset} $. An optimal tour on $ \tspgraph $ minimizes the transit costs over the all possible candidate solutions in  $ \mathbb{P}^{\scomaset^*} $.
+Let $ \mathbb{P}^{\scomaset} $ represent the set of all possible ordering of the elements in $ \scomaset $. This means, any candidate tour corresponds to a $ \scoma_\tour\in\mathbb{P}^{\scomaset} $. An optimal tour on $ \tspgraph $ minimizes the transit costs over the all possible candidate solutions in  $ \mathbb{P}^{\scomaset^*} $
 %\vspace{-0.1in}
 \begin{equation}
-\scoma^+ = \underset{ \scoma \in  \mathbb{P}^{\scomaset^*}   }{ \mathtt{argmin} } \ \sum_{e(u,v)\in\tour}\cost({M}( \coma_{u\rightarrow v} ))  )
+\scoma^+ = \underset{ \scoma \in  \mathbb{P}^{\scomaset^*}   }{ \mathtt{argmin} } \ \sum_{e(u,v)\in\tour}\cost({M}( \coma_{u\rightarrow v} ))  ).
 %\vspace{-0.05in}
 \end{equation}
 
@@ -182,13 +202,10 @@ The insight here is that, even though $ \scoma^+ $ reports a solution to a hiera
 %the algorithm operates over a much smaller search space, and operates over sub-problems which are more efficient to solve than the baselines.\\
 the search space is much smaller, and the sub-problems more efficient to solve.\\
 
-%\vspace{-0.1in}
-
+\vspace{-0.1in}
 \subsection{Algorithm : Tour-Over-Matching} 
 This section describes the algorithm  (\algo) outlined in the previous section. The steps correspond to Algo \ref{algo:tom}. 
 % The algorithm takes as input the set of objects $ \objectset $ and the start(and end) configuration $ \startq $ of the arms.
-
-\noindent $ \mathtt{transfer\_graph} $: This function constructs a directed graph $ \graph $ defined by Eqs.~\ref{eq:transfergraph}. This step creates a graph with $ n $ vertices and $ \permu[n]{2} $ edges.
 
 %\begin{wrapfigure}{r}{0.6\textwidth}\vspace{-0.3in}
 %  \begin{minipage}{0.6\textwidth}
@@ -206,24 +223,28 @@ This section describes the algorithm  (\algo) outlined in the previous section. 
 %  \vspace{-0.3in}
 %\end{wrapfigure}
 
-\noindent $ \mathtt{optimal\_matching} $: This function takes the graph $ \graph $ constructed as an argument and returns the unordered set of edges, corresponding to the set of optimal transfers over $ \graph $. 
-\commentdel{The first step is to convert the directed graph $ \graph $ into an equivalent undirected graph $ \graph_U $. Since $ \graph $ is complete, every pair of vertices has two directed edges between them. $\graph_U$ only preserves the minimally weighted connection for every vertex pair. Optimal matching is solved using an Edmond's Blossom Algorithm~\cite{edmonds1965maximum,galil1986ev} implementation~\cite{dezsHo2011lemon}. 
+
+\begin{itemize}
+\item[-] $ \mathtt{transfer\_graph} $: This function constructs a directed graph $ \graph $ defined by Eqs.~\ref{eq:transfergraph}. This step creates a graph with $ n $ vertices and $ \permu[n]{2} $ edges.
+\item[-] $ \mathtt{optimal\_matching} $: This function takes the graph $ \graph $ constructed as an argument and returns the unordered set of edges, corresponding to the set of optimal transfers over $ \graph $. 
+\commentdel{The first step is to convert the directed graph $ \graph $ into an equivalent undirected graph $ \graph_U $. Since $ \graph $ is complete, every pair of vertices shares two directed edges between them. $\graph_U$ only preserves the minimally weighted connection for every vertex pair. Optimal matching is solved using an Edmond's Blossom Algorithm~\cite{edmonds1965maximum,galil1986ev} implementation~\cite{dezsHo2011lemon}. 
 % Since the algorithm performs maximum matching by default, our desired minimally weighted matching can be obtained by subtracting the edge weights from some arbitrarily large number.
 }
 \commentadd{Optimal matching over an undirected graph can be solved using Edmond's Blossom Algorithm~\cite{edmonds1965maximum,galil1986ev,dezsHo2011lemon}. The directed graph $ \graph $ is converted into an equivalent undirected graph $ \graph_U $. Since $ \graph $ is complete, every pair of vertices shares two directed edges. $\graph_U$ only preserves the minimally weighted connection for every vertex pair. The result of matching}
 % The result 
 is a subset of edges on $ \graph_U $ which correspond to a set of directed edges on $ \graph $ i.e., $ \scomaset^* $. The runtime complexity of the step is $ O(|\edges||\nodes|\log|\nodes|) = O(\permu[n]{2}n\log n ) = O(n^3\log n)$.
-
-\noindent $ \mathtt{transit\_graph} $: This function constructs the directed transit graph $ \tspgraph $ as per the set of Eqs.~\ref{eq:transitgraph}. This constructs $ \frac{n}{2} + 1 $ vertices and $ \permu[(\frac{n}{2} + 1)]{2} $ edges.
-
-\noindent $\mathtt{optimal\_tour}  $: Standard TSP solvers like Gurobi~\cite{gurobi} can be used to find the  
+\item[-] $ \mathtt{transit\_graph} $: This function constructs the directed transit graph $ \tspgraph $ as per the set of Eqs.~\ref{eq:transitgraph}. This constructs $ \frac{n}{2} + 1 $ vertices and $ \permu[(\frac{n}{2} + 1)]{2} $ edges.
+\item[-]  $\mathtt{optimal\_tour}  $: Standard TSP solvers like Gurobi~\cite{gurobi} can be used to find the  
 % It should be noted that a lot of efficient solvers exist for such problems, that provide various degrees of approximation. 
 optimal tour over $ \tspgraph $ corresponding to $ \scoma^+ $.
+\end{itemize}
 
-The costs are deduced from coordinated motion plans over edges. The total number of such calls compared to the count from the baseline in Equ. \ref{eq:mpcount}, shows a saving in the order of $ O(n^2)$ queries ($\textrm{\# of Transfers} + \textrm{\# of Moves}$). 
+
+
+
+The costs are deduced from coordinated motion plans over edges. The total number of such calls compared to the count from the baseline in Equ. \ref{eq:mpcount}, shows a saving of a factor of $ O(n^2)$ queries ($\textrm{\# of Transfers} + \textrm{\# of Moves}$). 
 % \kiril{Consider completing the calculation.}
-%\vspace{-0.1in}
-
+\vspace{-0.1in}
 \begin{align*}
 \frac{\textrm{Baseline}\ \#}{{\algo}\ \#} &= 
 \frac{  {\permu[n]{2}} +   \Big{(}{{\permu[n]{2}}\times\permu[n-2]{2}}\Big{)} + \Big{(}2\times{\permu[n]{2}}\Big{)}   }
@@ -234,4 +255,4 @@ The costs are deduced from coordinated motion plans over edges. The total number
 
 %\vspace{-0.1in}
 
-The evaluation performed here focuses on the maximum of distances (Eq.~\ref{eq:cost_function}) for a fair comparison with the other methods. The prioritization of optimization objective, however, is also amenable to other cost functions, where carrying objects is often more expensive than object-free motions. 
+The evaluation performed here focuses on the maximum of distances (Eq.~\ref{eq:cost_function}) covered by the arms in a solution for a fair comparison with the other methods. The prioritization of optimization objective, however, is also amenable to other cost functions, where carrying objects is often more expensive than object-free motions. 

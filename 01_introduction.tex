@@ -7,7 +7,7 @@
 \IEEEPARstart{A}{utomation} tasks in industrial and service robotics, such as product packing or sorting, often require sets of objects to be arranged in
 specific poses on a planar surface. Efficient and high-quality
 single-arm solutions have been proposed for such
-setups \cite{193}. The proliferation of robot arms, however, including dual-arm setups, implies that industrial settings can utilize multiple robots in the same workspace (Fig \ref{fig:two_arms}). This work explores a) the benefits of coordinated dual-arm rearrangement versus single-arm, b) the combinatorial challenges involved and c) computationally efficient, high-quality and scalable methods.
+setups \cite{193}. The proliferation of robot arms, however, including dual-arm setups, implies that industrial settings can utilize multiple robots in the same workspace (Fig~\ref{fig:two_arms}). This work explores a) the benefits of coordinated dual-arm rearrangement versus single-arm, b) the combinatorial challenges involved and c) computationally efficient, high-quality and scalable methods.
 
 %While the benefits seem obvious, even for two arms, the challenge
 %lies in examining the combinatorial sub-structure of this integrated
@@ -29,16 +29,16 @@ setups \cite{193}. The proliferation of robot arms, however, including dual-arm 
 %some guarantees about the benefits of using more than one arm, before
 %endeavoring to study the problem.
 
-A motivating point is that the coordinated use of multiple arms can
+A major motivation for this work is that the coordinated use of multiple arms can
 result in significant improvements in efficiency. This arises from the following argument.
 
 % \vspace{-.1in}
-\begin{lemma}\label{l:k-arm-lower-bound}
+\begin{observation}\label{l:k-arm-lower-bound}
 There are classes of tabletop rearrangement problems, where a $k$-arm
 ($k \ge 2$) solution can be arbitrarily better than the optimal
 single-arm one.
 % \vspace{-.3in}
-\end{lemma}
+\end{observation}
 
 For instance, assume two arms that have full (overhand) access to a 
 unit square planar tabletop. There are $n$ objects on the table, 
@@ -55,28 +55,7 @@ c_t$. If $c_{pd}$ and $\varepsilon$ are sufficiently small, the $2$-arm
 cost can be arbitrarily better than the single-arm one. The argument 
 also extends to $k$-arms relative to $(k-1)$-arms.
 
-In most practical setups, the expectation is that a $2$-arm solution
-will be close to half the cost (e.g., time-wise) of the single-arm 
-case, which is a desirable improvement. While there 
-is coordination overhead, the best $2$-arm solution cannot do worse; simply 
-let one of the arms carry out the best single arm solution while the 
-other remains outside the workspace. More generally:
 
-% \vspace{-.1in}
-\begin{lemma}\label{l:2-arm-no-worse}
-For any rearrangement problem, the best $k$-arm ($k \ge 2$) solution
-cannot be worse than an optimal single arm solution.
-% \vspace{-.1in}
-\end{lemma}
-
-The above points motivate the development of scalable algorithmic
-tools for such dual-arm rearrangement instances. This work considers
-certain relaxations to achieve this objective. In particular,
-monotone tabletop instances are considered, where the start and goal
-object poses do not overlap.  Furthermore, the focus is on
-synchronized execution of pick-and-place actions by the two arms. i.e., where the two arms simultaneously transfer (different) objects, or simultaneously move towards picking the next objects.
-Theoretical arguments and experimental evaluation indicate that this does not significantly degrade solution
-quality.
 
 \begin{figure}[t]
 % \vspace{-0.15in}
@@ -86,8 +65,33 @@ quality.
 	\caption{Example of dual-arm setups that can utilize
 	algorithms proposed in this work.}
 	\label{fig:two_arms}
-% 	\vspace{-0.25in}
+	\vspace{-0.25in}
 \end{figure}
+
+
+
+In most practical setups, the expectation is that a $2$-arm solution
+will be close to half the cost (e.g., time-wise) of the single-arm 
+case, which is a desirable improvement. While there 
+is coordination overhead, the best $2$-arm solution cannot do worse; simply 
+let one of the arms carry out the best single arm solution while the 
+other remains outside the workspace. More generally:
+
+% \vspace{-.1in}
+\begin{observation}\label{l:2-arm-no-worse}
+For any rearrangement problem, the best $k$-arm ($k \ge 2$) solution
+cannot be worse than an optimal single arm solution.
+% \vspace{-.1in}
+\end{observation}
+
+The above observations motivate the development of scalable algorithmic
+tools for such dual-arm rearrangement instances. This work considers
+certain relaxations to achieve this objective. In particular,
+monotone tabletop instances are considered, where the start and goal
+object poses do not overlap.  Furthermore, the focus is on
+synchronized execution of pick-and-place actions by the two arms. i.e., where the two arms simultaneously transfer (different) objects, or simultaneously move towards picking the next objects.
+Theoretical arguments and experimental evaluation indicate that this does not significantly degrade solution
+quality.
 
 
 
@@ -99,9 +103,8 @@ cost of object transfers and assigns objects to the two arms by
 solving an optimal matching problem. It minimizes the cost of
 moves from an object's goal to another object's start pose per
 arm as a secondary objective by employing a {\tt TSP} solution. Most
-of the computation time is spent on the many calls to a
-lower-level motion planner that coordinates the two arms. A lazy
-evaluation strategy is proposed, where motion plans are evaluated for candidate solution sequences. This results in significant computational improvement and
+of the computation time is spent on the many calls to an underlying motion planner that coordinates the two arms. A lazy
+evaluation strategy is proposed, where motion plans are evaluated and validated for candidate solution sequences, as opposed to performing this expensive motion plan computation for the entire search space. This results in significant computational improvement and
 reduces the calls to the motion planner.  An analysis
 studies the expected improvement in solution quality
 versus the single arm case, as well as the expected cost overhead from a
@@ -112,14 +115,17 @@ improvement against the single arm case for the proposed approach in practice. T
 The lazy evaluation strategy significantly improves computation costs for both the optimal and proposed methods.
 
 \tase{
-The current archival version is an extension of previous work and several additions have been made to the draft to provide a more holistic inspection of the problem, chiefly:
+The current archival version is an extension of previous work \cite{shome2018dualarm}. In particular, several additions have been made to provide a more holistic study of the problem:
 \begin{enumerate}
-	\item An additional benchmark has been added to demonstrate the efficacy of the proposed approach in problem domains where all the object positions do not lie in the shared workspace.
-	\item It has been argued that smoothing can be used to alleviate the sychronization assumption. Data from the effects of smoothing the solutions in the experiments have been reported and show that the minor improvements highlight that in practice the synchronization assumption does not adversely affect solution quality to a great extent.
-	\item A k-arm extension of the asymptotic cost bound in the asynchronous case has been included.
-	\item The proof for the asymptotic cost bound estimate for 2-arms under the synchronization assumption has been expanded, and Monte-Carlo trials have been reported in a simplified setup to validate the analysis model.
+    % \item Additional explanation and visual support is provided for understanding the algorithmic steps, especially regarding Section \ref{sec:approximation}.
+    \item A detailed illustration and expository text is provided for describing the algorithmic steps, especially regarding Section \ref{sec:approximation}.
+	\item Further analysis has been performed to study the problem (Section \ref{sec:cost_bounds}). Specifically, the result describing the asymptotic cost bound for asynchronous operation has been extended to the $k$-arm case. Additionally, a more detailed proof is provided for the asymptotic cost bound estimate in the case of synchronized dual-arm operation.
+% 	\item New data (Section \ref{sec:smoothing}) is provided that study the effect of post-processing solutions so as to minimize delays introduced due to the synchronization assumption. 
+	\item The solutions from the benchmarks were post-processed so as to minimize delays introduced due to the synchronization assumption, and the data from this \textit{smoothing} operation is provided in Section \ref{sec:smoothing}.
+	\item A benchmark (Section \ref{sec:reachability}) has been included to demonstrate the efficacy of the proposed approach in problem domains where initial or target poses of objects do not lie in the shared workspace.
 \end{enumerate}
 }
+
 %The computational costs of both the optimal
 %and the proposed method are significantly improved from the lazy
 %evaluation strategy. 

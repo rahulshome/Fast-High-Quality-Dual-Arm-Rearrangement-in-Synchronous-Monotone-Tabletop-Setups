@@ -1,4 +1,6 @@
-Consider a planar surface and a set of $n$ rigid objects $ \objectset=\{ \object_1, \object_2 \cdots \object_n\}$  that can rest on the surface in stable poses $p_i \in \Pspace_i \subset SE(3)$. The arrangement space $ \Aspace = \Pspace_1 \times \Pspace_2 \ldots \times \Pspace_n $ is the Cartesian product of all $\Pspace_i$, where $ \arrangement = (\pose_1, \ldots, \pose_n) \in \Aspace $. In valid arrangements $ \Afree \subset \Aspace$, the objects are pairwise disjoint.
+Consider a planar surface and a set of $n$ rigid objects $ \objectset=\{ \object_1, \object_2 \cdots \object_n\}$  which can rest on the surface in stable poses $p_i \in \Pspace_i \subset SE(3)$. The arrangement space $ \Aspace = \Pspace_1 \times \Pspace_2 \ldots \times \Pspace_n $ is the Cartesian product of all $\Pspace_i$, where Every rearrangement $\arrangement \in \Aspace$ is an $n$-tuple $(\pose_1, \ldots, \pose_n)$. In valid arrangements $ \Afree \subset \Aspace$, the objects are pairwise disjoint.
+
+% $ \arrangement = (\pose_1, \ldots, \pose_n) \in \Aspace $. 
 
 \begin{figure}[h]
     % \vspace{-.3in}
@@ -16,26 +18,40 @@ pick and place the objects from and to the surface.
 % \kiril{The last statement is unclear, particularly the purpose of the word "raise". Can it be rewritten into "...can pick and place objects from and to the surface."?}  
 % THE OLD SENTENCE$\cfree^k$ is the set of collision-free configurations for arm $ \arm^k $, where $ q^k \in \cfree^k %\subset \reals^d $ (while ignoring possible collisions with  objects or the other arm).
 $\cfree^k$ is the set of collision-free configurations for arm $\arm^k$ (while ignoring possible collisions with  objects or the other arm), and is assumed here to be a subset of $\reals^d $.
-A path for $\arm^k$ is denoted as $ \pi^k : [0,1] \rightarrow \cfree^k$ and includes picking and placing actions.  Let $ \cfree^i(\pi^j) $ represent the collision free $\mathbb{C}$-space for $\arm^i$, given that $\arm^j$ moves along $\pi^j $. This is a function of the paths' parametrization. The space of dual-arm paths $\mathcal{D}$ denotes pairs of paths for the two arms: $D = (\pi^1,\pi^2) \in \mathcal{D}$. Then, $\arrangement(\ainit, D)$ is the resulting arrangement when the objects are at $\ainit$ and moved according to $D$.   Let $ \cost(D) : \mathcal{D} \rightarrow \reals $ be a cost function over dual-arm paths. 
+A path for $\arm^k$ is denoted as $ \pi^k : [0,1] \rightarrow \cfree^k$ and includes picking and placing actions throughout the entire rearrangement process. Let the set of collisions induced between the geometries of both the arms at two configurations along the path (at $t$) be denoted by the expression $ \pi^1(t) \ominus \pi^2(t) $. If there are no collisions then $\pi^1(t) \ominus \pi^2(t) = \emptyset$.
+% Let $ \cfree^i(\pi^j) $ represent the collision free $\mathbb{C}$-space for $\arm^i$, given that $\arm^j$ moves along $\pi^j $. This is a function of the paths' parametrization. 
+The space of dual-arm paths $\mathcal{D}$ is made of pairs of paths for the two arms: $D = (\pi^1,\pi^2) \in \mathcal{D}$. Then, $\arrangement(\ainit, D)$ is the resulting arrangement when the objects are at $\ainit$ and moved according to $D$.   Let $ \cost(D) : \mathcal{D} \rightarrow \reals $ be a cost function over dual-arm paths. 
 
 % \vspace{-.1in}
-{\definition [Optimal Dual-arm Rearrangement] Given arms $\arm^1$, $\arm^2$ and objects $\objectset$ to be moved from initial arrangement $ \ainit \in \Afree$ to target arrangement $ \atarget \in \Afree $, the optimal dual-arm rearrangement problem asks for a dual-arm path $D^* \in \mathcal{D}$, which satisfies the following constraint:
+{\definition [Optimal Dual-arm Rearrangement] Given arms $\arm^1$, $\arm^2$ and objects $\objectset$ to be moved from initial arrangement $ \ainit \in \Afree$ to target arrangement $ \atarget \in \Afree $, the optimal dual-arm rearrangement problem asks for a dual-arm path $D^* \in \mathcal{D}$, which optimizes a cost function, and solution paths belong to the valid configuration space.
 
 % \vspace{-.15in} 
-\begin{equation}
- D^* =  (\pi^{*1}, \pi^{*2}) \ |\ \arrangement(\ainit, D^*) = \atarget \textrm{ and } \pi^{*i} \in \cfree^i(\pi^{*j}) \vspace{-.05in}
-\label{eq:dualarm_constraint}
-\end{equation}
- and optimizes a cost function: $D^* = \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} } \ \cost(D).$}
+% \begin{equation}
+%  D^* =  (\pi^{*1}, \pi^{*2}) \ |\ \arrangement(\ainit, D^*) = \atarget \textrm{ and } \pi^{*i} \in \cfree^i(\pi^{*j}) \vspace{-.05in}
+% \label{eq:dualarm_constraint}
+% \end{equation}
+%  and optimizes a cost function: $D^* = \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} } \ \cost(D).$}
 
-A set of assumptions are introduced to deal with the problem's combinatorics. The reachable task-space $\taskspace^k \subset SE(3)$ of arm $\arm^k$ is the set of $SE(3)$ poses that objects attached to the arm's end effector can acquire.
+% \begin{align*}
+%  D^* =  (\pi^{*1}, \pi^{*2}) = \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} }\ \cost(D) \numberthis\label{eq:dualarm_constraint} \\ 
+%  \ \textrm{such that} \ \arrangement(\ainit, D^*) = \atarget \textrm{ and,}\\ \pi^{*1} \in \cfree^1(\pi^{*2}), \pi^{*2} \in \cfree^2(\pi^{*1})  
+% \end{align*}
+%  and optimizes a cost function: $D^* =  .$}
+\vspace{-0.1in}
+\begin{align*}
+ D^* =  (\pi^{*1}, \pi^{*2}) &= \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} }\ \cost(D) \numberthis\label{eq:dualarm_constraint} \\ 
+ \ \textrm{such that} \ \arrangement(\ainit, D^*) &= \atarget \textrm{ ,and }\ \forall t\in[0,1]\\
+ \pi^{*1}(t) \in \cfree^1,\ \pi^{*2}(t) \in \cfree^2,\ & \pi^{*1}(t) \ominus \pi^{*2}(t) = \emptyset
+\end{align*}
+
+Assumptions are introduced to deal with the problem's combinatorics. The reachable task-space $\taskspace^k \subset SE(3)$ of arm $\arm^k$ is the set of $SE(3)$ poses that objects attached to the arm's end effector can acquire.
 
 % \vspace{-.15in}
 \commentdel{
 {\textbf{Assumption} [Reachability] All objects are reachable by both arms at $\ainit$ and $\atarget$: $\forall\ \pose_i \in \ainit \textrm{ and } \forall\ \pose_j \in \atarget \textrm{ and } \forall\ k \in [1,2]: \pose_i, \pose_j \subset \taskspace^k $.}
 }
 
-Let the ordered set of objects moved during the arm path $ \pi^i $ be denoted as $ \moveset(\pi^k) $. In general, an object can appear many times in $ \moveset(\pi^k) $. The current work, however, focuses on monotone instances, where each object is moved once.
+Let the ordered set of objects moved during the arm path $ \pi^k $ be denoted as $ \moveset(\pi^k) $. In general, an object can appear many times in $ \moveset(\pi^k) $. The current work, however, focuses on monotone instances, where each object is moved once.
 
 % \vspace{-.15in}
 {\assumption [Monotonicity] There are dual-arm paths $D = (\pi^1,\pi^2)$ that satisfy Eq. \ref{eq:dualarm_constraint}, where each object $ \object_i \in \objectset $ appears once in $\moveset(\pi^1)$ or $ \moveset(\pi^2)$.}
@@ -51,7 +67,7 @@ The focus will be on simultaneous execution of transfer and move paths.
 \item[$-$]\ \ and completes it in contact with object $ \object^k_i $ at its final pose in $\atarget$. 
 \end{myitem}
 
-\noindent\textbf{Moves or Transits:} Paths $M(\pi^1_{i\rightarrow i^{\prime}},\pi^2_{i\rightarrow i^{\prime}}) \in \mathcal{D}$, $ \moveset(\pi^1_{i\rightarrow i^{\prime}}) = \emptyset $, and each $\arm^k$:
+\noindent\textbf{Moves or Transits:} Paths $M(\pi^1_{i\rightarrow i^{\prime}},\pi^2_{i\rightarrow i^{\prime}}) \in \mathcal{D}$, $ \moveset(\pi^k_{i\rightarrow i^{\prime}}) = \emptyset $, and each $\arm^k$:
 \begin{myitem}
 \item[$-$]\ \  starts in contact with object $\object^k_i$ at its final pose in $\atarget$,
 \item[$-$]\ \  and completes it in contact with object $\object^k_{i^{\prime}}$ at its initial pose in $\ainit$.
@@ -66,7 +82,7 @@ D=& (T(\pi^1_1,\pi^2_1),M(\pi^1_{1\rightarrow 2},\pi^2_{1\rightarrow 2}), \ldots
 % \vspace{-.05in}
 \label{eq:synchronicity}
 \end{align*}}
-\noindent For simplicity, Eq.~\ref{eq:synchronicity} does not include an initial move from $q^k_{\rm safe} \in \cfree^k$ and a final move back to $q^k_{\rm safe}$. An odd number of objects can also be easily handled. Then, the sequence of object pairs moved during a dual-arm path as in Eq. \ref{eq:synchronicity} is: 
+\noindent For simplicity, Eq.~\ref{eq:synchronicity} does not include an initial move from $q^k_{\rm safe} \in \cfree^k$ and a final move back to $q^k_{\rm safe}$ (an odd number of objects can also be easily handled). Then, the sequence of object pairs moved during a dual-arm path as in Eq. \ref{eq:synchronicity} is: 
 % \vspace{-.1in} 
 % $$ \scoma(D) = \left(  \coma_i = (\object_i^1,\object_i^2) \ |\ i,j\in [1,\cdots,\ell], \bigcup_i (\object_i^1 \cup \object_i^2) = \objectset, \object_i^1 \cap \object_j^1 = \object_i^2 \cap \object_j^2 = \emptyset \right). \vspace{-.15in}$$
 \begin{align*}
@@ -94,7 +110,7 @@ The metric this work focuses on relates to makespan and minimizes the sum of the
 % \vspace{-.1in}
 \label{eq:cost_function}
 \end{equation}
-Note that the \textit{transfer} costs do not depend on the order with which the objects are moved but only on the assignment of objects to arms. The \textit{transit} costs arise out of the specific ordering in $ \scoma(D)$. 
+Note that the \textit{transfer} costs do not depend on the order in which the objects are moved but only on the assignment of objects to arms. The \textit{transit} costs arise out of the specific ordering in $ \scoma(D)$. 
 Then, for the setup of Definition 1 and under Assumptions 1-3, the problem is to compute the optimal sequence of object pairs $\scoma^*$ so that $D(\scoma^*)$ satisfies Eq.~\ref{eq:dualarm_constraint} and minimizes the cost of Eq.~\ref{eq:cost_function}.
 
 \commentdel{Assumptions 2 and 3 will be partly relaxed in Section \ref{sec:integration}. Assumption 1 is also effectively relaxed to cases where at least one arm can transfer every object.}
@@ -106,11 +122,12 @@ Then, for the setup of Definition 1 and under Assumptions 1-3, the problem is to
 Objects do not need to be in the commonly reachable workspace as long as the problem is monotone and solvable. Section~\ref{sec:integration} discusses a {\tt NO\_ACT} task that can deal with unbalanced object assignments between two arms. 
 }
 
-The synchronicity assumption allows to study the combinatorial challenges of the problem, which do not relate to the choice of time synchronization of different picks and placements. Section \ref{sec:integration} describes the use of $\drrtstar$\cite{Dobson:2017aa} as the underlying motion planner that can discover solutions that can synchronize arm motions for simultaneous picks, and simultaneous placements. The synchronicity assumption is relaxed through smoothing (Section \ref{sec:integration}).
+The synchronicity assumption allows to study the combinatorial challenges of the problem, which do not relate to the choice of time synchronization of different pickups and drop-offs. Section \ref{sec:integration} describes the use of $\drrtstar$\cite{Dobson:2017aa,Shome2019} as the underlying motion planner that can discover solutions that can synchronize arm motions for simultaneous picks, and simultaneous placements. The synchronicity assumption is relaxed through smoothing (Section \ref{sec:integration}).
 
-The non-interactivity assumption comes up naturally in planar tabletop scenarios with top-down picks or delta robots. Such scenarios are popular in industrial settings. Once the object is raised from the resting surface, transporting it to its target does not introduce interactions with the other resting objects. This assumption is also relaxed in Section \ref{sec:integration}, with a lazy variant of the proposed method. Once a complete candidate solution is obtained, collision checking can be done with everything in the scene.
+The non-interactivity assumption comes up naturally in planar tabletop scenarios with top-down picks or delta robots. Such scenarios are popular in industrial settings. Once the object is raised from the resting surface, transporting it to its target does not introduce interactions with the other resting objects. This assumption is also relaxed in Section \ref{sec:integration}, with a lazy variant of the proposed method. Once a complete candidate solution is obtained, collision checking is performed with the entire scene.
 
-Overall, under the assumptions, the current work identifies a problem structure, which allows arguments pertaining to the search space, completeness, and optimality. Nevertheless, the smoothed, lazy variant of the proposed method will still return effective solutions in practice, even if these assumptions do not hold.
+Overall, under Assumptions~{1-3}, the current work identifies a problem structure, which allows arguments pertaining to the search space, completeness, and optimality. Nevertheless, the smoothed, lazy variant of the proposed method will still, in the
+experiments that were carried out, often return effective solutions in practice, even if these assumptions do not hold.
 
 % The validation of the final candidate solution enforces that the algorithm keeps trying till a collision-free solution is found. The assumptions enable the current work to study in detail the problem, which is otherwise mostly intractable. 
 

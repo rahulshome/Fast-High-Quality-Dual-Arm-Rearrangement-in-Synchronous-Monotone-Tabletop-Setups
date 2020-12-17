@@ -8,13 +8,17 @@
 \usepackage{psfrag,graphicx,epsfig,epsf}
 \usepackage[ruled,linesnumbered, noend]{algorithm2e}
 \usepackage{fancyhdr}
-\usepackage{wrapfig}
 \usepackage{subfigure}
 \usepackage{mathtools}
 \usepackage{url}
 \usepackage{color}
 \usepackage{verbatim}
 \usepackage{xspace}
+\usepackage{amsmath}
+
+\usepackage{wrapfig}
+
+\usepackage{picins}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 
@@ -54,7 +58,7 @@
 
 \title{Fast, High-Quality Dual-Arm Rearrangement in Synchronous, Monotone Tabletop Setups}
 %\titlerunning{Fast Methods for Synchronized Tabletop Dual-Arm Rearragement}
-\author{Rahul Shome$^1$ \and Kiril Solovey$^2$ \and Jingjin Yu$^1$ \and Kostas Bekris$^1$ \and Dan Halperin$^2$}
+\author{Rahul Shome$^1$ \and Kiril Solovey$^2$ \and Jingjin Yu$^1$ \and Kostas Bekris$^1$ \and Dan Halperin$^3$}
 %\authorrunning{Shome et al.}
 % \institute{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel}
 
@@ -65,9 +69,14 @@
 \input{00_abstract}
 \end{abstract}
 
+\def\abstractname{Note to Practitioners}
+\begin{abstract}
+\input{001_ntp}
+\end{abstract}
+
 %\kiril{I've temporarily changed the format to make the display in overleaf slightly more convenient.}
 
-\blfootnote{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel.
+\blfootnote{$^1$Rutgers University, NJ, USA, $^2$Stanford University, CA, USA, and $^3$Tel Aviv University, Israel.
 
 Work by \textit{RS}, \textit{JU} and \textit{KB} was supported by NSF CNS-1330789, IIS-1617744 and IIS-1734419, and \textit{DH} by the ISF grant~825/15, Blavatnik Computer Science Research Fund, Blavatnik Interdisciplinary Cyber Research Center, Yandex and Facebook.}
 
@@ -137,9 +146,13 @@ Work by \textit{RS}, \textit{JU} and \textit{KB} was supported by NSF CNS-133078
 % \bibliographystyle{spmpsci}
 % \bibliography{bib/manip}}
 
-\bibliographystyle{IEEEtran} \bibliography{IEEEabrv,bib/manip}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,bib/manip}
 
 %\newpage
+%\twocolumn
+%\section*{Biography}
 
+\input{biography}
 
 \end{document}

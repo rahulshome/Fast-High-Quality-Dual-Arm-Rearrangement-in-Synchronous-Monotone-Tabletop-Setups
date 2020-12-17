@@ -81,11 +81,23 @@
 	Volume = {12},
 	Year = {2015}}
 
+
 @inproceedings{SolYuZamHal15,
-	Author = {Kiril Solovey and Jingjin Yu and Or Zamir and Dan Halperin},
-	Booktitle = {Robotics: Science and Systems},
-	Title = {Motion Planning for Unlabeled Discs with Optimality Guarantees},
-	Year = {2015}}
+  author    = {Kiril Solovey and
+               Jingjin Yu and
+               Or Zamir and
+               Dan Halperin},
+  title     = {Motion Planning for Unlabeled Discs with Optimality Guarantees},
+  booktitle = {Robotics: Science and Systems XI, Sapienza University of Rome, Rome,
+               Italy, July 13-17, 2015},
+  year      = {2015},
+  url       = {http://www.roboticsproceedings.org/rss11/p11.html},
+  doi       = {10.15607/RSS.2015.XI.011},
+  timestamp = {Tue, 20 Nov 2018 15:31:10 +0100},
+  biburl    = {https://dblp.org/rec/bib/conf/rss/SoloveyYZH15},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
 
 @inproceedings{Johnson-RSS-16,
 	Address = {AnnArbor, Michigan},
@@ -228,13 +240,6 @@
 	Volume = {33},
 	Year = {2014}}
 
-@inproceedings{Dobson:2017aa,
-	Author = {Dobson, A. and Solovey, K. and Shome, R. and Halperin, D. and Bekris, K. E.},
-	Booktitle = {MRS},
-	Date-Modified = {2018-04-20 21:27:34 +0000},
-	Title = {{Scalable Asymptotically-Optimal Multi-Robot Motion Planning}},
-	Year = {2017},
-	Bdsk-Url-1 = {https://www.cs.rutgers.edu/~ajd223}}
 
 @inproceedings{ELM15a,
 	Author = {Edward Schmerling and Lucas Janson and Marco Pavone},
@@ -1546,13 +1551,6 @@
   publisher={Springer}
 }
 
-@article{solovey2015motion,
-  title={Motion planning for unlabeled discs with optimality guarantees},
-  author={Solovey, Kiril and Yu, Jingjin and Zamir, Or and Halperin, Dan},
-  journal={arXiv preprint arXiv:1504.05218},
-  year={2015}
-}
-
 @article{solovey2016hardness,
   title={On the hardness of unlabeled multi-robot motion planning},
   author={Solovey, Kiril and Halperin, Dan},
@@ -1812,11 +1810,14 @@
   booktitle={Robotics: Science and Systems},
   year={2015}
 }
+
 @inproceedings{krontiris2016efficiently,
   title={Efficiently solving general rearrangement tasks: A fast extension primitive for an incremental sampling-based planner},
   author={Krontiris, Athanasios and Bekris, Kostas E},
-  booktitle={ICRA},
-  year={2016}
+  booktitle={2016 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={3924--3931},
+  year={2016},
+  organization={IEEE}
 }
 
 
@@ -1941,10 +1942,70 @@ booktitle={WAFR},
 year={2018}
 }
 
-@article{Shome2018WAFR,
-Author = {Rahul Shome and Kiril Solovey and Jingjin Yu and Kostas Bekris and Dan Halperin},
-Title = {Fast, High-Quality Dual-Arm Rearrangement in Synchronous, Monotone Tabletop Setups},
-Year = {2018},
-Eprint = {arXiv:1810.12202},
-journal={arXiv:1810.12202 [cs.RO]}
+
+@conference {shome2018dualarm,
+	title = {Fast and High-Quality Dual-Arm Rearrangement in Synchronous, Monotone Tabletop Setups},
+	booktitle = {Workshop on the Algorithmic Foundations of Robotics (WAFR)},
+	year = {2018},
+	month = {12/2018},
+	address = {M{\'e}rida, M{\'e}xico},
+	abstract = {Rearranging objects on a planar surface arises in a variety of applications, such as packaging. Using two arms can improve efficiency but introduces new combinatorial challenges. This paper studies the structure of dual-arm rearrangement for synchronous, monotone tabletop setups and develops an optimal MILP model. It then describes an efficient and scalable algorithm, which first minimizes the cost of object transfers and then of transitions between objects. This is motivated by the fact that asymptotically object transfers dominate the cost of solutions. Moreover, a lazy strategy minimizes the number of motion planning calls and results in significant speedups. Theoretical arguments support the benefits of using two arms and indicate that synchronous operation introduces only a small cost increase. Experiments support these points and show that the scalable method can quickly compute solutions close to optimal for the considered setup.},
+	url = {http://www.cs.rutgers.edu/~kb572/pubs/Fast_High_Quality_Dual_Arm_Rearrangement.pdf},
+	author = {Shome, R. and Solovey, K. and Yu, J. and Bekris, K. E. and Halperin, D.}
+}
+
+@inproceedings{littlefield2016evaluating,
+  title={Evaluating end-effector modalities for warehouse picking: A vacuum gripper vs a 3-finger underactuated hand},
+  author={Littlefield, Zakary and Zhu, Shaojun and Kourtev, Hristiyan and Psarakis, Zacharias and Shome, Rahul and Kimmel, Andrew and Dobson, Andrew and De Souza, Alberto F and Bekris, Kostas E},
+  booktitle={2016 IEEE International Conference on Automation Science and Engineering (CASE)},
+  pages={1190--1195},
+  year={2016},
+  organization={IEEE}
+}
+
+@conference{shome2019multiarm,
+Author = {Rahul Shome and Kostas E. Bekris},
+Title = {Anytime Multi-arm Task and Motion Planning for Pick-and-Place of Individual Objects via Handoffs},
+booktitle = {{2nd IEEE International Symposium on Multi-Robot and Multi-Agent Systems (MRS)}},
+year = {2019},
+month = {08/2019},
+address = {New Brunswick, NJ, USA},
+Eprint = {arXiv:1905.03179},
+url = {https://arxiv.org/pdf/1905.03179.pdf},
+}
+
+@inproceedings{Dobson:2017aa,
+	Author = {Dobson, A. and Solovey, K. and Shome, R. and Halperin, D. and Bekris, K. E.},
+	Booktitle = {MRS},
+	Date-Modified = {2018-04-20 21:27:34 +0000},
+	Title = {{Scalable Asymptotically-Optimal Multi-Robot Motion Planning}},
+	Year = {2017},
+	Bdsk-Url-1 = {https://www.cs.rutgers.edu/~ajd223}}
+
+
+@Article{Shome2019,
+author="Shome, Rahul
+and Solovey, Kiril
+and Dobson, Andrew
+and Halperin, Dan
+and Bekris, Kostas E.",
+title="{dRRT*}: Scalable and informed asymptotically-optimal multi-robot motion planning",
+journal="Autonomous Robots",
+year="2019",
+month="Jan",
+day="24",
+abstract="Many exciting robotic applications require multiple robots with many degrees of freedom, such as manipulators, to coordinate their motion in a shared workspace. Discovering high-quality paths in such scenarios can be achieved, in principle, by exploring the composite space of all robots. Sampling-based planners do so by building a roadmap or a tree data structure in the corresponding configuration space and can achieve asymptotic optimality. The hardness of motion planning, however, renders the explicit construction of such structures in the composite space of multiple robots impractical. This work proposes a scalable solution for such coupled multi-robot problems, which provides desirable path-quality guarantees and is also computationally efficient. In particular, the proposed {\$}{\$}{\backslash}mathtt{\{}dRRT^*{\}}{\$}{\$}dRRT∗is an informed, asymptotically-optimal extension of a prior sampling-based multi-robot motion planner, {\$}{\$}{\backslash}mathtt{\{}dRRT{\}}{\$}{\$}dRRT. The prior approach introduced the idea of building roadmaps for each robot and implicitly searching the tensor product of these structures in the composite space. This work identifies the conditions for convergence to optimal paths in multi-robot problems, which the prior method was not achieving. Building on this analysis, {\$}{\$}{\backslash}mathtt{\{}dRRT{\}}{\$}{\$}dRRTis first properly adapted so as to achieve the theoretical guarantees and then further extended so as to make use of effective heuristics when searching the composite space of all robots. The case where the various robots share some degrees of freedom is also studied. Evaluation in simulation indicates that the new algorithm, {\$}{\$}{\backslash}mathtt{\{}dRRT^*{\}}{\$}{\$}dRRT∗  converges to high-quality paths quickly and scales to a higher number of robots where various alternatives fail. This work also demonstrates the planner's capability to solve problems involving multiple real-world robotic arms.",
+issn="1573-7527",
+url = {https://www.cs.rutgers.edu/~kb572/pubs/drrt_star_auro.pdf}
+}
+
+@article{dantzig1954solution,
+  title={Solution of a large-scale traveling-salesman problem},
+  author={Dantzig, George and Fulkerson, Ray and Johnson, Selmer},
+  journal={Journal of the operations research society of America},
+  volume={2},
+  number={4},
+  pages={393--410},
+  year={1954},
+  publisher={INFORMS}
 }

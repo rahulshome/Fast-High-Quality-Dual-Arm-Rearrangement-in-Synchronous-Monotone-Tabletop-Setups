@@ -1,5 +1,5 @@
 The algorithms described so far are agnostic to the underlying motion planner.
-Depending upon the model of the application domain, different motion planning primitives might be appropriate. For planar environments with disk robot pickers~(similar to delta robots), recent work~\cite{kirkpatrick2016characterizing} characterizes the optimal two-disk coordinated motions. The current implementation uses a general multi-robot motion planning framework \drrtstar~\cite{Dobson:2017aa} for dual-arm coordinated planning.
+Depending upon the model of the application domain, different motion planning primitives might be appropriate. For planar environments with disk robot pickers~(similar to delta robots), recent work~\cite{kirkpatrick2016characterizing} characterizes the optimal two-disk coordinated motions. The current implementation uses a general multi-robot motion planning framework \drrtstar~\cite{Dobson:2017aa,Shome2019} for dual-arm coordinated planning.
 
 % It should be noted that sometimes such motion plans might not be found either because no such solution exists, or because of a limited time budget. In such cases the edge costs should either be set of some arbitrarily large value, or removed altogether. 
 
@@ -48,7 +48,7 @@ In practice the cost of generating and evaluating two-arm motions can dominate t
 % \kiril{I suggest to replace this sentence with a high-level description omitting the term "underlying roadmaps": "This heuristic corresponds to pre-processed lower estimates of the shortest-path costs for the two arms."}
 % The online part of the estimate is tantamount to a simple look-up. 
 
-\noindent\textbf{Lazy Evaluation}: Recent work~\cite{shome2017improving} introduces heuristics for $ \drrtstar $, which pre-process estimates of the shortest path costs for the arms. Dual-arm rearrangement can be significantly sped up if the motion planning queries are replaced with look-ups of such heuristics. Once a candidate $ \scoma $ is obtained, motion planning can evaluate the solution $ \trajset(\scoma) $. If this fails, the algorithm tries other sequences. 
+\noindent\textbf{Lazy Evaluation}: Recent work~\cite{shome2017improving} introduces heuristics for $ \drrtstar $, which pre-process estimates of the shortest path costs for the arms. Dual-arm rearrangement can be significantly sped up if the motion planning queries are replaced with look-ups of such heuristics. Once a candidate $ \scoma $ is obtained, motion planning can expand the solution $ \trajset(\scoma) $ to obtain the actual solution paths. If this fails, the algorithm tries other sequences. 
 % \kiril{In line 8 of the algorithm, the first "$D$" in the curly brackets is redundant, right?}
 
 
@@ -57,14 +57,14 @@ The algorithm Algo \ref{algo:lazy} takes as input the algorithm $ \mathtt{ALGO} 
 
 \noindent\textbf{Completeness}: 
 % The heuristic versions would be an approximation of the original optimization guarantees of the algorithms. It should be noted that this framework can be used with all the dual-arm approaches ie., exhaustive search, MILP and \algo. 
-The lazy variants give up on optimality for the sake of efficiency but given enough retries the algorithms will eventually solve every problem that {\tt ALGO} can. Since the motion planning happens in the order of execution, the object non-interactivity assumption is relaxed.
+The lazy variants give up on optimality for the sake of efficiency but given enough retries the algorithms will eventually solve every problem that {\tt ALGO} can. The motion planning and evaluation is performed in sequence of the order of execution. The object non-interactivity assumption is relaxed since all the object positions are effectively known during the evaluation of a candidate solution.
 
 \noindent\textbf{Smoothing}: 
 % The solutions obtained out of the methods adhere to the defined synchronization assumptions of the problem. 
 Applying velocity tuning over the solution trajectories for the individual arms relaxes the synchronization assumption
 by minimizing any waits that might be a by-product of the synchronization. 
-Smoothing does not change the maximum of distances, only improves execution time. Indications that the smoothed variants of the synchronous solutions do not provide significant savings in execution time are included in the Appendix \cite{Shome2018WAFR} for the interested reader.
+Smoothing does not change the maximum of distances, only improves execution time. Indications that the smoothed variants of the synchronous solutions do not provide significant savings in execution time are included in the results for the interested reader in Fig~\ref{fig:smoothing}.
 
-It should be noted that in an iterative version of \algo, in order to explore variations in $ \scomaset^* $ if failures occur in finding $\tour$, some edges need to be temporarily blocked on $ \scomaset^* $. The search structures can also be augmented with {\tt NO\_ACT} tasks, for possible $\coma$ where one of the arms do not move. 
+It should be noted that in an iterative version of \algo, in order to explore variations in optimal object-to-arm assignments $ \scomaset^* $ if failures occur in finding $\tour$, some edges need to be temporarily blocked on $ \scomaset^* $. The search structures can also be augmented with {\tt NO\_ACT} tasks, for possible $\coma$ where one of the arms do not move. 
 % This effectively includes single arm solutions in the search as well.
 
