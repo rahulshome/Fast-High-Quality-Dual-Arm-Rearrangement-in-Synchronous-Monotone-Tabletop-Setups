@@ -48,7 +48,7 @@ In practice the cost of generating and evaluating two-arm motions can dominate t
 % \kiril{I suggest to replace this sentence with a high-level description omitting the term "underlying roadmaps": "This heuristic corresponds to pre-processed lower estimates of the shortest-path costs for the two arms."}
 % The online part of the estimate is tantamount to a simple look-up. 
 
-\noindent\textbf{Lazy Evaluation}: Recent work~\cite{shome2017improving} introduces heuristics for $ \drrtstar $, which pre-process estimates of the shortest path costs for the arms. Dual-arm rearrangement can be significantly sped up if the motion planning queries are replaced with look-ups of such heuristics. Once a candidate $ \scoma $ is obtained, motion planning can expand the solution $ \trajset(\scoma) $ to obtain the actual solution paths. If this fails, the algorithm tries other sequences. 
+\noindent\textbf{Lazy Evaluation}: Recent work~\cite{shome2017improving} introduces heuristics for $ \drrtstar $, which pre-process estimates of the shortest path costs for the arms. \Dual-arm rearrangement can be significantly sped up if the motion planning queries are replaced with look-ups of such heuristics. Once a candidate $ \scoma $ is obtained, motion planning can expand the solution $ \trajset(\scoma) $ to obtain the actual solution paths. If this fails, the algorithm tries other sequences. 
 % \kiril{In line 8 of the algorithm, the first "$D$" in the curly brackets is redundant, right?}
 
 

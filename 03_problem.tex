@@ -1,4 +1,4 @@
-Consider a planar surface and a set of $n$ rigid objects $ \objectset=\{ \object_1, \object_2 \cdots \object_n\}$  which can rest on the surface in stable poses $p_i \in \Pspace_i \subset SE(3)$. The arrangement space $ \Aspace = \Pspace_1 \times \Pspace_2 \ldots \times \Pspace_n $ is the Cartesian product of all $\Pspace_i$, where Every rearrangement $\arrangement \in \Aspace$ is an $n$-tuple $(\pose_1, \ldots, \pose_n)$. In valid arrangements $ \Afree \subset \Aspace$, the objects are pairwise disjoint.
+Consider a planar surface and a set of $n$ rigid objects $ \objectset=\{ \object_1, \object_2 \cdots \object_n\}$  which can rest on the surface in stable poses $p_i \in \Pspace_i \subset SE(3)$. The arrangement space $ \Aspace = \Pspace_1 \times \Pspace_2 \ldots \times \Pspace_n $ is the Cartesian product of all $\Pspace_i$, where every rearrangement $\arrangement \in \Aspace$ is an $n$-tuple $(\pose_1, \ldots, \pose_n)$. In valid arrangements $ \Afree \subset \Aspace$, the objects are pairwise disjoint.
 
 % $ \arrangement = (\pose_1, \ldots, \pose_n) \in \Aspace $. 
 
@@ -12,32 +12,18 @@ Consider a planar surface and a set of $n$ rigid objects $ \objectset=\{ \object
 	\label{fig:rearrangement}
     % \vspace{-.35in}
 \end{figure}
-Two robot arms $\arm^1$ and $\arm^2$ can 
+Two robot arms \footnote{We shall use superscripts to denote arms, and subscripts to index into some sequence or data-structure dependent on context, unless stated otherwise.} $\arm^1$ and $\arm^2$ can 
 % pick, raise above the surface and place the objects. 
 pick and place the objects from and to the surface.
 % \kiril{The last statement is unclear, particularly the purpose of the word "raise". Can it be rewritten into "...can pick and place objects from and to the surface."?}  
 % THE OLD SENTENCE$\cfree^k$ is the set of collision-free configurations for arm $ \arm^k $, where $ q^k \in \cfree^k %\subset \reals^d $ (while ignoring possible collisions with  objects or the other arm).
-$\cfree^k$ is the set of collision-free configurations for arm $\arm^k$ (while ignoring possible collisions with  objects or the other arm), and is assumed here to be a subset of $\reals^d $.
+$\cfree^k$ is the set of collision-free configurations for arm $\arm^k$ (while ignoring possible collisions with  objects or the other arm), and is assumed here to be a subset of \revisions{$d$-dimensional} $\reals^d $.
 A path for $\arm^k$ is denoted as $ \pi^k : [0,1] \rightarrow \cfree^k$ and includes picking and placing actions throughout the entire rearrangement process. Let the set of collisions induced between the geometries of both the arms at two configurations along the path (at $t$) be denoted by the expression $ \pi^1(t) \ominus \pi^2(t) $. If there are no collisions then $\pi^1(t) \ominus \pi^2(t) = \emptyset$.
 % Let $ \cfree^i(\pi^j) $ represent the collision free $\mathbb{C}$-space for $\arm^i$, given that $\arm^j$ moves along $\pi^j $. This is a function of the paths' parametrization. 
 The space of dual-arm paths $\mathcal{D}$ is made of pairs of paths for the two arms: $D = (\pi^1,\pi^2) \in \mathcal{D}$. Then, $\arrangement(\ainit, D)$ is the resulting arrangement when the objects are at $\ainit$ and moved according to $D$.   Let $ \cost(D) : \mathcal{D} \rightarrow \reals $ be a cost function over dual-arm paths. 
 
 % \vspace{-.1in}
-{\definition [Optimal Dual-arm Rearrangement] Given arms $\arm^1$, $\arm^2$ and objects $\objectset$ to be moved from initial arrangement $ \ainit \in \Afree$ to target arrangement $ \atarget \in \Afree $, the optimal dual-arm rearrangement problem asks for a dual-arm path $D^* \in \mathcal{D}$, which optimizes a cost function, and solution paths belong to the valid configuration space.
-
-% \vspace{-.15in} 
-% \begin{equation}
-%  D^* =  (\pi^{*1}, \pi^{*2}) \ |\ \arrangement(\ainit, D^*) = \atarget \textrm{ and } \pi^{*i} \in \cfree^i(\pi^{*j}) \vspace{-.05in}
-% \label{eq:dualarm_constraint}
-% \end{equation}
-%  and optimizes a cost function: $D^* = \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} } \ \cost(D).$}
-
-% \begin{align*}
-%  D^* =  (\pi^{*1}, \pi^{*2}) = \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} }\ \cost(D) \numberthis\label{eq:dualarm_constraint} \\ 
-%  \ \textrm{such that} \ \arrangement(\ainit, D^*) = \atarget \textrm{ and,}\\ \pi^{*1} \in \cfree^1(\pi^{*2}), \pi^{*2} \in \cfree^2(\pi^{*1})  
-% \end{align*}
-%  and optimizes a cost function: $D^* =  .$}
-\vspace{-0.1in}
+{\definition [Optimal \Dual-arm Rearrangement] Given arms $\arm^1$, $\arm^2$ and objects $\objectset$ to be moved from initial arrangement $ \ainit \in \Afree$ to target arrangement $ \atarget \in \Afree $, the optimal dual-arm rearrangement problem asks for a dual-arm path $D^* \in \mathcal{D}$, which optimizes a cost function, and solution paths belong to the valid configuration space.
 \begin{align*}
  D^* =  (\pi^{*1}, \pi^{*2}) &= \underset{ \forall D \in \mathcal{D}}{ \mathtt{argmin} }\ \cost(D) \numberthis\label{eq:dualarm_constraint} \\ 
  \ \textrm{such that} \ \arrangement(\ainit, D^*) &= \atarget \textrm{ ,and }\ \forall t\in[0,1]\\
@@ -117,9 +103,7 @@ Then, for the setup of Definition 1 and under Assumptions 1-3, the problem is to
 % , given a smoothing process for achieving an asynchronous solution and a lazy motion planning process for computing transfers and moves that can be informed of object poses. 
 
 \commentadd{
-\noindent \textbf{Note on Assumptions:} This work restricts the study to a class of monotone problems that relate to a range of industrial packing and stowing applications. The monotonicity assumption is often used in manageable variants of well-studied problems~\cite{Wilson:1994fk,Halperin:2000uq}. A monotone solution also implies that every object's start and target is reachable by at least one arm. 
-\cameraready{
-Objects do not need to be in the commonly reachable workspace as long as the problem is monotone and solvable. Section~\ref{sec:integration} discusses a {\tt NO\_ACT} task that can deal with unbalanced object assignments between two arms. 
+\subsection{Discussion on Assumptions} This work restricts the study to a class of monotone problems that relate to a range of industrial packing and stowing applications. The monotonicity assumption is often used in manageable variants of well-studied problems~\cite{Wilson:1994fk,Halperin:2000uq}. A monotone solution also implies that every object's start and target is reachable by at least one arm.\cameraready{Objects do not need to be in the commonly reachable workspace as long as the problem is monotone and solvable. Section~\ref{sec:integration} discusses a {\tt NO\_ACT} task that can deal with unbalanced object assignments between two arms. 
 }
 
 The synchronicity assumption allows to study the combinatorial challenges of the problem, which do not relate to the choice of time synchronization of different pickups and drop-offs. Section \ref{sec:integration} describes the use of $\drrtstar$\cite{Dobson:2017aa,Shome2019} as the underlying motion planner that can discover solutions that can synchronize arm motions for simultaneous picks, and simultaneous placements. The synchronicity assumption is relaxed through smoothing (Section \ref{sec:integration}).
@@ -133,3 +117,11 @@ experiments that were carried out, often return effective solutions in practice,
 
 
 }
+
+\revisions{
+	\textit{Scope and Limitations:} A variety of automation applications like packing, stowing, or sorting involve different singulated objects arriving at designated source regions, involving their rearrangement to a disjoint target region or container. Such automation applications also create semi-structured workspaces that guarantee that all objects of interest are easily graspable (top-down for planar surfaces). This class of problems is monotone since the source and target poses are disjoint, and \textit{no transfer will require an intermediate location}. In this case object non-interactivity essentially implies that the workspace is well-behaved enough to allow feasible single-arm motion plans between top-down reachable poses of the object. The current work addresses what we need to do go beyond single arm setups to effectively deploy two arms to speed up such an operation, and theoretically motivates the same. 
+	
+	The assumptions on the domain laid out in this work serve to identify the class of problems where our theoretical bounds will be close to the attained performance. \textit{The lazy variant proposed in this work is assured to iterate over all possible orderings of object-to-arm assignments, and take into account planning feasibility of the same. As such it is guaranteed to discover a solution as long as the \dual-arm rearrangement problem is monotone.} Admittedly, in domains where these assumptions are pathologically violated the theoretical and practical gains highlighted in this work will be compromised. The proposed method has limiting applicability to some interesting domains where objects are occluded, overlap, or lie in unstructured piles. Any non-monotonicity, i.e. problems that necessitate using an intermediate location, cannot be addressed by the current pipeline. These include puzzle-like or highly cluttered scenarios. 
+}
+
+

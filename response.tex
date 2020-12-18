@@ -1,0 +1,346 @@
+% \documentclass{llncs}
+
+\documentclass[journal]{IEEEtran}
+%\usepackage{makeidx}  % allows for indexgeneration
+
+\usepackage{amsmath,amsfonts,amssymb,mathrsfs}
+\usepackage{graphicx}
+\usepackage{psfrag,graphicx,epsfig,epsf}
+\usepackage[ruled,linesnumbered, noend]{algorithm2e}
+\usepackage{fancyhdr}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{xspace}
+\usepackage{amsmath}
+
+\usepackage{wrapfig}
+
+\usepackage{picins}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newcommand\permu[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\combi[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Theorems        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{amsthm}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{axiom}[theorem]{Axiom}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{problem}{Problem}
+%\newtheorem{prob}[theorem]{Problem}
+%\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{obj}[theorem]{Objective}
+%\newtheorem{prop}[theorem]{Property}
+%\newtheorem{schedule}[theorem]{Schedule}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Figure resizing          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The macros are useful when we need to change the document textwidth. 
+
+%%This would resize everything within it to \textwidth
+%\def\resizeall{\resizebox{\textwidth}{!}}
+%
+%%This would make a box around the item and center it 
+%\def\resizetotextwidth{\makebox[\textwidth]}
+
+\begin{document}
+	
+	\title{Fast, High-Quality Two-Arm Rearrangement in Synchronous, Monotone Tabletop Setups: Response}
+	%\titlerunning{Fast Methods for Synchronized Tabletop Dual-Arm Rearragement}
+	\author{Rahul Shome \and Kiril Solovey \and Jingjin Yu \and Kostas Bekris \and Dan Halperin}
+	%\authorrunning{Shome et al.}
+	% \institute{$^1$Rutgers University, NJ, USA and $^2$Tel Aviv University, Israel}
+	
+	\onecolumn
+	
+	\maketitle
+	\input{notation}
+	
+	
+	The authors would like to thank the reviewers for the helpful comments. This copy of the manuscript includes all the significant changes in the draft highlighted in blue to make it easier to track against the suggested edits. The authors also appreciate the efforts undertaken by the guest editors in their careful consideration of the reviewers' suggestions and their overall recommendation. We hope the changes are sufficient.
+	In this response document the specific review points are quoted inline and our responses explained and highlighted.
+	
+	\newenvironment{partt}{\ttfamily}{\par}
+	\newcommand{\edits}[1]{{\color{blue}#1}}
+	
+	\medskip
+	
+	\begin{partt}{ T-ASE-2019-525
+			
+			Lead Guest Editor
+			Comments to the Author:
+			Reviewer \#1 is very positive about the paper, and has no changes requested.  
+		}
+	\end{partt}
+	
+	\edits{The authors have addressed all the granular suggestions from Reviewer 1.} 
+	
+	
+	\begin{partt}
+		Reviewer \#2 raises several criticisms.  The first relates to terminology. In particular, the reviewer feels that this paper’s use of "dual-arm rearrangement" implies cooperative manipulation by the two arms, rather than two arms working essentially independently once their tasks have been scheduled. This is a minor issue, but the Guest Editors encourage you to clarify, perhaps even by modifying the title of the paper, that this is not a paper about dual-arm cooperative manipulation. (Alternatively, if this terminology is in current use, you could provide a citation or two to the seminal papers in which definitions are given.)  
+	\end{partt}
+	\edits{The title and references to dual-arm rearrangement have been updated to two-arm rearrangement. Text has also been added to the introduction to clarify that we address object rearrangement problems using two robotic arms. In order to avoid giving the impression of cooperative manipulation the authors include the explicit reference to object rearrangement, the discussions of related literature, and problem formulation tying only single objects to each arm at a time. The authors appreciate the raising of this concern so that readers do not get any misleading impression from the text. Hopefully this is sufficient to avoid confusion about the problem domain. }
+	
+	
+	\begin{partt}
+		The second relates to the three assumptions posited in Section III. To address these concerns, the revised manuscript should justify the assumptions (e.g., by  explaining how/why the do not significantly compromise the efficacy and scope of your method, or by showing/explaining why these assumptions are generally satisfied in practice), or the authors should carefully discuss the implications should these assumptions not be met in practice (see also Reviewer \#3's comments).
+	\end{partt}
+	
+	\edits{In addition to an existing paragraph that was previously a note on the assumptions, an additional discussion on the scope and limitations derived from the problem definition has been added.}
+	
+	\begin{partt}
+		The remaining criticisms raised in this review relate to clarity, and the Guest Editors encourage you to take these seriously when revising your manuscript.
+	\end{partt}
+	
+	\edits{The authors have added clarifying text wherever the reviewers have raised doubts or concerns.}
+	
+	
+	\begin{partt}
+		Reviewer \#3 raises two concerns: lack of adequate discussion of the limitations of the method, and the experimental setup. For the former, there is some overlap with the concerns of Reviewer \#2. A thorough, careful discussion of these issues is essential for your revised manuscript. 
+	\end{partt}
+	\edits{In addition to the discussion on the scope and limitations of our problem formulation, specific points raised by Reviewer 3 have also been addressed and pointed out inline with the review.}
+	
+	\begin{partt}
+		For the latter concern, Reviewer \#3 questions the value of using a random assignment strategy as the base case, and proposes alternatives that could give more meaningful comparisons. The Guest Editors encourage the authors to investigate these, since the overhead for doing so should be minimal.
+	\end{partt}
+	\edits{A note about heuristic strategies has been added in the evaluation section. The argument there is that the regions of common reachability which are a focus of the benchmarks (even for the placement region for the reachability benchmark), random problem instances will not admit a clear workspace partitioning. The results indicate that committing to a single choice of object-to-arm assignments hedges the solution feasibility to the coordinated motion planning over that specific sequence of assignments and causes a drop in success rates. In the work we have proposed a lazy variant that repeatedly evaluates alternative solutions till a feasible one is found. This leads to a drastic improvement in success rates, especially for the Kuka arms. A deterministic hand-crafter heuristic will not be amenable to this framework. As such we choose to focus on methods with theoretical optimality bounds, and a naive random baseline.}
+	
+	
+	\medskip
+	\medskip
+	
+	\begin{partt}
+		Reviewer's comments to author:
+		
+		Reviewer: 1
+		
+		Comments to the Authors
+		
+		Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+		The paper proposes a method for arrangement of objects on a tabletop environment using 2 manipulator arms and argue its benefit over use of a single arm. The objective of the method is to focus on the underlying combinatorial aspect of the problem.The proposed method is subdivided into two sub-problem : one to find an optimal assignment of object to the arms and then to optimize the transit cost. The authors also provide a MILP formulation of the problem. The experiments show that the proposed method is better than MILP, random splitting (for assignment) and exhaustive search with respect to succes ratio, path length travelled and computation time.
+		
+		The paper is well written and clearly states the added contribution of this version over the conference paper (ref. 2). Most of the added contribution is in additional experiments and added details in the bounding cost proof. However, following are some areas of improvements:-
+		
+	\end{partt}
+	\edits{ 
+		The authors would like to thank the reviewer for the kind words.
+	}
+	\begin{partt}	
+		- Note about the synchronicity assumption needs to be expanded with respect to reachabilty: The problem formulation assumes a balanced or nearly balanced distribution of the objects to two arms which enforces that atleast half of the objects are reachable by each arm for the proofs in Sec VII.
+	\end{partt}
+	\edits{ 
+		This can be handled by NOACT assignments and was mentioned in the text. For clarity another note has been added to evaluation about the use of NOACT object arm assignments to deal with unbalanced cases. 
+	}
+	\begin{partt}
+		
+		- More insight required for the statements in Sec VII :
+		-- "Clearly, the per robot additional (makespan or distance) cost is bounded by some function f(k,r)c\_t" in Theorem 8 proof : What is the nature of the f(k,r)? Is it based on the bound on the perimeter of the bounded region in ref 49?
+	\end{partt}
+	\edits{ 
+		The reviewer is correct in this observation. It indeed follows from previous work [49] and for the disk robot case depend on the perimeter.
+	}
+	\begin{partt}
+		-- Why is the statement about (n+1)\^2 potential line segment intersection is added in the proof of Corollary 9? 2n potential collision can be accounted by 4 potential collision for each pair and as there are n/2 pairs hence 2n potential collision.
+	\end{partt}
+	\edits{ 
+		The extraneous statement has been removed for clarity.
+	}
+	\begin{partt}
+		
+		- Details about the experimental setup is required such as : size of the workspace with respect to the size of the objects and the start and goal locations (atleast for one instance) in both the domains (a labelled figure will be useful). 
+	\end{partt}
+	\edits{ 
+		The dimensions of the Kuka workspace has been added to the evaluation section.
+	}
+	\begin{partt} 
+		
+		- It will be interesting to show how the proposed system handles unbalanced number of objects in experiments. Unbalanced not just in odd number of objects but also with respect to unbalance in number with respect to reachability (experiments in Sec. VIII D).
+	\end{partt}
+	\edits{ 
+		NOACT object assignments have been mentioned in Section III, VI, and as a note in evaluation to address such scenarios. This requires no change in our algorithm.
+	}
+	\begin{partt}
+		
+		- Also addition of static obstacles or experiments inspired by industrial setups (where the target locations are in a box or tightly spaced) will be interesting.
+	\end{partt}
+	\edits{ 
+		This indeed poses interesting future domains and realistic grasping and cluttered motivating scenarios have included in the discussion.
+	}
+	\begin{partt}
+		
+		- Please label or index the subfigures in the multifigures as a, b, c ... or 1, 2, 3 instead of top , bottom, etc. If considering top, bottom indexing please state it next to the sub-figures and not just in the main caption.
+	\end{partt}
+	\edits{ 
+		For compactness the authors have chosen to keep the arrangement of the plots unchanged for now. 
+	}
+	\begin{partt}
+		
+		- Section III "Every rearrangement ..." should be "every rearrangement ..." as it is in the middle of the sentence.
+	\end{partt}
+	\edits{ 
+		Done.
+	}
+	\begin{partt}
+		
+		- Section III paragraph "Note on Assumptions" there is a trailing spaces before the sentence  "Objects do not need ..."
+	\end{partt}
+	\edits{ 
+		Done.
+	}
+	\begin{partt}
+		
+		- Missing authors in reference 37
+	\end{partt}
+	\edits{ 
+		This was caused by the bib style for repeated author lists.
+	}
+
+	\begin{partt}
+		Reviewer: 2
+		
+		Comments to the Authors
+		
+		Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+		The manuscript addresses the problem of rearranging objects in a tabletop scenario using two agents. Among the multiple challenges involved in such scenario, the focus of the manuscript is on the assignment and scheduling of objects-to-agents actions. This frustrates the first impression given by the title where it is expected a two-arm co-operative solution to the problem.
+	\end{partt}
+	\edits{ 
+		The author appreciates the reviewer's feedback. The authors have clarified sections of the manuscript to alleviate some of the miscommunication that led to most of the criticisms laid by the reviewer. The authors feel that the changes will be enough to avoid the same with an interested reader.  The work does not solely deal with object assignment and scheduling and an explicit not pointing out the same has been added to the introduction.
+	} 
+	
+	\begin{partt}
+		Indeed, this is one major drawback of the work which should be addressed at first. Robotics, particularly, co-operative manipulation literature, refers to dual-arm synchronous motion as the action of two arms moving in synchrony to achieve a given common manipulation task with/without a shared load, e.g., moving an object, manipulating a steering-wheel, a broom, etc. The scenario addressed in the manuscript refers to simultaneous/parallel asynchronous manipulation in a shared and semi-structured environment.  
+	\end{partt}
+	\edits{ 
+		In order to avoid this confusion references to dual-arm rearrangement have been changed to two-arm rearrangement, and the text clarified.
+	} 
+	
+	\begin{partt}  
+		Another important point to be addressed and improved is the large set of assumptions taken. For instance, assumption 1. monotonicity does simplify the problem, yet it limits the range of existing solutions and if one is to take a realistic cluttered scenario, one object is very likely to be placed within Agoal.  Similarly, Assumption 3 is a very strong assumption, when using general serial-kinematic manipulators. Assuming that transfers will not influence future motions, that is, their costs do not depend on the order in which objects are moved, may not be realistic, especially in the envisioned cluttered scenario. Since this is one of the main assumptions required for assessing the costs in the resulting graph, it would be better if the authors focused on the scheduling of delta robots.
+		Finally, since the focus of the work is mostly on scheduling and assignment with constrained conditions, there is no reason not to make the solution as generic as possible, e.g., including multi-agents should not be a challenge.  
+	\end{partt}
+	\edits{ 
+		A discussion of the scope and limitations of the assumptions has been added. The authors disagree with the reviewer's concerns about scheduling and assignment since the current method deals with planned solutions that need to avoid collisions between robot geometries and obstacles.
+	} 
+	
+	\begin{partt}
+		
+		With regard to the presentation, the manuscript is lengthy and hard to follow.
+		In the Introduction Section, both observations are fairly too generic and should not be taken as observations since it is not true that, for instance, a k-arm solution cannot be worse than an optimal single-arm solution. First due to the lack of definition of optimality to this point, second by the lack of assumptions where this scenario is true. Take the trajectory cost, for example, if we assume possible collisions due to the initial pose of one arm, even if such arm stays static, the second arm will have to modify its trajectory accordingly. Naturally, this is just a specific example, but it should serve as a point to avoid generalizations.  
+	\end{partt}
+	\edits{ 
+		A note has been added about the availability of sufficient space to admit k arms. There was already text explaining how other arms move out of the workspace containing the rearrangement problem for an analogous single-arm solution.
+	} 
+	
+	\begin{partt}
+		In addition, the following remarks should also be addressed:
+		* The objects pose belong to the set SE(2), which is more precise than a subset SE(3);
+	\end{partt}
+	\edits{ 
+		The authors have maintained the SE(3) notation because that was used for all the benchmarks to compute and reason about grasps. Even the simple picker benchmarks modeled delta robots that existed in a 3D workspace.
+	} 
+	
+	\begin{partt}
+		* In the subset R\^d, the value of d is never defined;
+	\end{partt}
+	\edits{ 
+		This has been clarified as the dimension of the Euclidean space.
+	} 
+	
+	\begin{partt}
+		* In the transfers and moves definition, the variable o\_i\^k is presented for the first time to refer to the object i within the robot k. Yet, the dual-arm path takes \\pi\_i\^1 and \\pi\_i\^2 as input which naturally refers to the manipulation of two distinguish objects, yet since \\pi\_i\^1 and \\pi\_i\^2 have the same subindex, it implicitly implies the same object o\_i being manipulated by both robots. In Eq. 3, on the other hand, it is presented the o\_j. The lack of consistency makes it harder to follow the manuscript. In Eq. 3, the length \\ell is also presented for the first time. And, it is not clear how it connects to i,j;
+	\end{partt}
+	\edits{ 
+		A footnote to better explain the indices has been added.
+	} 
+	
+	\begin{partt}
+		* The set of optimization costs and constraints in pg. 5 should not be defined using letters. Really, there is no reason to refer to Eqs. Letters and not follow the standard approach with numbers (and perhaps, subequations if needed);
+	\end{partt}
+	\edits{ 
+		The authors see this as a self-contained set of MILP constraints and choose to distinguish the same.
+	} 
+	
+	\begin{partt}
+		* Lemma 1 appears as a reference in pg. 5 without being defined.  Then, we have Lemma 4 without 2 and 3.
+	\end{partt}
+	\edits{ 
+		The authors thank the reviewer for the careful read-through. This was an error in the theorem counter on our part. This has been fixed.
+	} 
+	
+	\begin{partt}
+		* Figs. 7 and 8 need further discussion and description.  For instance, what is the horizontal bar in the computation time? Why milp performs so badly in terms of computation time the picker (worst than random) and better in the Kuka lazy example?  
+	\end{partt}
+	\edits{ 
+		The authors believe the reviewer is referring to the lazy behavior. This is explained in the evaluation as an effect of increased infeasibility failures for random.
+	} 
+	
+	\begin{partt}
+		* It would be interesting to compare the computational time from the proposed parallel/simultaneous solution compared to the smoothing strategy (compares the results in Fig. 8 with Fig. 9 in terms of trajectory and, most important, time complexity).
+	\end{partt}
+	\edits{ 
+		The timings are mentioned within the text.
+	} 
+	
+	\begin{partt}
+		* Finally, during most of the manuscript, it was also not clear how collision avoidance was addressed.  This should be better clarified in the problem definition.
+	\end{partt}
+	\edits{ 
+		The subsection on Integration with Motion Planning, and the lazy algorithm's calls to the motion planner discuss the module that is burdened with motion planning and collision checking. 
+	} 
+	
+	\begin{partt}
+		
+		Overall the manuscript presents an interesting solution for the scheduling problem of multi(two)-agents. There are contributions to the area, but the text is rather lengthy and focused on a two-arm manipulation problem which is not addressed or important to the problem posed in the manuscript definition. In my opinion, the manuscript can be considerably improved taking care to better describe the problem and the strengths of the proposed solution, yet it is not sufficient contribution for a T-ASE publication.  
+	\end{partt}
+	\edits{ 
+		The authors hope the changes are sufficient to address the reviewer's concerns.
+	} 
+	
+	\begin{partt}
+		Reviewer: 3
+		
+		Comments to the Authors
+		
+		Please comment on Major Contribution of the Paper, Organization and Style, Technical Accuracy, Presentation and Adequacy of Citations (List possible additions if needed).
+		Summary:
+		
+		This work develops a planner for rearranging objects in the plane using two manipulator arms.  Each arm works independently and simultaneously (e.g., no collaborative object placements).  Their algorithm optimizes first the cost of object transfers (making object assignments to each manipulator arm) and then the cost of manipulator movements between one object’s goal and another object’s start (reducing manipulator travel time).  They show improved performance over a single manipulator, over random object-manipulator assignments, and over a mix-integer solution.  This manuscript is an extended version of their WAFR publication.
+		
+		Recommendation:
+		This work tackles an important problem that is becoming increasingly relevant as automation increases.  Specifically this addresses the automated packing problem where manipulator arms are used to rearrange and pack objects.  They first concentrate on the planar application where all objects start/goals lie in the plane and no objects are occluded/overlapping any other.  They assume an overhead grasping configuration for the robot arms.  The manuscript is well-written, clearly describing their work and experimental results.  With respect to their WAFR publication, they provide more detail in the method explanation, additional theoretical analysis, and some results with smoothing.
+	\end{partt}
+	\edits{ 
+		The authors appreciate the reviewer's feedback. 
+	} 
+	
+	\begin{partt}
+		
+		There are a few items that need improvement:
+		
+		- Discussion on limitations - The authors describe the limiting assumptions made (planar, non-overlapping, completely graspable and transferable by single arm, empty workspace other than objects to rearrange, etc).  However, they should discuss more explicitly the situations where this approach will not (yet) work.  For example, they assume a planar environment and test in open workspaces which is not applicable to many packing scenarios that must stack items, pack filling, and navigate around box/container walls.  They also assume each manipulator can grasp and maneuver every object on its own.  This limits the size and shape of objects grasped without allowing for collaborative maneuvers.  Finally, they assume objects are only moved once, but certain scenarios are not solvable under these conditions (e.g., puzzle/tunnel setups where objects block each others start/goals).  This should be made explicit in the text.
+	\end{partt}
+	\edits{ 
+		The concern about the discussion about the problem domain and limitations has been explicitly within a broader note on our assumptions. The reviewers' observations are all correct.
+	} 
+	
+	\begin{partt}
+		
+		- Experimental setup - The authors compare their method to randomly assigning objects to arms, but this approach will always yield poor results.  Instead, they should compare to something more reasonable such as splitting objects based on start proximity.  For example, they can divide the workspace into two halves along the plane that splits the manipulator bases.  This would yield much more reasonable results to compare against and be just as easy to compute as a random assignment.  The results would be more compelling if they varied the object size and geometry as often items to be packed are not identical (and nearly the size of the end effector so their collision status beyond the manipulator is not significant).
+		
+	\end{partt}
+	\edits{ 
+		A note about heuristics has been added in the evaluation to address this concern. Because of the benefits in feasibility obtained from repeated invocations within our proposed lazy framework, a deterministic hand-crafted heuristic has been avoided here. The authors do recognize that this is an important focus for practitioners and can form motivation for learning more effective ways to incorporate such heuristics about the coordinated problem into task planning. Richer classes of object geometries have been included as motivated future investigation domains in the discussion. 
+	} 
+	
+\end{document}

@@ -75,6 +75,9 @@ In order to ensure monotonicity, the object starts and goals do not overlap. Uni
 A comparison point includes a random split method, which splits $ \objectset $ at random into two subsets and chooses an arbitrary ordering. Maximum of distances cost is compared to the single arm solution~\cite{193}. Computation times and success rates are reported. The trends in both experiments show that in the single-shot versions, exhaustive and \milp tend to time-out for larger $n$. Lazy variants scale much better for all the algorithms, and in some cases increase the success ratio due to retries. \algo has much better running time than exhaustive and \milp, and produces better and more solutions than random split. Overall, the results show that a) our \milp succeeds more within the time limit than exhaustive, b) \algo scales the best among all the methods, and c) \textbf{the cost of solutions from \algo is close to the optimal baseline}, which is around half of the single arm cost.
 % to demonstrate the gains from using multiple arms.  Overall, MILP scales better than exhaustive search, while finding optimal solutions. \algo scales better than the other methods, and finds high quality solutions. The lazy variants improve all the dual-arm methods.
 
+\revisions{Note that we choose to focus on balanced problem instances where at least half of the objects are reachable to one of the robots. Unbalanced instances can be dealt with using {\tt NO\_ACT} object-to-arm assignments that requires no dual-arm coordination, while the proposed method remains unchanged.}
+
+
 \subsection{Simple Picker}
 %The results are shown in Figure~\ref{fig:disk}.
 This benchmark evaluates two disk robots hovering over a planar surface scattered with objects. The robots are only free to move around in a plane parallel to the resting plane of the objects, and the robots can pick up objects when they are directly above them. This benchmark is reminiscent of delta-robots operating over a picking surface. Fig~\ref{fig:disk}(\textit{top}) all runs up to $ 24 $ objects succeeded for \algo. \milp scales better than exhaustive. Lazy random split succeeds in all cases~(\textit{bottom}). In terms of solution costs~(\textit{middle}) exhaustive finds the true optimal. \milp matches exhaustive and \algo is competitive. In all experiments, \algo enjoys a success rate of 100\% while having much better computation time that exhaustive and \milp, as the number of objects increases. 
@@ -83,7 +86,9 @@ This benchmark evaluates two disk robots hovering over a planar surface scattere
 %\subsection{General Manipulator}
 %The results are shown in Figure~\ref{fig:kuka}.
 
-\subsection{General Dexterous Manipulator} The second benchmark sets up two \kuka arms across a table with objects on it. The objects are placed in the common reachable part of both arms' workspace, and only one top-down grasping configuration is allowed for each object pose. Here (Fig~\ref{fig:kuka}) a larger number of motion plans tend to fail, so the single shot variants show artifacts of the randomness of \drrtstar in their success rates. 
+\subsection{General Dexterous Manipulator} The second benchmark sets up two \kuka arms across a table with objects on it. The objects are placed in the common reachable part of both arms' workspace, and only one top-down grasping configuration is allowed for each object pose. \revisions{For the Kuka arms top-down reachability exists in an annular region between 40-70cm from the base of each robot. The robots were placed 1.1m apart. Experiments were performed on the largest rectangle that fitted within the intersection of the annular reachability regions.}
+
+Here (Fig~\ref{fig:kuka}) a larger number of motion plans tend to fail, so the single shot variants show artifacts of the randomness of \drrtstar in their success rates. 
 % The lazy iterative variants show the robust scalability. 
 Random split performs the worst since it is unlikely to chance upon valid motion plans. Single shot exhaustive and \milp scale poorly because of expensive motion planning.
 Interestingly, motion planning infeasibility reduces the size of the exhaustive search tree.
@@ -141,8 +146,13 @@ In this benchmark, two Kuka arms are placed opposite a target arrangement table,
 	    \vspace{-.2in}
 \end{figure}
 
-The problem of optimizing the assignment of arms to objects will be affected by the reachability. Expectedly, the naive random split tends to erroneously assign unreachable objects to arms. The data reported for the lazy variants, shows that our proposed method manages to maintain scalability and robustness even in such scenarios and moreover, further highlights the benefits of dual-arm rearrangement.
+The problem of optimizing the assignment of arms to objects will be affected by the reachability. Expectedly, the naive random split tends to erroneously assign unreachable objects to arms. The data reported for the lazy variants, shows that our proposed method manages to maintain scalability and robustness even in such scenarios and moreover, further highlights the benefits of \dual-arm rearrangement.
 
 
 }
+
+\revisions{\textit{Note on Heuristic Strategies: } 
+	%Alternative simplified strategies exist for this problem domain. A significant complexity in the studied problem arises from the coordination of the arms, especially for general manipulators. Decoupled motion planning here with coordination of single-arm solutions is typically faster but loses guarantees of completeness. 
+%	For the assignment of objects to arms fast heuristics can be designed to allocate the objects based some partitioning of the workspace. The focus of the current work is however on problems where the arms have to move and coordinate in common regions where such a partition might not exist, and decoupled solutions might not work.
+	 It is possible that instead of the random baseline, some other heuristic might be used to allocate the objects to arms, like the proximity of objects to arms or some workspace partitioning. Such a deterministic, decoupled heuristic will make it faster to compute object-arm assignments than the proposed reasoning, but trade off the optimality bounds posited in this work. Given the object-to-arm assignments feasibility of the solution ultimately depends on coordinated motion planning. It should be noted that committing to a single choice of object assignments seriously affects success rates (especially in the Kuka benchmark). The success is only increased using our proposed lazy approach which takes into account such infeasibility and keeps reattempting other alternatives. A deterministic heuristic however will not offer alternative object-arm assignments and thus is incompatible with the improvements obtained from lazy evaluation. As such we leave the learning and incorporation of appropriate heuristics in this domain as future work and a motivation for practitioners.}
 

@@ -203,8 +203,10 @@ For obtaining a $2$-arm solution, first partition the $n$ objects randomly into 
 From the initial $2$-arm solution, we construct an {\em asynchronous} $2$-arm 
 solution that is collision-free. Assume that pickups and drop-offs can be achieved without collisions between the two arms, which can be achieved with properly designed end-effectors. The main overhead is then the potential collision between the two (disc) arms during transfer and move operations. Because there are $\frac{n}{2}$ objects for each arm to work 
 with, an arm may travel a path formed by $n + 1$ straight line 
-segments. Therefore, there are up to $(n + 1)^2$ intersections between the 
-two end-effector trajectories where potential collisions may happen. Nevertheless, since we can have at most four intersections for the transfers and transits associated with a pair of objects (one for each arm), there are at most $2n$ potential collisions to handle. For each intersection, let one 
+segments. 
+\commentdel{Therefore, there are up to $(n + 1)^2$ intersections between the 
+two end-effector trajectories where potential collisions may happen. Nevertheless,} 
+Since we can have at most four intersections for the transfers and transits associated with a pair of objects (one for each arm), there are at most $2n$ potential collisions to handle. For each intersection, let one 
 arm wait while the other circles around the first arm, which incurs a cost that is bounded by $2\pi \cdot r \cdot c_t$. 
 
 Adding up all the potential cost that a $2$-arm solution can incur, the following cumulative cost is obtained:

@@ -7,7 +7,7 @@
 \IEEEPARstart{A}{utomation} tasks in industrial and service robotics, such as product packing or sorting, often require sets of objects to be arranged in
 specific poses on a planar surface. Efficient and high-quality
 single-arm solutions have been proposed for such
-setups \cite{193}. The proliferation of robot arms, however, including dual-arm setups, implies that industrial settings can utilize multiple robots in the same workspace (Fig~\ref{fig:two_arms}). This work explores a) the benefits of coordinated dual-arm rearrangement versus single-arm, b) the combinatorial challenges involved and c) computationally efficient, high-quality and scalable methods.
+setups \cite{193}. The proliferation of robot arms, however, including \dual-arm setups, implies that industrial settings can utilize multiple robots in the same workspace (Fig~\ref{fig:two_arms}). This work explores a) the benefits and trade-offs of \revisions{using two arms for solving object rearrangement instead of a} single-arm, b) the combinatorial challenges involved and c) computationally efficient, high-quality and scalable methods.
 
 %While the benefits seem obvious, even for two arms, the challenge
 %lies in examining the combinatorial sub-structure of this integrated
@@ -29,8 +29,8 @@ setups \cite{193}. The proliferation of robot arms, however, including dual-arm 
 %some guarantees about the benefits of using more than one arm, before
 %endeavoring to study the problem.
 
-A major motivation for this work is that the coordinated use of multiple arms can
-result in significant improvements in efficiency. This arises from the following argument.
+A major motivation for this work is that the coordinated use of multiple arms \revisions{to move multiple objects at the same time} can
+result in significant improvements in efficiency \revisions{of object rearrangement solutions}. This arises from the following argument.
 
 % \vspace{-.1in}
 \begin{observation}\label{l:k-arm-lower-bound}
@@ -62,7 +62,7 @@ also extends to $k$-arms relative to $(k-1)$-arms.
 	\centering
 	\includegraphics[width=0.48\textwidth]{figures/two_arms}
 % 	\vspace{-0.1in}
-	\caption{Example of dual-arm setups that can utilize
+	\caption{\Dual-arm setups that can utilize
 	algorithms proposed in this work.}
 	\label{fig:two_arms}
 	\vspace{-0.25in}
@@ -75,7 +75,7 @@ will be close to half the cost (e.g., time-wise) of the single-arm
 case, which is a desirable improvement. While there 
 is coordination overhead, the best $2$-arm solution cannot do worse; simply 
 let one of the arms carry out the best single arm solution while the 
-other remains outside the workspace. More generally:
+other remains outside the workspace. \revisions{This means whenever there is enough available space for $k$ arms, it can be said:}
 
 % \vspace{-.1in}
 \begin{observation}\label{l:2-arm-no-worse}
@@ -84,8 +84,9 @@ cannot be worse than an optimal single arm solution.
 % \vspace{-.1in}
 \end{observation}
 
+
 The above observations motivate the development of scalable algorithmic
-tools for such dual-arm rearrangement instances. This work considers
+tools for such \dual-arm rearrangement instances. This work considers
 certain relaxations to achieve this objective. In particular,
 monotone tabletop instances are considered, where the start and goal
 object poses do not overlap.  Furthermore, the focus is on
@@ -93,12 +94,14 @@ synchronized execution of pick-and-place actions by the two arms. i.e., where th
 Theoretical arguments and experimental evaluation indicate that this does not significantly degrade solution
 quality.
 
+\revisions{It should be noted here that the solutions presented in this paper go beyond purely reasoning about task allocation and scheduling of objects to robots. The \dual-arm object rearrangement solution needs to consider geometric interactions and collisions between robots and obstacles through coordinated motion planning. Information about these real-world interactions need to be considered to yield solutions that are ultimately valid and collision-free.}
+
 
 
 The first contribution is the study of the combinatorial structure of
-synchronous, monotone dual-arm rearrangement. Then, a mixed integer linear programming (\milp) model is
+synchronous, monotone \dual-arm rearrangement. Then, a mixed integer linear programming (\milp) model is
 proposed that achieves optimal coordinated solutions in this domain.
-The proposed efficient algorithm {\tt Tour\_Over\_Matching} (\algo) significantly improves in scalability. \algo\ first optimizes the
+The proposed efficient algorithm {\tt Tour Over Matching} (\algo) significantly improves in scalability. \algo\ first optimizes the
 cost of object transfers and assigns objects to the two arms by
 solving an optimal matching problem. It minimizes the cost of
 moves from an object's goal to another object's start pose per
@@ -108,18 +111,18 @@ evaluation strategy is proposed, where motion plans are evaluated and validated 
 reduces the calls to the motion planner.  An analysis
 studies the expected improvement in solution quality
 versus the single arm case, as well as the expected cost overhead from a
-synchronous solution.
+synchronous solution. 
 
 Finally, experiments for i) a simple planar picker setting, and ii) two 7-DOF Kuka arms, demonstrate a nearly two-fold
 improvement against the single arm case for the proposed approach in practice. The algorithm exhibits close to optimal solutions and good scalability. 
-The lazy evaluation strategy significantly improves computation costs for both the optimal and proposed methods.
+The lazy evaluation strategy significantly improves computation costs for both the optimal and proposed methods. 
 
 \tase{
 The current archival version is an extension of previous work \cite{shome2018dualarm}. In particular, several additions have been made to provide a more holistic study of the problem:
 \begin{enumerate}
     % \item Additional explanation and visual support is provided for understanding the algorithmic steps, especially regarding Section \ref{sec:approximation}.
     \item A detailed illustration and expository text is provided for describing the algorithmic steps, especially regarding Section \ref{sec:approximation}.
-	\item Further analysis has been performed to study the problem (Section \ref{sec:cost_bounds}). Specifically, the result describing the asymptotic cost bound for asynchronous operation has been extended to the $k$-arm case. Additionally, a more detailed proof is provided for the asymptotic cost bound estimate in the case of synchronized dual-arm operation.
+	\item Further analysis has been performed to study the problem (Section \ref{sec:cost_bounds}). Specifically, the result describing the asymptotic cost bound for asynchronous operation has been extended to the $k$-arm case. Additionally, a more detailed proof is provided for the asymptotic cost bound estimate in the case of synchronized \dual-arm operation.
 % 	\item New data (Section \ref{sec:smoothing}) is provided that study the effect of post-processing solutions so as to minimize delays introduced due to the synchronization assumption. 
 	\item The solutions from the benchmarks were post-processed so as to minimize delays introduced due to the synchronization assumption, and the data from this \textit{smoothing} operation is provided in Section \ref{sec:smoothing}.
 	\item A benchmark (Section \ref{sec:reachability}) has been included to demonstrate the efficacy of the proposed approach in problem domains where initial or target poses of objects do not lie in the shared workspace.

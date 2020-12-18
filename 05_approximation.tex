@@ -6,7 +6,7 @@ The optimal baseline methods described above highlight the problem's complexity.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Importance of Transfers} In order to draw some insight, consider again the tabletop setup with a general cost measure of $c_t$ per unit distance.
-Lemma~\ref{l:k-arm-lower-bound} suggests that under certain conditions, there 
+Observation~\ref{l:k-arm-lower-bound} suggests that under certain conditions, there 
 may not be a meaningful bound on the performance ratio between a $k$-arm 
 solution and a single-arm solution. This motivates the examination of another
 often used setting---randomly chosen non-overlapping 
@@ -124,7 +124,7 @@ This ends up scaling better by effectively reducing the size of the search space
 		\includegraphics[width=0.8\textwidth]{figures/algo_2}
 	\end{center}
 %\vspace{-0.2in}
-	\caption{ \tase{ \textit{(Top-left)} A dual-arm rearrangement problem. \textit{(Top-middle)} Directed edges between objects represents the assignment of arms to object \textit{transfers}. \textit{(Top-right)} The problem of optimizing object transfers reduces to a minimum weight edge matching on a fully connected directed graph of \textit{transfers}. \textit{(Bottom-left)} The legends for the different symbols used in the diagrams. \textit{(Bottom-middle)} A directed edge between object pairs represents the \textit{transit} between the target poses of the previous objects to the initial poses of the next. \textit{(Bottom-right)} Each transit moves the arms from the target poses of the current objects, to the initial poses of the next objects in the object-arm assignments. A sequence of object-arm assignments form an optimal tour over a \textit{transit} graph.} }
+	\caption{ \tase{ \textit{(Top-left)} A \dual-arm rearrangement problem. \textit{(Top-middle)} Directed edges between objects represents the assignment of arms to object \textit{transfers}. \textit{(Top-right)} The problem of optimizing object transfers reduces to a minimum weight edge matching on a fully connected directed graph of \textit{transfers}. \textit{(Bottom-left)} The legends for the different symbols used in the diagrams. \textit{(Bottom-middle)} A directed edge between object pairs represents the \textit{transit} between the target poses of the previous objects to the initial poses of the next. \textit{(Bottom-right)} Each transit moves the arms from the target poses of the current objects, to the initial poses of the next objects in the object-arm assignments. A sequence of object-arm assignments form an optimal tour over a \textit{transit} graph.} }
 %	\vspace{-0.2in}
 	\label{fig:edge_matching}
 % \end{figure}
@@ -149,7 +149,7 @@ It should also be noted that since the arms are different, in general, $\cost( \
 By Eq.~\ref{eq:cost_function}, the cost of the transfers can be reasoned about independent of their order. 
 Define $\scomaset$ as the unordered set of $\coma\in\scoma$, then unordered transfer cost component corresponds to $\sum_{\coma\in\scomaset}\cost(T(\coma))$.
 % We defined $ \scoma $ to be an ordered sequence of object-to-arm assignments. Let $ \scoma $ be a candidate solution to the synchronized dual-arm rearrangement problem. $ \scoma $ is an ordered sequence of $ \coma $, and $ \scomaset $ denote the unordered set of all $ \coma $ that comprise $ \scoma $. 
-Since $ \graph $ is a complete graph (shown in Fig~\ref{fig:edge_matching}(top-right)) where every edge corresponds to every possible valid $ \coma $, by construction $ \scomaset \subset \edges$. A candidate solution of a monotone dual-arm rearrangement problem must transfer every object exactly once. In terms of the graph, this means that in the subset of edges $ \scomaset $ every vertex appears in only one edge. We arrive at the following crucial observation.
+Since $ \graph $ is a complete graph (shown in Fig~\ref{fig:edge_matching}(top-right)) where every edge corresponds to every possible valid $ \coma $, by construction $ \scomaset \subset \edges$. A candidate solution of a monotone \dual-arm rearrangement problem must transfer every object exactly once. In terms of the graph, this means that in the subset of edges $ \scomaset $ every vertex appears in only one edge. We arrive at the following crucial observation.
 
 
 
@@ -183,7 +183,7 @@ which is a complete tour over~$ \tspgraph $, that visits all the vertices i.e., 
 %\vspace{-0.1in}
 {
 \lemma [Tour]
-Any complete tour $ \tour $ over the graph $ \tspgraph $, corresponds to a sequence of object-to-arm assignments $ \scoma_\tour $ and is a candidate solution to the synchronous dual-arm rearrangement problem.
+Any complete tour $ \tour $ over the graph $ \tspgraph $, corresponds to a sequence of object-to-arm assignments $ \scoma_\tour $ and is a candidate solution to the synchronous \dual-arm rearrangement problem.
 }
 
 % In the problem setup it was assumed that $ \trajset(\scoma) $ contained the start and end transits to $ \startq $. Additionally, the entire trajectory contained both transfers and transits. Since we have considered all the transfers in $ \cost(\scomaset^*) $, what remains is the transits. Then 
